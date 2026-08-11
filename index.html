@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ECE 314 Electronics course portal with eight interactive learning modules covering operational amplifiers, semiconductors, diodes, MOSFETs, BJTs, and transistor amplifiers.">
+<meta name="theme-color" content="#082f49">
+<title>ECE 314 Electronics | Interactive Course</title>
+<style>
+:root{
+  --navy:#082f49;
+  --navy-2:#0c4a6e;
+  --blue:#0369a1;
+  --sky:#0ea5e9;
+  --cyan:#22d3ee;
+  --paper:#f6f9fc;
+  --surface:#ffffff;
+  --surface-2:#edf4f8;
+  --ink:#102235;
+  --muted:#5d7081;
+  --line:#d8e3ea;
+  --success:#0f8a66;
+  --warning:#b45309;
+  --shadow:0 18px 50px rgba(15,45,65,.12);
+  --radius:22px;
+}
+[data-theme="dark"]{
+  --paper:#07111b;
+  --surface:#0e1b28;
+  --surface-2:#142636;
+  --ink:#edf7ff;
+  --muted:#9fb2c2;
+  --line:#263b4c;
+  --shadow:0 18px 50px rgba(0,0,0,.32);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.55;transition:background .2s,color .2s
+}
+button,input,select{font:inherit}
+button,a{touch-action:manipulation}
+a{color:var(--blue)}
+.skip-link{position:fixed;left:16px;top:-80px;z-index:200;background:#fff;color:#111;padding:10px 14px;border-radius:8px}
+.skip-link:focus{top:12px}
+.hidden{display:none!important}
+.site-header{
+  position:sticky;top:0;z-index:80;height:72px;
+  background:color-mix(in srgb,var(--surface) 92%,transparent);
+  border-bottom:1px solid var(--line);backdrop-filter:blur(16px)
+}
+.header-inner{max-width:1240px;height:100%;margin:auto;padding:0 24px;display:flex;align-items:center;gap:18px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);margin-right:auto}
+.brand-mark{
+  width:43px;height:43px;border-radius:13px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--sky),var(--cyan));color:#05263b;font-weight:950;
+  box-shadow:0 8px 20px rgba(14,165,233,.26)
+}
+.brand-copy{display:grid;line-height:1.1}.brand-copy b{font-size:15px}.brand-copy span{font-size:12px;color:var(--muted);margin-top:4px}
+.header-nav{display:flex;gap:5px;align-items:center}
+.header-nav a{color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:9px;font-size:14px;font-weight:700}
+.header-nav a:hover{background:var(--surface-2);color:var(--ink)}
+.icon-button{
+  width:40px;height:40px;border:1px solid var(--line);border-radius:12px;
+  background:var(--surface);color:var(--ink);cursor:pointer;font-size:18px
+}
+.page{max-width:1240px;margin:auto;padding:36px 24px 70px}
+.hero{
+  position:relative;overflow:hidden;border-radius:30px;padding:54px;
+  color:#fff;background:
+    radial-gradient(circle at 88% 15%,rgba(34,211,238,.26),transparent 28%),
+    radial-gradient(circle at 70% 82%,rgba(14,165,233,.23),transparent 30%),
+    linear-gradient(135deg,#082f49,#0c4a6e 62%,#075985);
+  box-shadow:0 24px 60px rgba(8,47,73,.22)
+}
+.hero::after{content:"";position:absolute;width:320px;height:320px;border:1px solid rgba(255,255,255,.14);border-radius:50%;right:-95px;bottom:-155px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(270px,.75fr);gap:42px;align-items:center;position:relative;z-index:1}
+.eyebrow{display:flex;align-items:center;gap:9px;text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:850;color:#bcecff}
+.eyebrow::before{content:"";width:24px;height:2px;background:var(--cyan)}
+.hero h1{font-size:clamp(42px,6vw,72px);line-height:.98;letter-spacing:-.055em;margin:16px 0 15px;max-width:760px}
+.hero-lead{font-size:18px;color:#d8edf8;max-width:760px;margin:0}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.button{
+  border:0;border-radius:12px;padding:12px 17px;font-weight:850;cursor:pointer;text-decoration:none;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px
+}
+.button.primary{background:#fff;color:#08324b}.button.primary:hover{background:#e9f8ff}
+.button.ghost{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.22)}
+.button.ghost:hover{background:rgba(255,255,255,.16)}
+.hero-facts{display:grid;gap:12px}
+.fact{
+  padding:18px;border:1px solid rgba(255,255,255,.17);border-radius:17px;
+  background:rgba(255,255,255,.09);backdrop-filter:blur(8px)
+}
+.fact small{display:block;color:#bfe4f5;text-transform:uppercase;letter-spacing:.1em;font-size:10px;font-weight:850}
+.fact strong{display:block;font-size:22px;margin-top:3px}.fact span{display:block;color:#d6e8f1;font-size:13px;margin-top:2px}
+.section{margin-top:48px}
+.section-heading{display:flex;align-items:end;justify-content:space-between;gap:22px;margin-bottom:18px}
+.section-heading h2{font-size:clamp(28px,4vw,40px);letter-spacing:-.035em;line-height:1.05;margin:0}
+.section-heading p{margin:7px 0 0;color:var(--muted);max-width:720px}
+.catalog-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:18px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.description-panel{padding:28px}
+.description-panel p{font-family:Georgia,"Times New Roman",serif;font-size:17px;line-height:1.75;color:color-mix(in srgb,var(--ink) 86%,var(--muted));margin:0}
+.catalog-label{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-size:11px;font-weight:900;letter-spacing:.11em;text-transform:uppercase;margin-bottom:12px}
+.requirements{display:grid;gap:14px}
+.requirement{padding:20px}
+.requirement h3{font-size:14px;margin:0 0 9px}.requirement p{margin:0;color:var(--muted);font-size:14px}
+.course-links{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.course-link{padding:5px 9px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);font-size:12px;font-weight:800;text-decoration:none;color:var(--blue)}
+.restriction{border-left:4px solid var(--warning);background:color-mix(in srgb,#f59e0b 8%,var(--surface))}
+.restriction h3{color:var(--warning)}
+.pathway{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0 26px}
+.path-step{position:relative;padding:15px 14px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.path-step small{font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.path-step strong{display:block;font-size:14px;margin-top:3px}.path-step span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.module-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.search-wrap{position:relative;min-width:min(100%,320px)}
+.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;color:var(--muted)}
+.search-wrap input{width:100%;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);padding:11px 14px 11px 40px;outline:none}
+.search-wrap input:focus{border-color:var(--sky);box-shadow:0 0 0 3px color-mix(in srgb,var(--sky) 18%,transparent)}
+.filters{display:flex;gap:6px;flex-wrap:wrap}
+.filter-button{border:1px solid var(--line);background:var(--surface);color:var(--muted);padding:8px 11px;border-radius:10px;cursor:pointer;font-size:12px;font-weight:800}
+.filter-button[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.module-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.module-card{
+  --accent:#0ea5e9;display:grid;grid-template-columns:82px minmax(0,1fr);min-height:290px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow);transition:transform .18s,border-color .18s,box-shadow .18s
+}
+.module-card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 65%,var(--line));box-shadow:0 22px 55px rgba(15,45,65,.16)}
+.module-index{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 17%,var(--surface-2)),var(--surface-2));padding:20px 12px;display:flex;flex-direction:column;align-items:center;gap:10px;border-right:1px solid var(--line)}
+.module-number{width:48px;height:48px;border-radius:15px;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:21px;font-weight:950;box-shadow:0 9px 18px color-mix(in srgb,var(--accent) 25%,transparent)}
+.module-state{writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;text-transform:uppercase;letter-spacing:.13em;font-weight:900;color:var(--muted);margin-top:auto}
+.module-state.visited{color:var(--success)}
+.module-content{padding:21px 22px;display:flex;flex-direction:column;min-width:0}
+.module-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:10px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+.module-meta .track{padding:3px 7px;border-radius:999px;background:color-mix(in srgb,var(--accent) 11%,var(--surface))}
+.module-content h3{font-size:23px;line-height:1.1;letter-spacing:-.03em;margin:9px 0 7px}
+.module-description{font-size:13px;color:var(--muted);margin:0 0 13px}
+.topic-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 13px;margin:0 0 18px;padding:0;list-style:none}
+.topic-list li{font-size:12px;color:color-mix(in srgb,var(--ink) 76%,var(--muted));position:relative;padding-left:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topic-list li::before{content:"";position:absolute;left:0;top:.67em;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.card-actions{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.open-module{border:0;background:var(--navy);color:#fff;padding:10px 14px;border-radius:11px;cursor:pointer;font-weight:850;display:inline-flex;align-items:center;gap:8px}
+.open-module:hover{background:var(--navy-2)}
+.topic-count{font-size:11px;color:var(--muted);font-weight:750}
+.empty-state{grid-column:1/-1;padding:38px;text-align:center;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius)}
+.progress-panel{margin-top:24px;padding:18px 20px;display:flex;align-items:center;gap:18px}
+.progress-copy{min-width:180px}.progress-copy b{display:block}.progress-copy span{font-size:12px;color:var(--muted)}
+.progress-track{height:10px;background:var(--surface-2);border-radius:99px;overflow:hidden;flex:1}
+.progress-fill{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--sky),var(--cyan));border-radius:99px;transition:width .3s}
+.progress-value{font-size:13px;font-weight:900;color:var(--blue)}
+.footer{margin-top:58px;padding:24px 0 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;color:var(--muted);font-size:12px}
+
+/* Module reader */
+.reader{height:100vh;display:grid;grid-template-rows:70px minmax(0,1fr);background:var(--paper)}
+.reader-toolbar{display:flex;align-items:center;gap:12px;padding:10px 18px;background:var(--surface);border-bottom:1px solid var(--line);z-index:10}
+.reader-back{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:11px;padding:9px 12px;cursor:pointer;font-weight:800;display:flex;align-items:center;gap:8px}
+.reader-title{min-width:0;margin-right:auto}.reader-title small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-weight:850}.reader-title strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px}
+.reader-select{max-width:270px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);padding:9px 11px}
+.reader-action{width:39px;height:39px;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center;text-decoration:none}
+.viewer-wrap{position:relative;min-height:0;background:#e9eff3}
+.module-frame{display:block;width:100%;height:100%;border:0;background:#fff}
+.loading-state{position:absolute;inset:0;z-index:4;display:grid;place-items:center;background:var(--paper)}
+.loading-card{padding:22px 26px;text-align:center;color:var(--muted)}
+.spinner{width:36px;height:36px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--sky);animation:spin .8s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.viewer-wrap:fullscreen{background:#fff}.viewer-wrap:fullscreen .module-frame{height:100vh}
+
+@media(max-width:980px){
+  .header-nav{display:none}
+  .hero{padding:38px}.hero-grid{grid-template-columns:1fr}.hero-facts{grid-template-columns:repeat(3,1fr)}
+  .catalog-grid{grid-template-columns:1fr}.requirements{grid-template-columns:repeat(2,1fr)}.restriction{grid-column:1/-1}
+  .pathway{grid-template-columns:repeat(2,1fr)}
+  .module-grid{grid-template-columns:1fr}
+  .reader-select{max-width:210px}
+}
+@media(max-width:680px){
+  .header-inner{padding:0 15px}.brand-copy span{display:none}.page{padding:22px 14px 50px}
+  .hero{padding:29px 23px;border-radius:23px}.hero-facts{grid-template-columns:1fr}.hero h1{font-size:44px}
+  .section{margin-top:38px}.section-heading{display:block}.section-heading .module-tools{margin-top:15px}
+  .requirements{grid-template-columns:1fr}.restriction{grid-column:auto}.description-panel{padding:21px}
+  .pathway{grid-template-columns:1fr 1fr}.path-step span{display:none}
+  .module-card{grid-template-columns:62px minmax(0,1fr)}.module-index{padding:17px 8px}.module-number{width:42px;height:42px}
+  .module-content{padding:18px 16px}.topic-list{grid-template-columns:1fr}.topic-list li:nth-child(n+6){display:none}
+  .progress-panel{align-items:flex-start;flex-wrap:wrap}.progress-track{flex-basis:70%}
+  .footer{display:block}.footer span{display:block;margin-top:5px}
+  .reader{grid-template-rows:auto minmax(0,1fr)}.reader-toolbar{flex-wrap:wrap;padding:8px 10px}
+  .reader-title{order:1;flex:1}.reader-select{order:3;max-width:none;width:100%}.reader-action{order:2}.reader-back{order:0;padding:9px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#modules">Skip to modules</a>
+
+<div id="courseView">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="ECE 314 course home">
+        <span class="brand-mark">314</span>
+        <span class="brand-copy"><b>ECE 314</b><span>Electronics · Interactive Course</span></span>
+      </a>
+      <nav class="header-nav" aria-label="Course sections">
+        <a href="#about">About</a><a href="#requirements">Requirements</a><a href="#modules">Modules</a>
+      </nav>
+      <button class="icon-button" id="themeToggle" aria-label="Toggle color theme" title="Toggle color theme">◐</button>
+    </div>
+  </header>
+
+  <main class="page" id="top">
+    <section class="hero" aria-labelledby="courseTitle">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Old Dominion University · Electrical and Computer Engineering</div>
+          <h1 id="courseTitle">ECE 314<br>Electronics</h1>
+          <p class="hero-lead">An interactive path from operational amplifiers and semiconductor physics to transistor biasing, small-signal models, and analog circuit design.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#modules">Explore the 8 modules <span aria-hidden="true">↓</span></a>
+            <a class="button ghost" href="#requirements">View prerequisites</a>
+          </div>
+        </div>
+        <div class="hero-facts" aria-label="Course facts">
+          <div class="fact"><small>Course</small><strong>ECE 314</strong><span>Electronics</span></div>
+          <div class="fact"><small>Credit hours</small><strong>3</strong><span>Undergraduate course</span></div>
+          <div class="fact"><small>Learning format</small><strong>8 modules</strong><span>Interactive lessons and walkthroughs</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="aboutTitle">
+      <div class="section-heading">
+        <div><h2 id="aboutTitle">Course description</h2><p>Catalog scope and the concepts developed across the interactive learning sequence.</p></div>
+      </div>
+      <div class="catalog-grid">
+        <article class="panel description-panel">
+          <div class="catalog-label">Official course overview</div>
+          <p>Students will be introduced to concepts of signal amplification along with detailed analysis and design of operational-amplifier circuits. The main emphasis of the course is to introduce students to the basic operation of PN junctions, bipolar-junction transistors (BJTs), and metal-oxide-semiconductor (MOS) transistors and their application in the design of electronic circuits. Detailed large-signal and small-signal models of these devices will be developed. Analysis and design of basic electronic circuit building blocks with diodes, BJTs, and MOSFETs will be studied. Both discrete and integrated-circuit analog design techniques will be covered. The building blocks of an operational amplifier, along with differential amplifiers, will also be covered.</p>
+        </article>
+        <div class="requirements" id="requirements">
+          <article class="panel requirement">
+            <h3>Prerequisites</h3>
+            <p>A grade of C or better in one approved technical-writing course and in ECE 201, ECE 202, and ECE 287.</p>
+            <div class="course-links">
+              <a class="course-link" href="https://catalog.odu.edu/search/?P=ENGL%20211C" target="_blank" rel="noopener">ENGL 211C</a>
+              <a class="course-link" href="https://catalog.odu.edu/search/?P=ENGL%20221C" target="_blank" rel="noopener">ENGL 221C</a>
+              <a class="course-link" href="https://catalog.odu.edu/search/?P=ENGL%20231C" target="_blank" rel="noopener">ENGL 231C</a>
+              <a class="course-link" href="https://catalog.odu.edu/search/?P=ECE%20201" target="_blank" rel="noopener">ECE 201</a>
+              <a class="course-link" href="https://catalog.odu.edu/search/?P=ECE%20202" target="_blank" rel="noopener">ECE 202</a>
+              <a class="course-link" href="https://catalog.odu.edu/search/?P=ECE%20287" target="_blank" rel="noopener">ECE 287</a>
+            </div>
+          </article>
+          <article class="panel requirement">
+            <h3>Pre- or corequisite</h3>
+            <p>A grade of C or better in ECE 241.</p>
+            <div class="course-links"><a class="course-link" href="https://catalog.odu.edu/search/?P=ECE%20241" target="_blank" rel="noopener">ECE 241</a></div>
+          </article>
+          <article class="panel requirement restriction">
+            <h3>Enrollment restriction</h3>
+            <p>Not open to electrical engineering majors or electrical engineering/computer engineering dual majors.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="modules" aria-labelledby="modulesTitle">
+      <div class="section-heading">
+        <div><h2 id="modulesTitle">Interactive modules</h2><p>Open any module to study its full lessons, circuit figures, guided calculations, simulations, and knowledge checks.</p></div>
+        <div class="module-tools">
+          <label class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+            <span class="hidden">Search modules</span>
+            <input id="moduleSearch" type="search" placeholder="Search topics…" autocomplete="off">
+          </label>
+          <div class="filters" role="group" aria-label="Filter modules">
+            <button class="filter-button" data-filter="all" aria-pressed="true">All</button>
+            <button class="filter-button" data-filter="foundations" aria-pressed="false">Foundations</button>
+            <button class="filter-button" data-filter="devices" aria-pressed="false">Devices</button>
+            <button class="filter-button" data-filter="circuits" aria-pressed="false">Circuits</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pathway" aria-label="Course learning pathway">
+        <div class="path-step"><small>Phase 1</small><strong>Amplifier language</strong><span>Module 1</span></div>
+        <div class="path-step"><small>Phase 2</small><strong>Device foundations</strong><span>Modules 2–3</span></div>
+        <div class="path-step"><small>Phase 3</small><strong>Transistor operation</strong><span>Modules 4–6</span></div>
+        <div class="path-step"><small>Phase 4</small><strong>Amplifier design</strong><span>Modules 7–8</span></div>
+      </div>
+
+      <div class="module-grid" id="moduleGrid" aria-live="polite"></div>
+
+      <div class="panel progress-panel" aria-label="Visited module progress">
+        <div class="progress-copy"><b>Your course exploration</b><span>Progress is saved in this browser.</span></div>
+        <div class="progress-track" aria-hidden="true"><span class="progress-fill" id="progressFill"></span></div>
+        <div class="progress-value" id="progressValue">0 of 8 visited</div>
+      </div>
+    </section>
+
+    <footer class="footer"><b>ECE 314 · Electronics</b><span>Eight interactive modules for analog electronics learning</span></footer>
+  </main>
+</div>
+
+<section class="reader hidden" id="moduleReader" aria-label="Module reader">
+  <header class="reader-toolbar">
+    <button class="reader-back" id="readerBack" type="button" aria-label="Return to course page"><span aria-hidden="true">←</span><span>Course</span></button>
+    <div class="reader-title"><small id="readerKicker">Module</small><strong id="readerTitle">Loading…</strong></div>
+    <select class="reader-select" id="readerSelect" aria-label="Choose another module"></select>
+    <a class="reader-action" id="openNew" href="#" target="_blank" rel="noopener" title="Open module in a new tab" aria-label="Open module in a new tab">↗</a>
+    <button class="reader-action" id="fullscreenButton" type="button" title="View module full screen" aria-label="View module full screen">⛶</button>
+  </header>
+  <div class="viewer-wrap" id="viewerWrap">
+    <div class="loading-state" id="loadingState"><div class="loading-card"><div class="spinner" aria-hidden="true"></div><b>Loading interactive module</b></div></div>
+    <iframe class="module-frame" id="moduleFrame" title="Interactive ECE 314 module" allow="fullscreen"></iframe>
+  </div>
+</section>
+
+<script>
+const MODULES=[
+  {id:1,title:'Operational Amplifiers',track:'foundations',trackLabel:'Amplifier foundations',accent:'#2563eb',file:'modules/module1.html',description:'Develop ideal op-amp rules and apply negative feedback to six essential circuit configurations.',topics:['Ideal op-amp','Inverting amplifier','Noninverting amplifier','Difference amplifier','Summing amplifier','Op-amp integrator','Knowledge check']},
+  {id:2,title:'Semiconductor Foundations',track:'foundations',trackLabel:'Device foundations',accent:'#0891b2',file:'modules/module2.html',description:'Connect materials, doping, carrier concentrations, transport, PN-junction physics, and diode current.',topics:['Materials and doping','Carrier solver','Drift and diffusion','PN junction','Diode I–V relation','Summary and check']},
+  {id:3,title:'Diodes',track:'devices',trackLabel:'Nonlinear devices',accent:'#0f9f6e',file:'modules/module3.html',description:'Progress from ideal and constant-drop models to exponential, small-signal, and waveform applications.',topics:['Diode foundation','Ideal-diode analysis','Constant-drop model','Diode I–V law','Small-signal model','Waveform applications','Guided solver studio','Summary and check']},
+  {id:4,title:'MOSFETs',track:'devices',trackLabel:'Transistor devices',accent:'#7c3aed',file:'modules/module4.html',description:'Study MOS structure, channel formation, operating regions, output curves, and device-design walkthroughs.',topics:['Structure and physics','Channel laboratory','I–V models','Output curves','Process to device','Saturation to triode','Variable-resistor design','Knowledge check']},
+  {id:5,title:'MOSFET Circuits at DC',track:'circuits',trackLabel:'Bias circuits',accent:'#c2410c',file:'modules/module5.html',description:'Analyze and design practical nMOS, pMOS, diode-connected, feedback, and complementary DC circuits.',topics:['DC workflow','Dual-supply walkthrough','Diode-connected MOSFETs','Triode bias design','Divider and source feedback','pMOS walkthrough','Complementary pair','Knowledge check']},
+  {id:6,title:'Bipolar Junction Transistors',track:'devices',trackLabel:'Transistor devices',accent:'#dc2626',file:'modules/module6.html',description:'Use the two-junction picture, large-signal relations, Early effect, and guided BJT bias analysis.',topics:['Structure and modes','Large-signal relations','Output and Early effect','Two-supply bias','Divider bias','Push-pull stage','Knowledge check']},
+  {id:7,title:'Transistor Amplifiers',track:'circuits',trackLabel:'Small-signal design',accent:'#b58105',file:'modules/module7.html',description:'Move from the DC Q-point to linearized MOSFET and BJT models, gain, bias, and headroom.',topics:['Amplifier principles','DC plus small signal','Linearization','MOSFET models','BJT models','Three configurations','Bias and headroom','Design walkthrough','Knowledge check']},
+  {id:8,title:'Full Circuit Walkthroughs',track:'circuits',trackLabel:'Amplifier applications',accent:'#0f766e',file:'modules/module8.html',description:'Solve six complete MOSFET and BJT amplifier circuits with staged visual reasoning and comparison.',topics:['Common-source MOSFET','Source degeneration','Common-gate MOSFET','Common-emitter BJT','MOSFET source follower','BJT emitter follower','Comparison','Knowledge check']}
+];
+
+const $=selector=>document.querySelector(selector);
+const $$=selector=>[...document.querySelectorAll(selector)];
+let activeFilter='all';
+let searchText='';
+let activeModule=null;
+let visited=new Set();
+
+function readSetting(key,fallback){try{return localStorage.getItem(key)??fallback}catch{return fallback}}
+function saveSetting(key,value){try{localStorage.setItem(key,value)}catch{}}
+try{visited=new Set(JSON.parse(readSetting('ece314-visited','[]')))}catch{visited=new Set()}
+
+function moduleCard(module){
+  const state=visited.has(String(module.id));
+  return `<article class="module-card" style="--accent:${module.accent}">
+    <div class="module-index"><div class="module-number">${module.id}</div><div class="module-state ${state?'visited':''}">${state?'Visited':'Module'}</div></div>
+    <div class="module-content">
+      <div class="module-meta"><span class="track">${module.trackLabel}</span><span>Module ${module.id}</span></div>
+      <h3>${module.title}</h3><p class="module-description">${module.description}</p>
+      <ul class="topic-list">${module.topics.map(topic=>`<li title="${topic}">${topic}</li>`).join('')}</ul>
+      <div class="card-actions"><button class="open-module" data-module="${module.id}" type="button">Open module <span aria-hidden="true">→</span></button><span class="topic-count">${module.topics.length} sections</span></div>
+    </div>
+  </article>`;
+}
+
+function renderModules(){
+  const query=searchText.trim().toLowerCase();
+  const matches=MODULES.filter(module=>{
+    const trackOK=activeFilter==='all'||module.track===activeFilter;
+    const text=[module.title,module.description,...module.topics].join(' ').toLowerCase();
+    return trackOK&&(!query||text.includes(query));
+  });
+  $('#moduleGrid').innerHTML=matches.length?matches.map(moduleCard).join(''):`<div class="empty-state"><b>No matching module</b><br>Try a broader topic or choose another filter.</div>`;
+  $$('.open-module').forEach(button=>button.addEventListener('click',()=>goToModule(Number(button.dataset.module))));
+}
+
+function updateProgress(){
+  const count=MODULES.filter(module=>visited.has(String(module.id))).length;
+  $('#progressFill').style.width=`${100*count/MODULES.length}%`;
+  $('#progressValue').textContent=`${count} of ${MODULES.length} visited`;
+}
+
+function renderReaderOptions(){
+  $('#readerSelect').innerHTML=MODULES.map(module=>`<option value="${module.id}">Module ${module.id}: ${module.title}</option>`).join('');
+}
+
+function goToModule(id){
+  if(!MODULES.some(module=>module.id===id))return;
+  location.hash=`module-${id}`;
+}
+
+function openModule(id){
+  const module=MODULES.find(item=>item.id===id);
+  if(!module)return;
+  activeModule=module;
+  $('#courseView').classList.add('hidden');
+  $('#moduleReader').classList.remove('hidden');
+  $('#readerKicker').textContent=`ECE 314 · Module ${module.id}`;
+  $('#readerTitle').textContent=module.title;
+  $('#readerSelect').value=String(module.id);
+  $('#openNew').href=module.file;
+  $('#loadingState').classList.remove('hidden');
+  if($('#moduleFrame').getAttribute('src')!==module.file)$('#moduleFrame').src=module.file;
+  document.title=`Module ${module.id}: ${module.title} | ECE 314`;
+  visited.add(String(module.id));
+  saveSetting('ece314-visited',JSON.stringify([...visited]));
+  updateProgress();renderModules();
+  window.scrollTo(0,0);
+}
+
+function closeReader(){
+  activeModule=null;
+  $('#moduleReader').classList.add('hidden');
+  $('#courseView').classList.remove('hidden');
+  document.title='ECE 314 Electronics | Interactive Course';
+  if(location.hash.startsWith('#module-'))history.replaceState(null,'',location.pathname+location.search+'#modules');
+  setTimeout(()=>$('#modules').scrollIntoView({block:'start'}),0);
+}
+
+function handleHash(){
+  const match=location.hash.match(/^#module-(\d+)$/);
+  if(match)openModule(Number(match[1]));
+  else if(activeModule)closeReader();
+}
+
+$('#moduleSearch').addEventListener('input',event=>{searchText=event.target.value;renderModules()});
+$$('.filter-button').forEach(button=>button.addEventListener('click',()=>{
+  activeFilter=button.dataset.filter;
+  $$('.filter-button').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+  renderModules();
+}));
+$('#readerBack').addEventListener('click',closeReader);
+$('#readerSelect').addEventListener('change',event=>goToModule(Number(event.target.value)));
+$('#moduleFrame').addEventListener('load',()=>$('#loadingState').classList.add('hidden'));
+$('#fullscreenButton').addEventListener('click',async()=>{
+  try{
+    if(!document.fullscreenElement)await $('#viewerWrap').requestFullscreen();
+    else await document.exitFullscreen();
+  }catch{}
+});
+document.addEventListener('fullscreenchange',()=>{$('#fullscreenButton').textContent=document.fullscreenElement?'×':'⛶'});
+window.addEventListener('hashchange',handleHash);
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&activeModule&&!document.fullscreenElement)closeReader()});
+
+const savedTheme=readSetting('ece314-theme','');
+if(savedTheme)document.documentElement.dataset.theme=savedTheme;
+else if(matchMedia('(prefers-color-scheme:dark)').matches)document.documentElement.dataset.theme='dark';
+$('#themeToggle').addEventListener('click',()=>{
+  const next=document.documentElement.dataset.theme==='dark'?'light':'dark';
+  document.documentElement.dataset.theme=next;saveSetting('ece314-theme',next);
+});
+
+renderReaderOptions();renderModules();updateProgress();handleHash();
+</script>
+</body>
+</html>
