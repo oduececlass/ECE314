@@ -144,8 +144,26 @@ a{color:var(--blue)}
 .topic-list li{font-size:12px;color:color-mix(in srgb,var(--ink) 76%,var(--muted));position:relative;padding-left:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .topic-list li::before{content:"";position:absolute;left:0;top:.67em;width:5px;height:5px;border-radius:50%;background:var(--accent)}
 .card-actions{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.open-module{border:0;background:var(--navy);color:#fff;padding:10px 14px;border-radius:11px;cursor:pointer;font-weight:850;display:inline-flex;align-items:center;gap:8px}
+.card-buttons{display:flex;gap:8px;flex-wrap:wrap}
+.open-module,.open-homework{border:0;padding:10px 14px;border-radius:11px;cursor:pointer;font-weight:850;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.open-module{background:var(--navy);color:#fff}
 .open-module:hover{background:var(--navy-2)}
+.open-homework{background:var(--surface-2);color:var(--blue);border:1px solid var(--line)}
+.open-homework:hover{border-color:var(--sky);background:color-mix(in srgb,var(--sky) 8%,var(--surface))}
+.homework-intro{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 22px;margin-bottom:18px}
+.homework-intro p{margin:0;color:var(--muted);font-size:14px}.homework-intro strong{display:block;margin-bottom:3px}
+.homework-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.homework-card{position:relative;overflow:hidden;padding:20px;min-height:220px;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .18s,border-color .18s}
+.homework-card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--sky) 60%,var(--line))}
+.homework-number{width:45px;height:45px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--navy-2),var(--sky));color:#fff;font-weight:950;margin-bottom:16px}
+.homework-card small{font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--blue)}
+.homework-card h3{font-size:18px;line-height:1.16;margin:7px 0 8px;letter-spacing:-.02em}
+.homework-card p{margin:0 0 16px;color:var(--muted);font-size:12px;line-height:1.55}
+.homework-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;margin-bottom:13px}
+.homework-chip{padding:4px 7px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted);font-size:10px;font-weight:800}
+.homework-launch{display:flex;align-items:center;justify-content:center;text-decoration:none;background:var(--navy);color:#fff;border-radius:11px;padding:10px 12px;font-size:12px;font-weight:850}
+.homework-launch:hover{background:var(--navy-2)}
+.reader-homework{width:auto;min-width:52px;padding:0 10px;font-size:11px;font-weight:900;letter-spacing:.03em}
 .topic-count{font-size:11px;color:var(--muted);font-weight:750}
 .empty-state{grid-column:1/-1;padding:38px;text-align:center;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:var(--radius)}
 .progress-panel{margin-top:24px;padding:18px 20px;display:flex;align-items:center;gap:18px}
@@ -176,6 +194,7 @@ a{color:var(--blue)}
   .catalog-grid{grid-template-columns:1fr}.requirements{grid-template-columns:repeat(2,1fr)}.restriction{grid-column:1/-1}
   .pathway{grid-template-columns:repeat(2,1fr)}
   .module-grid{grid-template-columns:1fr}
+  .homework-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .reader-select{max-width:210px}
 }
 @media(max-width:680px){
@@ -187,6 +206,7 @@ a{color:var(--blue)}
   .module-card{grid-template-columns:62px minmax(0,1fr)}.module-index{padding:17px 8px}.module-number{width:42px;height:42px}
   .module-content{padding:18px 16px}.topic-list{grid-template-columns:1fr}.topic-list li:nth-child(n+6){display:none}
   .progress-panel{align-items:flex-start;flex-wrap:wrap}.progress-track{flex-basis:70%}
+  .homework-grid{grid-template-columns:1fr}.homework-intro{align-items:flex-start;flex-direction:column}
   .footer{display:block}.footer span{display:block;margin-top:5px}
   .reader{grid-template-rows:auto minmax(0,1fr)}.reader-toolbar{flex-wrap:wrap;padding:8px 10px}
   .reader-title{order:1;flex:1}.reader-select{order:3;max-width:none;width:100%}.reader-action{order:2}.reader-back{order:0;padding:9px}
@@ -205,7 +225,7 @@ a{color:var(--blue)}
         <span class="brand-copy"><b>ECE 314</b><span>Electronics · Interactive Course</span></span>
       </a>
       <nav class="header-nav" aria-label="Course sections">
-        <a href="#about">About</a><a href="#requirements">Requirements</a><a href="#modules">Modules</a>
+        <a href="#about">About</a><a href="#requirements">Requirements</a><a href="#modules">Modules</a><a href="#homework">Homework</a>
       </nav>
       <button class="icon-button" id="themeToggle" aria-label="Toggle color theme" title="Toggle color theme">◐</button>
     </div>
@@ -220,6 +240,7 @@ a{color:var(--blue)}
           <p class="hero-lead">An interactive path from operational amplifiers and semiconductor physics to transistor biasing, small-signal models, and analog circuit design.</p>
           <div class="hero-actions">
             <a class="button primary" href="#modules">Explore the 8 modules <span aria-hidden="true">↓</span></a>
+            <a class="button ghost" href="#homework">Open homework</a>
             <a class="button ghost" href="#requirements">View prerequisites</a>
           </div>
         </div>
@@ -300,7 +321,18 @@ a{color:var(--blue)}
       </div>
     </section>
 
-    <footer class="footer"><b>ECE 314 · Electronics</b><span>Eight interactive modules for analog electronics learning</span></footer>
+    <section class="section" id="homework" aria-labelledby="homeworkTitle">
+      <div class="section-heading">
+        <div><h2 id="homeworkTitle">Homework problems</h2><p>Eight interactive problem-solving workspaces aligned one-to-one with the course modules. Students can work solutions, edit circuit drawings, save progress, and download submissions.</p></div>
+      </div>
+      <div class="panel homework-intro">
+        <div><strong>Module-aligned practice</strong><p>Open a homework workspace directly below, or use the Homework button on any module card.</p></div>
+        <a class="button primary" href="homework/ECE314-HW1_student_workspace.html" target="_blank" rel="noopener">Start Homework 1 <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="homework-grid" id="homeworkGrid"></div>
+    </section>
+
+    <footer class="footer"><b>ECE 314 · Electronics</b><span>Eight interactive modules with integrated homework workspaces</span></footer>
   </main>
 </div>
 
@@ -310,6 +342,7 @@ a{color:var(--blue)}
     <div class="reader-title"><small id="readerKicker">Module</small><strong id="readerTitle">Loading…</strong></div>
     <select class="reader-select" id="readerSelect" aria-label="Choose another module"></select>
     <a class="reader-action" id="openNew" href="#" target="_blank" rel="noopener" title="Open module in a new tab" aria-label="Open module in a new tab">↗</a>
+    <a class="reader-action reader-homework" id="openHomework" href="#" target="_blank" rel="noopener" title="Open this module’s homework" aria-label="Open homework">HW</a>
     <button class="reader-action" id="fullscreenButton" type="button" title="View module full screen" aria-label="View module full screen">⛶</button>
   </header>
   <div class="viewer-wrap" id="viewerWrap">
@@ -320,15 +353,32 @@ a{color:var(--blue)}
 
 <script>
 const MODULES=[
-  {id:1,title:'Operational Amplifiers',track:'foundations',trackLabel:'Amplifier foundations',accent:'#2563eb',file:'modules/module1.html',description:'Develop ideal op-amp rules and apply negative feedback to six essential circuit configurations.',topics:['Ideal op-amp','Inverting amplifier','Noninverting amplifier','Difference amplifier','Summing amplifier','Op-amp integrator','Knowledge check']},
-  {id:2,title:'Semiconductor Foundations',track:'foundations',trackLabel:'Device foundations',accent:'#0891b2',file:'modules/module2.html',description:'Connect materials, doping, carrier concentrations, transport, PN-junction physics, and diode current.',topics:['Materials and doping','Carrier solver','Drift and diffusion','PN junction','Diode I–V relation','Summary and check']},
-  {id:3,title:'Diodes',track:'devices',trackLabel:'Nonlinear devices',accent:'#0f9f6e',file:'modules/module3.html',description:'Progress from ideal and constant-drop models to exponential, small-signal, and waveform applications.',topics:['Diode foundation','Ideal-diode analysis','Constant-drop model','Diode I–V law','Small-signal model','Waveform applications','Guided solver studio','Summary and check']},
-  {id:4,title:'MOSFETs',track:'devices',trackLabel:'Transistor devices',accent:'#7c3aed',file:'modules/module4.html',description:'Study MOS structure, channel formation, operating regions, output curves, and device-design walkthroughs.',topics:['Structure and physics','Channel laboratory','I–V models','Output curves','Process to device','Saturation to triode','Variable-resistor design','Knowledge check']},
-  {id:5,title:'MOSFET Circuits at DC',track:'circuits',trackLabel:'Bias circuits',accent:'#c2410c',file:'modules/module5.html',description:'Analyze and design practical nMOS, pMOS, diode-connected, feedback, and complementary DC circuits.',topics:['DC workflow','Dual-supply walkthrough','Diode-connected MOSFETs','Triode bias design','Divider and source feedback','pMOS walkthrough','Complementary pair','Knowledge check']},
-  {id:6,title:'Bipolar Junction Transistors',track:'devices',trackLabel:'Transistor devices',accent:'#dc2626',file:'modules/module6.html',description:'Use the two-junction picture, large-signal relations, Early effect, and guided BJT bias analysis.',topics:['Structure and modes','Large-signal relations','Output and Early effect','Two-supply bias','Divider bias','Push-pull stage','Knowledge check']},
-  {id:7,title:'Transistor Amplifiers',track:'circuits',trackLabel:'Small-signal design',accent:'#b58105',file:'modules/module7.html',description:'Move from the DC Q-point to linearized MOSFET and BJT models, gain, bias, and headroom.',topics:['Amplifier principles','DC plus small signal','Linearization','MOSFET models','BJT models','Three configurations','Bias and headroom','Design walkthrough','Knowledge check']},
-  {id:8,title:'Full Circuit Walkthroughs',track:'circuits',trackLabel:'Amplifier applications',accent:'#0f766e',file:'modules/module8.html',description:'Solve six complete MOSFET and BJT amplifier circuits with staged visual reasoning and comparison.',topics:['Common-source MOSFET','Source degeneration','Common-gate MOSFET','Common-emitter BJT','MOSFET source follower','BJT emitter follower','Comparison','Knowledge check']}
+  {id:1,title:'Operational Amplifiers',track:'foundations',trackLabel:'Amplifier foundations',accent:'#2563eb',file:'modules/module1.html',homework:'homework/ECE314-HW1_student_workspace.html',description:'Develop ideal op-amp rules and apply negative feedback to six essential circuit configurations.',topics:['Ideal op-amp','Inverting amplifier','Noninverting amplifier','Difference amplifier','Summing amplifier','Op-amp integrator','Knowledge check']},
+  {id:2,title:'Semiconductor Foundations',track:'foundations',trackLabel:'Device foundations',accent:'#0891b2',file:'modules/module2.html',homework:'homework/ECE314-HW2_student_workspace.html',description:'Connect materials, doping, carrier concentrations, transport, PN-junction physics, and diode current.',topics:['Materials and doping','Carrier solver','Drift and diffusion','PN junction','Diode I–V relation','Summary and check']},
+  {id:3,title:'Diodes',track:'devices',trackLabel:'Nonlinear devices',accent:'#0f9f6e',file:'modules/module3.html',homework:'homework/ECE314-HW3_student_workspace.html',description:'Progress from ideal and constant-drop models to exponential, small-signal, and waveform applications.',topics:['Diode foundation','Ideal-diode analysis','Constant-drop model','Diode I–V law','Small-signal model','Waveform applications','Guided solver studio','Summary and check']},
+  {id:4,title:'MOSFETs',track:'devices',trackLabel:'Transistor devices',accent:'#7c3aed',file:'modules/module4.html',homework:'homework/ECE314-HW4_student_workspace.html',description:'Study MOS structure, channel formation, operating regions, output curves, and device-design walkthroughs.',topics:['Structure and physics','Channel laboratory','I–V models','Output curves','Process to device','Saturation to triode','Variable-resistor design','Knowledge check']},
+  {id:5,title:'MOSFET Circuits at DC',track:'circuits',trackLabel:'Bias circuits',accent:'#c2410c',file:'modules/module5.html',homework:'homework/ECE314-HW5_student_workspace.html',description:'Analyze and design practical nMOS, pMOS, diode-connected, feedback, and complementary DC circuits.',topics:['DC workflow','Dual-supply walkthrough','Diode-connected MOSFETs','Triode bias design','Divider and source feedback','pMOS walkthrough','Complementary pair','Knowledge check']},
+  {id:6,title:'Bipolar Junction Transistors',track:'devices',trackLabel:'Transistor devices',accent:'#dc2626',file:'modules/module6.html',homework:'homework/ECE314-HW6_student_workspace.html',description:'Use the two-junction picture, large-signal relations, Early effect, and guided BJT bias analysis.',topics:['Structure and modes','Large-signal relations','Output and Early effect','Two-supply bias','Divider bias','Push-pull stage','Knowledge check']},
+  {id:7,title:'Transistor Amplifiers',track:'circuits',trackLabel:'Small-signal design',accent:'#b58105',file:'modules/module7.html',homework:'homework/ECE314-HW7_student_workspace.html',description:'Move from the DC Q-point to linearized MOSFET and BJT models, gain, bias, and headroom.',topics:['Amplifier principles','DC plus small signal','Linearization','MOSFET models','BJT models','Three configurations','Bias and headroom','Design walkthrough','Knowledge check']},
+  {id:8,title:'Full Circuit Walkthroughs',track:'circuits',trackLabel:'Amplifier applications',accent:'#0f766e',file:'modules/module8.html',homework:'homework/ECE314-HW8_student_workspace.html',description:'Solve six complete MOSFET and BJT amplifier circuits with staged visual reasoning and comparison.',topics:['Common-source MOSFET','Source degeneration','Common-gate MOSFET','Common-emitter BJT','MOSFET source follower','BJT emitter follower','Comparison','Knowledge check']}
 ];
+
+const HOMEWORKS=[{"id":1,"title":"Operational amplifiers","fullTitle":"Homework #1 · Operational amplifiers","topic":"Module 1 · Op amps","questions":10,"points":65,"file":"homework/ECE314-HW1_student_workspace.html"},{"id":2,"title":"Semiconductor physics and the pn junction","fullTitle":"Homework #2 · Semiconductor physics and the pn junction","topic":"Module 2 · Semiconductors · Drift/diffusion · pn junction","questions":10,"points":68,"file":"homework/ECE314-HW2_student_workspace.html"},{"id":3,"title":"Diode circuits","fullTitle":"Homework #3 · Diode circuits","topic":"Module 3 · Diodes · Ideal and constant-drop models · Small-signal regulation","questions":8,"points":90,"file":"homework/ECE314-HW3_student_workspace.html"},{"id":4,"title":"MOSFET device operation","fullTitle":"Homework #4 · MOSFET device operation","topic":"Module 4 · MOSFET · Triode resistance · Saturation · Device sizing","questions":8,"points":74,"file":"homework/ECE314-HW4_student_workspace.html"},{"id":5,"title":"MOSFET circuits at DC","fullTitle":"Homework #5 · MOSFET circuits at DC","topic":"Module 5 · MOSFET DC bias · Diode-connected devices · Mirrors · CMOS","questions":8,"points":89,"file":"homework/ECE314-HW5_student_workspace.html"},{"id":6,"title":"BJT operating regions and DC bias","fullTitle":"Homework #6 · BJT operating regions and DC bias","topic":"Module 6 · BJT · Junction-bias test · DC bias · PNP · Push-pull","questions":8,"points":94,"file":"homework/ECE314-HW6_student_workspace.html"},{"id":7,"title":"Transistor small-signal models","fullTitle":"Homework #7 · Transistor small-signal models","topic":"Module 7 · Small-signal models · g_m, r_o · T and hybrid-π equivalents","questions":8,"points":81,"file":"homework/ECE314-HW7_student_workspace.html"},{"id":8,"title":"Basic amplifier configurations","fullTitle":"Homework #8 · Basic amplifier configurations","topic":"Module 8 · CS, discrete CS, emitter follower, common base","questions":8,"points":102,"file":"homework/ECE314-HW8_student_workspace.html"}];
+
+function homeworkCard(homework){
+  return `<article class="panel homework-card">
+    <div class="homework-number">${homework.id}</div>
+    <small>Module ${homework.id} · Homework ${homework.id}</small>
+    <h3>${homework.title}</h3>
+    <p>${homework.topic}</p>
+    <div class="homework-meta"><span class="homework-chip">${homework.questions} problems</span><span class="homework-chip">${homework.points} points</span><span class="homework-chip">Interactive workspace</span></div>
+    <a class="homework-launch" href="${homework.file}" target="_blank" rel="noopener">Open Homework ${homework.id} <span aria-hidden="true">→</span></a>
+  </article>`;
+}
+
+function renderHomework(){
+  $('#homeworkGrid').innerHTML=HOMEWORKS.map(homeworkCard).join('');
+}
 
 const $=selector=>document.querySelector(selector);
 const $$=selector=>[...document.querySelectorAll(selector)];
@@ -349,7 +399,7 @@ function moduleCard(module){
       <div class="module-meta"><span class="track">${module.trackLabel}</span><span>Module ${module.id}</span></div>
       <h3>${module.title}</h3><p class="module-description">${module.description}</p>
       <ul class="topic-list">${module.topics.map(topic=>`<li title="${topic}">${topic}</li>`).join('')}</ul>
-      <div class="card-actions"><button class="open-module" data-module="${module.id}" type="button">Open module <span aria-hidden="true">→</span></button><span class="topic-count">${module.topics.length} sections</span></div>
+      <div class="card-actions"><div class="card-buttons"><button class="open-module" data-module="${module.id}" type="button">Open module <span aria-hidden="true">→</span></button><a class="open-homework" href="${module.homework}" target="_blank" rel="noopener">Homework ${module.id}</a></div><span class="topic-count">${module.topics.length} sections</span></div>
     </div>
   </article>`;
 }
@@ -390,6 +440,9 @@ function openModule(id){
   $('#readerTitle').textContent=module.title;
   $('#readerSelect').value=String(module.id);
   $('#openNew').href=module.file;
+  $('#openHomework').href=module.homework;
+  $('#openHomework').title=`Open Homework ${module.id}`;
+  $('#openHomework').setAttribute('aria-label',`Open Homework ${module.id}`);
   $('#loadingState').classList.remove('hidden');
   if($('#moduleFrame').getAttribute('src')!==module.file)$('#moduleFrame').src=module.file;
   document.title=`Module ${module.id}: ${module.title} | ECE 314`;
@@ -441,7 +494,7 @@ $('#themeToggle').addEventListener('click',()=>{
   document.documentElement.dataset.theme=next;saveSetting('ece314-theme',next);
 });
 
-renderReaderOptions();renderModules();updateProgress();handleHash();
+renderReaderOptions();renderModules();renderHomework();updateProgress();handleHash();
 </script>
 </body>
 </html>
