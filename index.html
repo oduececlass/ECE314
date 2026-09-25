@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="ECE 314 Electronics course portal with eight interactive learning modules covering operational amplifiers, semiconductors, diodes, MOSFETs, BJTs, and transistor amplifiers.">
+<meta name="description" content="ECE 314 Electronics course portal with eight interactive learning modules covering operational amplifiers, semiconductors, diodes, MOSFETs, BJTs, and transistor amplifiers, plus Circuit Studio for step-by-step problem solving and guided tutoring.">
 <meta name="theme-color" content="#082f49">
 <title>ECE 314 Electronics | Interactive Course</title>
 <style>
@@ -217,6 +217,38 @@ a{color:var(--blue)}
   .reader-title{order:1;flex:1}.reader-select{order:3;max-width:none;width:100%}.reader-action{order:2}.reader-back{order:0;padding:9px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* Circuit Studio course gateway */
+.section{scroll-margin-top:94px}
+.studio-intro{padding:30px;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(230px,.7fr);gap:30px;align-items:center;background:linear-gradient(125deg,color-mix(in srgb,var(--sky) 9%,var(--surface)),var(--surface))}
+.studio-kicker{font-size:11px;letter-spacing:.13em;font-weight:900;text-transform:uppercase;color:var(--blue);margin:0 0 10px}
+.studio-intro h3{font-size:26px;letter-spacing:-.025em;line-height:1.2;margin:0 0 12px}
+.studio-intro p:not(.studio-kicker){margin:0;color:var(--muted)}
+.studio-start{display:grid;gap:10px}.studio-start small{color:var(--muted);font-size:12px;text-align:center}
+.button.studio-primary{background:var(--navy);color:#fff}.button.studio-primary:hover{background:var(--navy-2)}
+.button.studio-secondary{background:var(--surface);color:var(--blue);border:1px solid var(--line)}
+.studio-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:20px}
+.studio-card{padding:26px;display:flex;flex-direction:column;min-width:0;border-top:4px solid var(--studio-accent)}
+.studio-card-heading{display:flex;align-items:center;gap:15px;margin-bottom:13px}
+.studio-symbol{width:62px;height:54px;border-radius:12px;flex-shrink:0;background:color-mix(in srgb,var(--studio-accent) 10%,var(--surface));color:var(--studio-accent);display:grid;place-items:center}
+.studio-symbol svg{width:52px;height:40px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.studio-card h3{font-size:23px;line-height:1.2;margin:0;letter-spacing:-.02em}.studio-card-heading small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.studio-card p{color:var(--muted);margin:0 0 13px;font-size:14px}
+.studio-card ul{margin:0 0 20px;padding-left:20px;font-size:14px}.studio-card li+li{margin-top:8px}
+.studio-card-footer{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:auto;padding-top:16px;border-top:1px solid var(--line)}
+.studio-topic-link{font-weight:850;text-decoration:none;color:var(--blue)}.studio-topic-link:hover{text-decoration:underline}
+.studio-related{font-size:12px;color:var(--muted)}.studio-related a{font-weight:750}
+.studio-workflow{padding:27px;margin-top:20px}.studio-workflow h3{margin:0 0 8px;font-size:23px;letter-spacing:-.02em}.studio-workflow>p{color:var(--muted);margin:0 0 20px}
+.studio-steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;counter-reset:studio-step}
+.studio-steps li{counter-increment:studio-step;padding:17px;background:var(--surface-2);border-radius:14px;min-width:0}
+.studio-steps li::before{content:counter(studio-step);display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--navy);color:white;font-weight:850;margin-bottom:12px}
+.studio-steps strong{display:block;font-size:15px;margin-bottom:6px}.studio-steps p{font-size:13px;color:var(--muted);margin:0}
+.studio-tools{margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}.studio-tools strong{color:var(--ink)}
+.studio-note{font-size:13px;color:var(--muted);margin:16px 2px 0}
+#circuit-studio a:focus-visible{outline:3px solid var(--sky);outline-offset:4px;border-radius:5px}
+[data-theme="dark"] #circuit-studio{--blue:#7dd3fc}
+@media(max-width:980px){.studio-intro{grid-template-columns:1fr}.studio-start{justify-items:start}.studio-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){.studio-grid,.studio-steps{grid-template-columns:1fr}.studio-intro,.studio-card,.studio-workflow{padding:21px}.studio-card-footer{align-items:flex-start;flex-direction:column}.studio-start{justify-items:stretch}.studio-card h3{font-size:21px}}
 </style>
 </head>
 <body>
@@ -230,7 +262,7 @@ a{color:var(--blue)}
         <span class="brand-copy"><b>ECE 314</b><span>Electronics · Interactive Course</span></span>
       </a>
       <nav class="header-nav" aria-label="Course sections">
-        <a href="#about">About</a><a href="#requirements">Requirements</a><a href="#modules">Modules</a><a href="#homework">Homework</a><a href="guides/Student_Workspace_Quick_Guide.docx" download>HW Guide</a>
+        <a href="#about">About</a><a href="#requirements">Requirements</a><a href="#modules">Modules</a><a href="#circuit-studio">Circuit Studio</a><a href="#homework">Homework</a><a href="guides/Student_Workspace_Quick_Guide.docx" download>HW Guide</a>
       </nav>
       <button class="icon-button" id="themeToggle" aria-label="Toggle color theme" title="Toggle color theme">◐</button>
     </div>
@@ -245,6 +277,7 @@ a{color:var(--blue)}
           <p class="hero-lead">An interactive path from operational amplifiers and semiconductor physics to transistor biasing, small-signal models, and analog circuit design.</p>
           <div class="hero-actions">
             <a class="button primary" href="#modules">Explore the 8 modules <span aria-hidden="true">↓</span></a>
+            <a class="button ghost" href="Circuit_Studio.html" target="_blank" rel="noopener">Launch Circuit Studio <span aria-hidden="true">↗</span></a>
             <a class="button ghost" href="#homework">Open homework</a>
             <a class="button ghost" href="guides/Student_Workspace_Quick_Guide.docx" download>HW workspace guide <span aria-hidden="true">↓</span></a>
             <a class="button ghost" href="#requirements">View prerequisites</a>
@@ -327,6 +360,83 @@ a{color:var(--blue)}
       </div>
     </section>
 
+    <section class="section" id="circuit-studio" aria-labelledby="studioTitle">
+      <div class="section-heading">
+        <div><h2 id="studioTitle">Circuit Studio</h2><p>An interactive circuit workspace for step-by-step problem solving and guided tutoring in op amps, diodes, MOSFETs, and BJTs.</p></div>
+      </div>
+      <div class="panel studio-intro">
+        <div>
+          <p class="studio-kicker">Draw · Solve · Understand</p>
+          <h3>Connect each equation to the circuit.</h3>
+          <p>Choose a worked example, inspect its editable circuit, and follow the analysis one step at a time. Circuit Studio brings the drawing, model assumptions, equations, and results together. Use <strong>Solution</strong> to study a derivation, then switch to <strong>Tutor</strong> to predict answers, request hints, and check your reasoning before revealing a result.</p>
+        </div>
+        <div class="studio-start">
+          <a class="button studio-primary" href="Circuit_Studio.html" target="_blank" rel="noopener">Open Circuit Studio <span aria-hidden="true">↗</span></a>
+          <a class="button studio-secondary" href="#studio-workflow">How to use the tutor <span aria-hidden="true">↓</span></a>
+          <small>Opens in a new tab so your course page stays available.</small>
+        </div>
+      </div>
+
+      <div class="studio-grid">
+        <article class="panel studio-card" style="--studio-accent:#2563eb">
+          <div class="studio-card-heading"><span class="studio-symbol" aria-hidden="true"><svg viewBox="0 0 64 48"><path d="M17 6V42L48 24ZM3 15H17M3 33H17M48 24H61M22 14H29M22 33H29M25.5 29.5V36.5"/></svg></span><div><h3>Operational amplifiers</h3><small>Feedback, gain, and output limits</small></div></div>
+          <p>See how the ideal op-amp assumptions and negative feedback lead to the familiar amplifier equations—and when output limits make the linear result invalid.</p>
+          <ul>
+            <li>Work through inverting and noninverting amplifiers, voltage followers, difference amplifiers, weighted summers, and integrators.</li>
+            <li>Follow virtual-ground or virtual-short reasoning, input currents, KCL, resistor ratios, and the output calculation.</li>
+            <li>Check output polarity and supply limits; change input and resistor values to explore how the response changes.</li>
+          </ul>
+          <div class="studio-card-footer"><a class="studio-topic-link" href="Circuit_Studio.html?topic=opamp" target="_blank" rel="noopener" aria-label="Open op-amp problems in Circuit Studio, new tab">Explore op-amp problems ↗</a><span class="studio-related">Related: <a href="#module-1">Module 1</a></span></div>
+        </article>
+
+        <article class="panel studio-card" style="--studio-accent:#0f9f6e">
+          <div class="studio-card-heading"><span class="studio-symbol" aria-hidden="true"><svg viewBox="0 0 64 48"><path d="M4 24H20M20 10V38L42 24ZM42 10V38M42 24H60"/></svg></span><div><h3>Diodes</h3><small>Device states, models, and waveforms</small></div></div>
+          <p>Develop a consistent assume–solve–verify approach. Track diode polarity and current direction, and test whether each proposed ON or OFF state is physically consistent.</p>
+          <ul>
+            <li>Compare ideal and constant-voltage-drop models in single- and multiple-diode circuits.</li>
+            <li>Study rectification, limiting, and regulation examples, with waveform views where the selected problem supports them.</li>
+            <li>Connect DC bias to the small-signal diode resistance and examine the effect of changing the supply or load.</li>
+          </ul>
+          <div class="studio-card-footer"><a class="studio-topic-link" href="Circuit_Studio.html?topic=diode" target="_blank" rel="noopener" aria-label="Open diode problems in Circuit Studio, new tab">Explore diode problems ↗</a><span class="studio-related">Related: <a href="#module-3">Module 3</a></span></div>
+        </article>
+
+        <article class="panel studio-card" style="--studio-accent:#7c3aed">
+          <div class="studio-card-heading"><span class="studio-symbol" aria-hidden="true"><svg viewBox="0 0 64 48"><path d="M4 24H22M22 10V38M29 10V38M29 12H47V3M29 36H47V45M38 36L33 32M38 36L33 40"/></svg></span><div><h3>MOSFETs</h3><small>Operating regions, bias, and amplification</small></div></div>
+          <p>Build the analysis from terminal voltages and an operating-region assumption. Solve the bias circuit, verify the result, and connect the DC operating point to amplifier behavior.</p>
+          <ul>
+            <li>Distinguish cutoff, triode, and saturation; use the appropriate NMOS or PMOS voltage and current conventions.</li>
+            <li>Practice fixed-gate, voltage-divider, source-feedback, and diode-connected bias circuits.</li>
+            <li>For amplifier examples, follow DC-to-small-signal conversion, transconductance, output resistance, and gain.</li>
+          </ul>
+          <div class="studio-card-footer"><a class="studio-topic-link" href="Circuit_Studio.html?topic=mosfet" target="_blank" rel="noopener" aria-label="Open MOSFET problems in Circuit Studio, new tab">Explore MOSFET problems ↗</a><span class="studio-related">Related: <a href="#module-4">4</a>, <a href="#module-5">5</a>, <a href="#module-7">7</a>, <a href="#module-8">8</a></span></div>
+        </article>
+
+        <article class="panel studio-card" style="--studio-accent:#dc2626">
+          <div class="studio-card-heading"><span class="studio-symbol" aria-hidden="true"><svg viewBox="0 0 64 48"><path d="M4 24H25M25 10V38M25 17L47 5V1M25 31L47 43V47M47 43L38 42M47 43L42 35"/></svg></span><div><h3>Bipolar junction transistors</h3><small>Junction bias, current flow, and gain</small></div></div>
+          <p>Use both junction biases to identify the operating region, include base-current loading, and check whether the calculated voltages support the assumed transistor model.</p>
+          <ul>
+            <li>Analyze NPN and PNP circuits in cutoff, forward-active operation, and saturation.</li>
+            <li>Work through two-supply and voltage-divider bias, Thevenin equivalents, emitter feedback, and current directions.</li>
+            <li>For amplifier examples, connect the Q-point to hybrid-π or T models and calculate the small-signal response.</li>
+          </ul>
+          <div class="studio-card-footer"><a class="studio-topic-link" href="Circuit_Studio.html?topic=bjt" target="_blank" rel="noopener" aria-label="Open BJT problems in Circuit Studio, new tab">Explore BJT problems ↗</a><span class="studio-related">Related: <a href="#module-6">6</a>, <a href="#module-7">7</a>, <a href="#module-8">8</a></span></div>
+        </article>
+      </div>
+
+      <div class="panel studio-workflow" id="studio-workflow" style="scroll-margin-top:94px">
+        <h3>From a worked example to independent practice</h3>
+        <p>The built-in Tutor uses structured questions, hints, and answer feedback tied to the selected circuit.</p>
+        <ol class="studio-steps">
+          <li><strong>Choose a problem</strong><p>Open a device library, choose a topic, and load a starting, exploration, or challenge example. Read the givens and model assumptions.</p></li>
+          <li><strong>Follow the solution</strong><p>Open Solution and select Guided steps. Move through the derivation while matching each equation to the highlighted circuit elements.</p></li>
+          <li><strong>Predict and check</strong><p>Open Tutor. Commit to a prediction or calculation, check your answer, and use hints when needed. Try independent practice before revealing answers.</p></li>
+          <li><strong>Change and explain</strong><p>Adjust a supported value or exploration slider. Predict the effect, compare the result, and explain it using the circuit model.</p></li>
+        </ol>
+        <div class="studio-tools"><strong>Keep your reasoning with the drawing.</strong> Edit components and connections, annotate with text and equations, inspect available model conversions, save and reopen circuit projects, and export drawings or print worked steps.</div>
+      </div>
+      <p class="studio-note">Use Circuit Studio for study and practice alongside the modules. Complete assigned work in the Homework workspaces below, where the instructor controls which solving tools are available.</p>
+    </section>
+
     <section class="section" id="homework" aria-labelledby="homeworkTitle">
       <div class="section-heading">
         <div><h2 id="homeworkTitle">Homework problems</h2><p>Eight interactive problem-solving workspaces aligned one-to-one with the course modules. Students can work solutions, edit circuit drawings, save progress, and download submissions.</p></div>
@@ -341,7 +451,7 @@ a{color:var(--blue)}
       <div class="homework-grid" id="homeworkGrid"></div>
     </section>
 
-    <footer class="footer"><b>ECE 314 · Electronics</b><span>Eight interactive modules with integrated homework workspaces</span></footer>
+    <footer class="footer"><b>ECE 314 · Electronics</b><span>Interactive modules · Circuit Studio tutoring · Homework workspaces</span></footer>
   </main>
 </div>
 
