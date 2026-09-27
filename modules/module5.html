@@ -1054,11 +1054,14 @@ const G=(x,y)=>'<g transform="translate('+x+' '+y+')">'+W('0,0 0,10')+L(-17,10,1
 function R(x,y,len=90){let p=[[x,y],[x,y+12]];for(let i=0;i<8;i++)p.push([x+(i%2?8:-8),y+12+(len-24)*(i+.5)/8]);p.push([x,y+len-12],[x,y+len]);return W(p.map(a=>a.join(',')).join(' '))}
 function A(x,y,a,b){const ang=Math.atan2(b-y,a-x),len=11,bx=a-len*Math.cos(ang),by=b-len*Math.sin(ang),w=4;return L(x,y,bx,by,1.9)+'<path d="M'+a+' '+b+'L'+(bx+w*Math.sin(ang))+' '+(by-w*Math.cos(ang))+'L'+(bx-w*Math.sin(ang))+' '+(by+w*Math.cos(ang))+'Z" fill="currentColor"/>'}
 function source(x,y,current=false){return '<circle cx="'+x+'" cy="'+y+'" r="25" fill="var(--panel)" stroke="currentColor" stroke-width="2.3"/>'+(current?A(x,y-16,x,y+16):L(x-6,y-9,x+6,y-9)+L(x,y-15,x,y-3)+L(x-6,y+11,x+6,y+11))}
-function mos(x,y,p=false){
- let b=L(x-70,y,x-24,y)+L(x-24,y-38,x-24,y+38,3);
- for(const [a,c]of [[-44,-18],[-9,9],[18,44]])b+=L(x,y+a,x,y+c,3);
+// Module-wide MOSFET symbol (same as the Section 06 solver): gate plate, continuous channel,
+// drain/source leads, and the arrow on the source lead (nMOS: out of the channel; pMOS: into it),
+// which implies body = source. bodyLead=true draws a separate body terminal instead (body not at source).
+function mos(x,y,p=false,bodyLead=false){
+ let b=L(x-70,y,x-14,y)+L(x-14,y-36,x-14,y+36,3)+L(x,y-44,x,y+44,3);
  b+=W((x)+','+(y-32)+' '+(x+35)+','+(y-32)+' '+(x+35)+','+(y-80))+W(x+','+(y+32)+' '+(x+35)+','+(y+32)+' '+(x+35)+','+(y+80));
- b+=p?L(x+90,y,x+60,y)+A(x+10,y,x+60,y):L(x+90,y,x+65,y)+A(x+65,y,x+10,y);
+ if(bodyLead)b+=p?L(x+90,y,x+60,y)+A(x+8,y,x+60,y):L(x+90,y,x+62,y)+A(x+62,y,x+5,y);
+ else b+=p?A(x+34,y-32,x+5,y-32):A(x+4,y+32,x+30,y+32);
  return b;
 }
 function svg(o){return '<svg xmlns="http://www.w3.org/2000/svg" class="m5x-svg" role="img" aria-label="'+o.title+'" viewBox="0 0 '+o.w+' '+o.h+'"><title>'+o.title+'</title>'+o.body+'</svg>'}
@@ -1112,7 +1115,7 @@ function biasCircuit(p,q,{title='Divider-biased nMOS',divider=true,pmos=false,re
   b+=W('250,125 250,95 680,95')+D(680,95)+R(250,125,100)+L(250,225,250,300)+D(250,300)+L(250,300,250,350)+R(250,350,100)+L(250,450,250,510)+G(250,510);
   b+=T(205,165,S('R','G1'),23,'end')+T(205,198,f(p.rg1/1000)+' MΩ',20,'end')+T(205,390,S('R','G2'),23,'end')+T(205,422,f(p.rg2/1000)+' MΩ',20,'end');
  }else b+=W('250,300 250,355')+source(250,380)+L(250,405,250,510)+G(250,510)+T(212,384,S('V','G'),23,'end');
- b+=L(250,300,575,300)+T(409,279,S('V','G')+' = '+f(p.vg)+' V',23)+mos(645,300,pmos)+T(554,327,'G',18);
+ b+=L(250,300,575,300)+T(409,279,S('V','G')+' = '+f(p.vg)+' V',23)+mos(645,300,pmos,p.body==='ground'&&!pmos)+T(554,327,'G',18);
  if(!pmos){
   b+=L(680,85,680,125)+R(680,125,95)+T(725,165,S('R','D'),23,'start')+T(725,196,f(p.rd)+' kΩ',20,'start');
   b+=L(680,380,680,410)+(p.rs>0?R(680,410,80):L(680,410,680,490))+L(680,490,680,510)+G(680,510);
@@ -1122,10 +1125,9 @@ function biasCircuit(p,q,{title='Divider-biased nMOS',divider=true,pmos=false,re
   b+=L(680,85,680,220)+L(680,380,680,410)+R(680,410,80)+L(680,490,680,510)+G(680,510)+T(725,447,S('R','D'),23,'start')+T(725,479,f(p.rd)+' kΩ',20,'start');
   b+=T(705,235,'S',18,'start')+T(705,375,'D',18,'start');
  }
- b+='<g style="color:var(--purple)">'+L(735,300,815,300)+T(785,280,'B',18);
- if(p.body==='ground'&&!pmos)b+=L(815,300,815,510)+G(815,510)+T(854,352,'Body = 0 V',19,'start');
- else if(pmos)b+=W('815,300 815,175 680,175')+D(680,175)+T(851,268,'Body = source',19,'start');
- else b+=W('815,300 815,395 680,395')+D(680,395)+T(851,355,'Body = source',19,'start');
+ b+='<g style="color:var(--purple)">';
+ if(p.body==='ground'&&!pmos)b+=L(735,300,815,300)+T(785,280,'B',18)+L(815,300,815,510)+G(815,510)+T(854,352,'Body = 0 V',19,'start');
+ else b+=T(740,306,'Body tied to source',18,'start');
  b+='</g>';
  b+=A(620,135,620,195)+T(595,170,pmos?'|'+S('I','D')+'|':S('I','D'),21,'end');
  if(reveal&&q){
@@ -1137,7 +1139,7 @@ function biasCircuit(p,q,{title='Divider-biased nMOS',divider=true,pmos=false,re
 }
 function mirrorCircuit(p,z,reveal=true){
  let b=T(45,34,'Diode-connected reference and nMOS current sink',23,'start');
- b+=term(295,67)+T(295,51,'5 V',22)+L(295,67,295,95)+source(295,120,true)+L(295,145,295,240);
+ b+=term(295,67)+T(312,74,'5 V',22,'start')+L(295,67,295,95)+source(295,120,true)+L(295,145,295,240);
  b+=T(340,123,S('I','REF')+' = '+f(p.iref)+' mA',22,'start')+mos(260,320)+mos(725,320);
  b+=W('190,320 160,320 160,180 620,180 620,320 655,320')+D(295,180);
  b+=T(487,212,'Shared gate voltage',19)+T(242,374,S('M','1'),23,'end')+T(702,374,S('M','2'),23,'end');
@@ -1145,7 +1147,6 @@ function mirrorCircuit(p,z,reveal=true){
  b+=A(800,172,800,230)+T(823,206,S('I','OUT'),22,'start')+D(760,150);
  for(const x of [295,760]){
   b+=L(x,400,x,450)+G(x,450);
-  b+='<g style="color:var(--purple)">'+W((x+55)+',320 '+(x+100)+',320 '+(x+100)+',420 '+x+',420')+D(x,420)+'</g>';
  }
  b+=T(295,515,S('k','1')+' = '+f(p.k)+' mA/V²',21)+T(760,515,S('k','2')+' = '+f(p.ratio)+S('k','1'),21);
  b+=T(45,554,'Bodies tied to sources · '+S('V','T1')+' = '+f(p.vt)+' V · '+S('V','T2')+' = '+f(z.vt2)+' V',20,'start');
