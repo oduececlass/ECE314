@@ -435,7 +435,81 @@ body.dark .m7x-tabs button[aria-pressed=true]{color:#11292c}
 @media(max-width:1100px){.m7x-controls{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:760px){.m7x-controls,.m7x-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.m7x-formula-grid{grid-template-columns:1fr}.m7x-math{font-size:16px}.m7x-tabs button{flex:1 1 auto}.m7x-detail{padding:12px}.m7x-metric strong{font-size:19px}}
 @media(max-width:390px){.m7x-controls{grid-template-columns:1fr}}
-</style></head>
+</style>
+<style id="module7-video-styles">
+.m7-video{margin:18px 0 28px;padding:18px 20px;border:1px solid var(--line);border-radius:18px;background:var(--panel);box-shadow:var(--shadow)}
+.m7-video-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;max-width:880px;margin:0 auto 13px}
+.m7-video-label{font-size:12px;font-weight:800;color:var(--blue);letter-spacing:.025em}
+.m7-video h3{font-size:20px;line-height:1.35;margin:5px 0 0;color:var(--ink)}
+.m7-video-time{flex:none;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;padding-top:5px}
+.m7-video .course-youtube{display:block;width:100%;max-width:880px;height:auto;aspect-ratio:16/9;object-fit:contain;margin:0 auto;background:#edf3fb;border:1px solid var(--line);border-radius:12px}
+.m7-video-links{max-width:880px;margin:12px auto 0;display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px;font-size:13px}
+.m7-video-status{color:var(--muted);margin-right:auto}.m7-video a{color:var(--blue);font-weight:700;text-underline-offset:3px}
+.m7-video a:focus-visible{outline:3px solid var(--blue);outline-offset:4px;border-radius:3px}
+.m7-video-error{max-width:880px;margin:12px auto 0;color:var(--red);font-size:13px}
+.m7-video [hidden]{display:none!important}
+@media(max-width:620px){.m7-video{padding:13px}.m7-video h3{font-size:18px}.m7-video-head{gap:10px}.m7-video-status{flex-basis:100%;margin-right:0}.m7-video .course-youtube{border-radius:8px}}
+@media print{.m7-video{display:none!important}}
+</style>
+<script id="course-youtube-controls">
+(function(){
+  const players = new Map();
+  window.pauseCourseVideos = function(except){
+    players.forEach(player => {
+      if(player !== except && typeof player.pauseVideo === 'function') player.pauseVideo();
+    });
+  };
+  function setup(){
+    const frames = Array.from(document.querySelectorAll('iframe.course-youtube'));
+    if(location.protocol === 'https:' || location.protocol === 'http:'){
+      frames.forEach(frame => {
+        const url = new URL(frame.src);
+        url.searchParams.set('origin', location.origin);
+        frame.src = url.href;
+      });
+    }
+    document.querySelectorAll('details.lesson-video').forEach(box => {
+      box.addEventListener('toggle', function(){
+        if(!box.open){
+          const frame = box.querySelector('iframe.course-youtube');
+          const player = frame && players.get(frame.id);
+          if(player && typeof player.pauseVideo === 'function') player.pauseVideo();
+        }
+      });
+    });
+    window.onYouTubeIframeAPIReady = function(){
+      frames.forEach(frame => {
+        const card = frame.closest('.lesson-video, aside');
+        const error = card && card.querySelector('[data-youtube-error]');
+        const player = new YT.Player(frame.id, {events:{
+          onStateChange: function(event){
+            if(event.data === YT.PlayerState.PLAYING){
+              window.pauseCourseVideos(event.target);
+              if(error) error.hidden = true;
+            }
+          },
+          onError: function(){if(error) error.hidden = false;}
+        }});
+        players.set(frame.id, player);
+      });
+    };
+    if(window.YT && window.YT.Player) window.onYouTubeIframeAPIReady();
+    else {
+      const script = document.createElement('script');
+      script.src = 'https://www.youtube.com/iframe_api';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup);
+  else setup();
+})();
+</script>
+<style id="course-youtube-style">
+iframe.course-youtube{display:block;width:100%;height:auto;min-height:200px;aspect-ratio:16/9;border:0;border-radius:10px;background:#111;margin:0 auto;max-width:960px}
+@media print{iframe.course-youtube{display:none!important}}
+</style>
+</head>
 <body>
 <div class="app">
 <aside class="sidebar" id="sidebar">
@@ -553,7 +627,14 @@ body.dark .m7x-tabs button[aria-pressed=true]{color:#11292c}
 <button type="button" class="card topic-card" data-open="principles"><div class="topic-icon">Aᵥ</div><span class="pill">Topic 7.1</span><h3>Amplifier principles</h3><p>Transfer characteristics, Q-point, inversion, and clipping.</p></button><button type="button" class="card topic-card" data-open="decomposition"><div class="topic-icon">DC+</div><span class="pill">Topic 7.2</span><h3>DC plus small signal</h3><p>Separate total variables into bias and incremental parts.</p></button><button type="button" class="card topic-card" data-open="linearization"><div class="topic-icon">∂</div><span class="pill">Topic 7.2</span><h3>Linearization</h3><p>Use the tangent slope \(g_m\) and evaluate distortion.</p></button><button type="button" class="card topic-card" data-open="mos-models"><div class="topic-icon">G</div><span class="pill">Figures 7.5–7.6</span><h3>MOSFET models</h3><p>Controlled source, \(r_o\), and T-model.</p></button><button type="button" class="card topic-card" data-open="bjt-models"><div class="topic-icon">π</div><span class="pill">Figures 7.7–7.8</span><h3>BJT models</h3><p>Hybrid-\(\pi\), T-model, \(r_\pi\), and \(r_e\).</p></button><button type="button" class="card topic-card" data-open="configurations"><div class="topic-icon">3×</div><span class="pill">Configurations</span><h3>Three configurations</h3><p>Inverting, follower, and common-gate/base stages.</p></button></div>
 </section>
 <section class="view" id="view-principles">
-<div class="section-title"><div><span class="pill">Topic 7.1</span><h2>Basic Principles of Transistor Amplifiers</h2><p>Signal-controlled use of DC power and the role of the Q-point.</p></div></div><aside class="review-note"><strong>Transfer-curve model conventions</strong><p>The MOSFET transfer plot uses the square-law device with k<sub>n</sub> = 1 mA/V², V<sub>T</sub> = 1 V, and λ = 0, joined to the triode solution. The BJT plot uses I<sub>S</sub> = 10<sup>−15</sup> A, V<sub>T</sub> = 25 mV, and an illustrative 0.2 V output floor. That floor is a clipping approximation; it is not an Ebers–Moll saturation calculation.</p></aside>
+<div class="section-title"><div><span class="pill">Topic 7.1</span><h2>Basic Principles of Transistor Amplifiers</h2><p>Signal-controlled use of DC power and the role of the Q-point.</p></div></div>
+<aside class="m7-video" id="module7-video-1" aria-labelledby="module7-video-title-1" data-narration="available">
+<div class="m7-video-head"><div><span class="m7-video-label">Video 1 · Animated lesson</span><h3 id="module7-video-title-1">Amplifier Principles, Q-Point, and Inversion</h3></div><span class="m7-video-time" aria-label="Video duration">3:32</span></div>
+<iframe id="youtube-m7-v1-1" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/0H2RQOqz1Zg?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module7 Video1 Amplifier Principles" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module7-video-status-1"></iframe>
+<p class="m7-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m7-video-links"><span class="m7-video-status" id="module7-video-status-1">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=0H2RQOqz1Zg" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module7_Video1_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+<aside class="review-note"><strong>Transfer-curve model conventions</strong><p>The MOSFET transfer plot uses the square-law device with k<sub>n</sub> = 1 mA/V², V<sub>T</sub> = 1 V, and λ = 0, joined to the triode solution. The BJT plot uses I<sub>S</sub> = 10<sup>−15</sup> A, V<sub>T</sub> = 25 mV, and an illustrative 0.2 V output floor. That floor is a clipping approximation; it is not an Ebers–Moll saturation calculation.</p></aside>
 <div class="review-note"><strong>New applied extensions</strong><p>Section 03: annotated MOSFET and BJT DC-to-AC circuit conversion. Section 04: harmonic distortion and a quantitative small-signal limit. Section 08: full-nodal degeneration lab, test-source resistance methods, and three worked checks.</p></div><div class="intro-panel">
 <span class="intro-kicker">Section introduction</span>
 <h3>A resistor converts transistor-current changes into output-voltage changes</h3>
@@ -726,6 +807,13 @@ body.dark .m7x-tabs button[aria-pressed=true]{color:#11292c}
 </section></section>
 <section class="view" id="view-decomposition">
 <div class="section-title"><div><span class="pill">Topic 7.2.1</span><h2>From DC Bias to Small-Signal Operation</h2><p>Total instantaneous quantity = DC value + time-varying increment.</p></div></div>
+<aside class="m7-video" id="module7-video-2" aria-labelledby="module7-video-title-2" data-narration="available">
+<div class="m7-video-head"><div><span class="m7-video-label">Video 2 · Animated lesson</span><h3 id="module7-video-title-2">From DC Bias to the Small-Signal Circuit</h3></div><span class="m7-video-time" aria-label="Video duration">3:42</span></div>
+<iframe id="youtube-m7-v2-2" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/jJgPhdmO-Gg?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module7 Video2 DC to Small Signal" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module7-video-status-2"></iframe>
+<p class="m7-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m7-video-links"><span class="m7-video-status" id="module7-video-status-2">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=jJgPhdmO-Gg" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module7_Video2_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+
 <div class="intro-panel">
 <span class="intro-kicker">Section introduction</span>
 <h3>Uppercase and lowercase symbols describe two simultaneous layers</h3>
@@ -945,6 +1033,13 @@ body.dark .m7x-tabs button[aria-pressed=true]{color:#11292c}
 </section></section>
 <section class="view" id="view-linearization">
 <div class="section-title"><div><span class="pill">Topic 7.2.2</span><h2>Meaning of “Small Signal” and Linearization</h2><p>Approximate a nonlinear curve by its tangent near the Q-point.</p></div></div>
+<aside class="m7-video" id="module7-video-3" aria-labelledby="module7-video-title-3" data-narration="available">
+<div class="m7-video-head"><div><span class="m7-video-label">Video 3 · Animated lesson</span><h3 id="module7-video-title-3">Linearization and Quantitative Small-Signal Limits</h3></div><span class="m7-video-time" aria-label="Video duration">3:36</span></div>
+<iframe id="youtube-m7-v3-3" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/fh2mF7A08mk?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module7 Video3 Linearization and Distortion" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module7-video-status-3"></iframe>
+<p class="m7-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m7-video-links"><span class="m7-video-status" id="module7-video-status-3">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=fh2mF7A08mk" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module7_Video3_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+
 <div class="intro-panel">
 <span class="intro-kicker">Section introduction</span>
 <h3>Small means small relative to the curvature scale</h3>
@@ -1131,7 +1226,14 @@ body.dark .m7x-tabs button[aria-pressed=true]{color:#11292c}
 <div class="m7-summary" hidden=""><b>Walkthrough complete.</b> Use the principle cards and vector figures above to review the reasoning, then move to the next Module 7 section.</div>
 </section></section>
 <section class="view" id="view-mos-models">
-<div class="section-title"><div><span class="pill">Topic 7.2.3 and Figures 7.5-7.6</span><h2>MOSFET Small-Signal Models</h2><p>Controlled current source, finite output resistance, and T-model.</p></div></div><aside class="review-note"><strong>Body effect and the T-model</strong><p>These models assume the body and source have the same incremental voltage, so the g<sub>mb</sub>v<sub>bs</sub> controlled-current term is absent. If the body is fixed while the source moves, body effect changes follower and common-gate behavior. The drawn T-model uses r<sub>o</sub> → ∞; 1/g<sub>m</sub> is a model element, not a gate leakage resistance.</p></aside>
+<div class="section-title"><div><span class="pill">Topic 7.2.3 and Figures 7.5-7.6</span><h2>MOSFET Small-Signal Models</h2><p>Controlled current source, finite output resistance, and T-model.</p></div></div>
+<aside class="m7-video" id="module7-video-4" aria-labelledby="module7-video-title-4" data-narration="available">
+<div class="m7-video-head"><div><span class="m7-video-label">Video 4 · Animated lesson</span><h3 id="module7-video-title-4">MOSFET Controlled-Source and T-Models</h3></div><span class="m7-video-time" aria-label="Video duration">3:33</span></div>
+<iframe id="youtube-m7-v4-4" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/IG5x5XKf0AI?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module7 Video4 MOSFET Small Signal Models" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module7-video-status-4"></iframe>
+<p class="m7-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m7-video-links"><span class="m7-video-status" id="module7-video-status-4">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=IG5x5XKf0AI" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module7_Video4_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+<aside class="review-note"><strong>Body effect and the T-model</strong><p>These models assume the body and source have the same incremental voltage, so the g<sub>mb</sub>v<sub>bs</sub> controlled-current term is absent. If the body is fixed while the source moves, body effect changes follower and common-gate behavior. The drawn T-model uses r<sub>o</sub> → ∞; 1/g<sub>m</sub> is a model element, not a gate leakage resistance.</p></aside>
 <div class="intro-panel">
 <span class="intro-kicker">Section introduction</span>
 <h3>The gate controls current without ideally drawing current</h3>
@@ -1300,6 +1402,13 @@ body.dark .m7x-tabs button[aria-pressed=true]{color:#11292c}
 </section></section>
 <section class="view" id="view-bjt-models">
 <div class="section-title"><div><span class="pill">Topic 7.2.4 and Figures 7.7-7.8</span><h2>BJT Hybrid-\(\pi\) and T-Models</h2><p>Two equivalent ways to represent the same local transistor behavior.</p></div></div>
+<aside class="m7-video" id="module7-video-5" aria-labelledby="module7-video-title-5" data-narration="available">
+<div class="m7-video-head"><div><span class="m7-video-label">Video 5 · Animated lesson</span><h3 id="module7-video-title-5">BJT Hybrid-Pi and T-Model Equivalence</h3></div><span class="m7-video-time" aria-label="Video duration">3:32</span></div>
+<iframe id="youtube-m7-v5-5" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/wVIe8_VIuec?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module7 Video5 BJT Small Signal Models" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module7-video-status-5"></iframe>
+<p class="m7-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m7-video-links"><span class="m7-video-status" id="module7-video-status-5">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=wVIe8_VIuec" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module7_Video5_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+
 <div class="intro-panel">
 <span class="intro-kicker">Section introduction</span>
 <h3>The hybrid-\(\pi\) model emphasizes base voltage; the T-model emphasizes emitter current</h3>
@@ -1473,6 +1582,13 @@ body.dark .m7x-tabs button[aria-pressed=true]{color:#11292c}
 </section></section>
 <section class="view" id="view-configurations">
 <div class="section-title"><div><span class="pill">Configuration comparison</span><h2>The Three Basic Single-Transistor Configurations</h2><p>Compare common-source/emitter, follower, and common-gate/base stages.</p></div></div>
+<aside class="m7-video" id="module7-video-6" aria-labelledby="module7-video-title-6" data-narration="available">
+<div class="m7-video-head"><div><span class="m7-video-label">Video 6 · Animated lesson</span><h3 id="module7-video-title-6">Three Amplifier Configurations and Degeneration</h3></div><span class="m7-video-time" aria-label="Video duration">3:46</span></div>
+<iframe id="youtube-m7-v6-6" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/tLINkR12a84?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module7 Video6 Amplifier Configurations" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module7-video-status-6"></iframe>
+<p class="m7-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m7-video-links"><span class="m7-video-status" id="module7-video-status-6">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=tLINkR12a84" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module7_Video6_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+
 <div class="intro-panel">
 <span class="intro-kicker">Circuit interpretation</span>
 <h3>“Common” identifies the terminal shared by the input and output circuits</h3>
@@ -1620,6 +1736,13 @@ body.dark .m7x-tabs button[aria-pressed=true]{color:#11292c}
 </section></section>
 <section class="view" id="view-design">
 <div class="section-title"><div><span class="pill">Integrated design walkthrough</span><h2>Single-Stage Amplifier Design Walkthrough</h2><p>Combine Q-point, transconductance, loading, degeneration, and input attenuation.</p></div></div>
+<aside class="m7-video" id="module7-video-7" aria-labelledby="module7-video-title-7" data-narration="available">
+<div class="m7-video-head"><div><span class="m7-video-label">Video 7 · Animated lesson</span><h3 id="module7-video-title-7">Complete-Stage Gain, Loading, and Resistance Checks</h3></div><span class="m7-video-time" aria-label="Video duration">4:59</span></div>
+<iframe id="youtube-m7-v7-7" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/g2Dul1nEsN4?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module7 Video7 Complete Stage Analysis" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module7-video-status-7"></iframe>
+<p class="m7-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m7-video-links"><span class="m7-video-status" id="module7-video-status-7">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=g2Dul1nEsN4" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module7_Video7_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+
 <div class="intro-panel">
 <span class="intro-kicker">Cumulative engineering walkthrough</span>
 <h3>The device gain is not necessarily the source-to-load gain</h3>
@@ -1892,7 +2015,7 @@ body.dark .m7x-tabs button[aria-pressed=true]{color:#11292c}
 const $=id=>document.getElementById(id);
 const qsa=(s,r=document)=>[...r.querySelectorAll(s)];
 function typeset(){ if(window.MathJax?.typesetPromise) MathJax.typesetPromise().catch(()=>{}); }
-function openView(name){
+function openView(name){window.pauseCourseVideos();
   qsa('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+name));
   qsa('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===name));
   const nav=qsa('.nav-btn'); const idx=Math.max(0,nav.findIndex(b=>b.dataset.view===name));
@@ -2740,7 +2863,9 @@ function quizScore(){const answered=quizRoot.querySelectorAll('[data-m7x-answer]
 quizRoot.addEventListener('click',e=>{const b=e.target.closest('.choice');if(!b)return;const q=b.closest('.quiz-q');if(q.dataset.m7xAnswer)return;q.dataset.m7xAnswer=b.classList.contains('correct')?'correct':'wrong';quizScore()});
 retry.onclick=()=>{buildQuiz();quizScore()};quizScore();
 })();
-</script></body>
+</script>
+
+</body>
 </html>
 <!-- Embedded font and MathJax licenses
 spacegrotesk

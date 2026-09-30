@@ -757,7 +757,81 @@ body.dark{--v-electron:#82bbff;--v-hole:#f19bc7;--v-ion:#b2c2ce;--v-energy:#b8b1
 @media print{.visual-controls,.visual-tools,.visual-jumps,.visual-mobile-note,.visual-dialog{display:none!important}.concept-art{overflow:visible}.concept-svg{min-width:0}.m2-concept{break-inside:avoid}.visual-reading{grid-template-columns:1fr 1fr}}
 
 .visual-reading[hidden]{display:none}.visual-controls #hole-count{align-self:center;font:14px var(--display)}
-</style></head>
+</style>
+<style id="module2-video-styles">
+.m2-video{margin:18px 0 28px;padding:18px 20px;border:1px solid var(--line);border-radius:18px;background:var(--panel);box-shadow:var(--shadow)}
+.m2-video-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;max-width:880px;margin:0 auto 13px}
+.m2-video-label{font-size:12px;font-weight:800;color:var(--blue);letter-spacing:.025em}
+.m2-video h3{font-size:20px;line-height:1.35;margin:5px 0 0;color:var(--ink)}
+.m2-video-time{flex:none;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;padding-top:5px}
+.m2-video .course-youtube{display:block;width:100%;max-width:880px;height:auto;aspect-ratio:16/9;object-fit:contain;margin:0 auto;background:#edf3fb;border:1px solid var(--line);border-radius:12px}
+.m2-video-links{max-width:880px;margin:12px auto 0;display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px;font-size:13px}
+.m2-video-status{color:var(--muted);margin-right:auto}.m2-video a{color:var(--blue);font-weight:700;text-underline-offset:3px}
+.m2-video a:focus-visible{outline:3px solid var(--blue);outline-offset:4px;border-radius:3px}
+.m2-video-error{max-width:880px;margin:12px auto 0;color:var(--red);font-size:13px}
+.m2-video [hidden]{display:none!important}
+@media(max-width:620px){.m2-video{padding:13px}.m2-video h3{font-size:18px}.m2-video-head{gap:10px}.m2-video-status{flex-basis:100%;margin-right:0}.m2-video .course-youtube{border-radius:8px}}
+@media print{.m2-video{display:none!important}}
+</style>
+<script id="course-youtube-controls">
+(function(){
+  const players = new Map();
+  window.pauseCourseVideos = function(except){
+    players.forEach(player => {
+      if(player !== except && typeof player.pauseVideo === 'function') player.pauseVideo();
+    });
+  };
+  function setup(){
+    const frames = Array.from(document.querySelectorAll('iframe.course-youtube'));
+    if(location.protocol === 'https:' || location.protocol === 'http:'){
+      frames.forEach(frame => {
+        const url = new URL(frame.src);
+        url.searchParams.set('origin', location.origin);
+        frame.src = url.href;
+      });
+    }
+    document.querySelectorAll('details.lesson-video').forEach(box => {
+      box.addEventListener('toggle', function(){
+        if(!box.open){
+          const frame = box.querySelector('iframe.course-youtube');
+          const player = frame && players.get(frame.id);
+          if(player && typeof player.pauseVideo === 'function') player.pauseVideo();
+        }
+      });
+    });
+    window.onYouTubeIframeAPIReady = function(){
+      frames.forEach(frame => {
+        const card = frame.closest('.lesson-video, aside');
+        const error = card && card.querySelector('[data-youtube-error]');
+        const player = new YT.Player(frame.id, {events:{
+          onStateChange: function(event){
+            if(event.data === YT.PlayerState.PLAYING){
+              window.pauseCourseVideos(event.target);
+              if(error) error.hidden = true;
+            }
+          },
+          onError: function(){if(error) error.hidden = false;}
+        }});
+        players.set(frame.id, player);
+      });
+    };
+    if(window.YT && window.YT.Player) window.onYouTubeIframeAPIReady();
+    else {
+      const script = document.createElement('script');
+      script.src = 'https://www.youtube.com/iframe_api';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup);
+  else setup();
+})();
+</script>
+<style id="course-youtube-style">
+iframe.course-youtube{display:block;width:100%;height:auto;min-height:200px;aspect-ratio:16/9;border:0;border-radius:10px;background:#111;margin:0 auto;max-width:960px}
+@media print{iframe.course-youtube{display:none!important}}
+</style>
+</head>
 <body>
 <div class="app">
 <aside class="sidebar" id="sidebar">
@@ -873,7 +947,14 @@ body.dark{--v-electron:#82bbff;--v-hole:#f19bc7;--v-ion:#b2c2ce;--v-energy:#b8b1
 </div>
 </section>
 <section class="view" id="view-materials">
-<div class="section-title"><div><span class="pill">Topic 2.1</span><h2>Intrinsic and Doped Semiconductors</h2><p>Doping changes carrier populations by many orders of magnitude without changing the equilibrium mass-action product.</p></div></div><div class="section-introduction">
+<div class="section-title"><div><span class="pill">Topic 2.1</span><h2>Intrinsic and Doped Semiconductors</h2><p>Doping changes carrier populations by many orders of magnitude without changing the equilibrium mass-action product.</p></div></div>
+<aside class="m2-video" id="module2-video-1-materials" aria-labelledby="module2-video-title-1-materials" data-narration="available">
+<div class="m2-video-head"><div><span class="m2-video-label">Video 1 · Animated lesson</span><h3 id="module2-video-title-1-materials">Silicon Bonds, Energy Bands, and Doping</h3></div><span class="m2-video-time" aria-label="Video duration">3:29</span></div>
+<iframe id="youtube-m2-v1-1" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/WNsts1Hvkhk?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module2 Video1 Bands Carriers and Doping" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module2-video-status-1-materials"></iframe>
+<p class="m2-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m2-video-links"><span class="m2-video-status" id="module2-video-status-1-materials">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=WNsts1Hvkhk" target="_blank" rel="noopener">Watch on YouTube</a><a href="scripts/Module2_Video1_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+<div class="section-introduction">
 <span class="intro-kicker">Section introduction</span>
 <h3>Begin with three simple material cases</h3>
 <p>
@@ -1209,7 +1290,14 @@ body.dark{--v-electron:#82bbff;--v-hole:#f19bc7;--v-ion:#b2c2ce;--v-energy:#b8b1
 <div class="grid-2"><div class="card"><h3>Intrinsic silicon at 300 K</h3><div class="math-block center">\[n=p=n_i\approx10^{10}\ \mathrm{cm^{-3}}\]</div><p>Electrons and holes are equal because they are generated as pairs.</p></div><div class="card"><h3>n-type silicon with \(N_D=10^{16}\ \mathrm{cm^{-3}}\)</h3><div class="math-block center">\[n\approx10^{16},\qquad p=\frac{10^{20}}{10^{16}}=10^4\ \mathrm{cm^{-3}}\]</div><p>Electrons are the majority carrier. Holes become the minority carrier while the product remains \(10^{20}\ \mathrm{cm^{-6}}\).</p></div></div>
 </section>
 <section class="view" id="view-carriers">
-<div class="section-title"><div><span class="pill">Interactive Laboratory 2A</span><h2>Carrier Concentration and Conductivity Solver</h2><p>Adjust temperature and donor/acceptor concentrations, then observe equilibrium concentrations within the stated model, material type, Fermi-level shift, conductivity, and resistivity.</p></div></div><aside class="review-note"><strong>Temperature and compensation conventions</strong><p>The material laboratory uses n<sub>i</sub>(300 K) = 10<sup>10</sup> cm<sup>−3</sup>, a fixed 1.12 eV band gap, complete dopant ionization, and nondegenerate statistics. Equal donor and acceptor settings give a compensated, intrinsic-like carrier population; this is not an undoped crystal. Mobility remains at the selected value when temperature changes.</p></aside><div class="section-introduction">
+<div class="section-title"><div><span class="pill">Interactive Laboratory 2A</span><h2>Carrier Concentration and Conductivity Solver</h2><p>Adjust temperature and donor/acceptor concentrations, then observe equilibrium concentrations within the stated model, material type, Fermi-level shift, conductivity, and resistivity.</p></div></div>
+<aside class="m2-video" id="module2-video-2-carriers" aria-labelledby="module2-video-title-2-carriers" data-narration="available">
+<div class="m2-video-head"><div><span class="m2-video-label">Video 2 · Animated lesson</span><h3 id="module2-video-title-2-carriers">Carrier Concentrations, Conductivity, and Fermi Level</h3></div><span class="m2-video-time" aria-label="Video duration">3:58</span></div>
+<iframe id="youtube-m2-v2-2" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/GDGma-P4q4U?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module2 Video2 Carrier Concentrations" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module2-video-status-2-carriers"></iframe>
+<p class="m2-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m2-video-links"><span class="m2-video-status" id="module2-video-status-2-carriers">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=GDGma-P4q4U" target="_blank" rel="noopener">Watch on YouTube</a><a href="scripts/Module2_Video2_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+<aside class="review-note"><strong>Temperature and compensation conventions</strong><p>The material laboratory uses n<sub>i</sub>(300 K) = 10<sup>10</sup> cm<sup>−3</sup>, a fixed 1.12 eV band gap, complete dopant ionization, and nondegenerate statistics. Equal donor and acceptor settings give a compensated, intrinsic-like carrier population; this is not an undoped crystal. Mobility remains at the selected value when temperature changes.</p></aside><div class="section-introduction">
 <span class="intro-kicker">Laboratory introduction</span>
 <h3>Convert the equilibrium equations into a quantitative material model</h3>
 <p>
@@ -1345,7 +1433,14 @@ body.dark{--v-electron:#82bbff;--v-hole:#f19bc7;--v-ion:#b2c2ce;--v-energy:#b8b1
 </div>
 </section>
 <section class="view" id="view-transport">
-<div class="section-title"><div><span class="pill">Topic 2.2</span><h2>Drift and Diffusion Currents</h2><p>Current density is the superposition of electric-field-driven drift and concentration-gradient-driven diffusion.</p></div></div><aside class="review-note"><strong>Local current is not automatically equilibrium</strong><p>The linear carrier profiles and uniform field are independent inputs. Currents are evaluated at the midpoint, where the displayed carrier concentrations apply. “Balance electron current” cancels J<sub>n</sub> at that point; it does not establish thermal equilibrium throughout the bar or force the hole current to vanish.</p></aside><div class="section-introduction">
+<div class="section-title"><div><span class="pill">Topic 2.2</span><h2>Drift and Diffusion Currents</h2><p>Current density is the superposition of electric-field-driven drift and concentration-gradient-driven diffusion.</p></div></div>
+<aside class="m2-video" id="module2-video-3-transport" aria-labelledby="module2-video-title-3-transport" data-narration="available">
+<div class="m2-video-head"><div><span class="m2-video-label">Video 3 · Animated lesson</span><h3 id="module2-video-title-3-transport">Drift: Electric Field, Carrier Motion, and Current</h3></div><span class="m2-video-time" aria-label="Video duration">3:50</span></div>
+<iframe id="youtube-m2-v3-3" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/BAoE4vyFHfU?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module2 Video3 Drift Current" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module2-video-status-3-transport"></iframe>
+<p class="m2-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m2-video-links"><span class="m2-video-status" id="module2-video-status-3-transport">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=BAoE4vyFHfU" target="_blank" rel="noopener">Watch on YouTube</a><a href="scripts/Module2_Video3_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+<aside class="review-note"><strong>Local current is not automatically equilibrium</strong><p>The linear carrier profiles and uniform field are independent inputs. Currents are evaluated at the midpoint, where the displayed carrier concentrations apply. “Balance electron current” cancels J<sub>n</sub> at that point; it does not establish thermal equilibrium throughout the bar or force the hole current to vanish.</p></aside><div class="section-introduction">
 <span class="intro-kicker">Section introduction</span>
 <h3>Separate field-driven motion from gradient-driven motion</h3>
 <p>
@@ -1633,6 +1728,13 @@ body.dark{--v-electron:#82bbff;--v-hole:#f19bc7;--v-ion:#b2c2ce;--v-energy:#b8b1
 <details><summary>Equilibrium as drift-diffusion cancellation</summary><div class="detail-content"><p>At equilibrium there is no net current, even when a concentration gradient exists. An internal electric field develops so drift exactly cancels diffusion.</p><div class="math-block center">\[J_n=0\Rightarrow E=-\frac{D_n}{\mu_n}\frac{1}{n}\frac{dn}{dx}=-V_T\frac{d(\ln n)}{dx}\]</div><div class="math-block center">\[J_p=0\Rightarrow E=+V_T\frac{d(\ln p)}{dx}\]</div></div></details>
 </div></div>
 <div class="section-title"><div><span class="pill">Interactive Laboratory 2B</span><h2>Drift-Diffusion Current-Density Simulator</h2><p>Control the field and concentration profiles, then inspect each current component and its direction.</p></div></div>
+<aside class="m2-video" id="module2-video-4-transport" aria-labelledby="module2-video-title-4-transport" data-narration="available">
+<div class="m2-video-head"><div><span class="m2-video-label">Video 4 · Animated lesson</span><h3 id="module2-video-title-4-transport">Diffusion, Einstein Relation, and Current Balance</h3></div><span class="m2-video-time" aria-label="Video duration">3:57</span></div>
+<iframe id="youtube-m2-v4-4" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/SfYwGuLRdFk?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module2 Video4 Diffusion and Balance" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module2-video-status-4-transport"></iframe>
+<p class="m2-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m2-video-links"><span class="m2-video-status" id="module2-video-status-4-transport">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=SfYwGuLRdFk" target="_blank" rel="noopener">Watch on YouTube</a><a href="scripts/Module2_Video4_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+
 <div class="beginner-foundation">
 <span class="lesson-badge">Simulation procedure · Laboratory 2B</span>
 <h3>Use the drift-diffusion simulator as a controlled experiment</h3>
@@ -1696,7 +1798,14 @@ body.dark{--v-electron:#82bbff;--v-hole:#f19bc7;--v-ion:#b2c2ce;--v-energy:#b8b1
 </div>
 </section>
 <section class="view" id="view-junction">
-<div class="section-title"><div><span class="pill">Topic 2.3</span><h2>pn Junction at Equilibrium and Under Bias</h2><p>Carrier diffusion creates fixed space charge, which creates an electric field and a built-in voltage barrier.</p></div></div><aside class="review-note"><strong>Validity of the depletion model</strong><p>Use nondegenerate, predominantly ionized p- and n-type regions. The abrupt-junction formulas require V<sub>bi</sub> − V<sub>D</sub> &gt; 0. Near barrier collapse, the depletion approximation fails; a missing width is a model-limit result, not a physically zero-width junction.</p></aside><div class="section-introduction">
+<div class="section-title"><div><span class="pill">Topic 2.3</span><h2>pn Junction at Equilibrium and Under Bias</h2><p>Carrier diffusion creates fixed space charge, which creates an electric field and a built-in voltage barrier.</p></div></div>
+<aside class="m2-video" id="module2-video-5-junction" aria-labelledby="module2-video-title-5-junction" data-narration="available">
+<div class="m2-video-head"><div><span class="m2-video-label">Video 5 · Animated lesson</span><h3 id="module2-video-title-5-junction">How a pn Junction Builds Charge, Field, and Potential</h3></div><span class="m2-video-time" aria-label="Video duration">3:41</span></div>
+<iframe id="youtube-m2-v5-5" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/wbUWq_DRsFQ?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module2 Video5 Junction Formation" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module2-video-status-5-junction"></iframe>
+<p class="m2-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m2-video-links"><span class="m2-video-status" id="module2-video-status-5-junction">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=wbUWq_DRsFQ" target="_blank" rel="noopener">Watch on YouTube</a><a href="scripts/Module2_Video5_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+<aside class="review-note"><strong>Validity of the depletion model</strong><p>Use nondegenerate, predominantly ionized p- and n-type regions. The abrupt-junction formulas require V<sub>bi</sub> − V<sub>D</sub> &gt; 0. Near barrier collapse, the depletion approximation fails; a missing width is a model-limit result, not a physically zero-width junction.</p></aside><div class="section-introduction">
 <span class="intro-kicker">Section introduction</span>
 <h3>Follow the junction from initial contact to electrostatic equilibrium</h3>
 <p>
@@ -1994,6 +2103,13 @@ body.dark{--v-electron:#82bbff;--v-hole:#f19bc7;--v-ion:#b2c2ce;--v-energy:#b8b1
 <div class="theory-note"><b>Validity:</b> the depletion-width expression assumes an abrupt junction, complete ionization, the depletion approximation, and operation before breakdown or high-level injection.</div>
 </div></div>
 <div class="section-title"><div><span class="pill">Interactive Laboratory 2C</span><h2>pn-Junction Electrostatics Simulator</h2><p>Vary doping, temperature, and bias while keeping the charge, field, and potential plots spatially aligned.</p></div></div>
+<aside class="m2-video" id="module2-video-6-junction" aria-labelledby="module2-video-title-6-junction" data-narration="available">
+<div class="m2-video-head"><div><span class="m2-video-label">Video 6 · Animated lesson</span><h3 id="module2-video-title-6-junction">Junction Bias, Depletion Width, and Doping Asymmetry</h3></div><span class="m2-video-time" aria-label="Video duration">3:49</span></div>
+<iframe id="youtube-m2-v6-6" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/L9qbI0UfTD8?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module2 Video6 Bias and Depletion Width" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module2-video-status-6-junction"></iframe>
+<p class="m2-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m2-video-links"><span class="m2-video-status" id="module2-video-status-6-junction">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=L9qbI0UfTD8" target="_blank" rel="noopener">Watch on YouTube</a><a href="scripts/Module2_Video6_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+
 <div class="beginner-foundation">
 <span class="lesson-badge">Simulation procedure · Laboratory 2C</span>
 <h3>Connect the charge, field, potential, and depletion-width plots</h3>
@@ -2045,7 +2161,14 @@ body.dark{--v-electron:#82bbff;--v-hole:#f19bc7;--v-ion:#b2c2ce;--v-energy:#b8b1
 </div>
 </section>
 <section class="view" id="view-diode">
-<div class="section-title"><div><span class="pill">Diode behavior</span><h2>Diode Current-Voltage Relationship</h2><p>Forward bias produces exponential injection; reverse bias produces approximately \(-I_S\) until breakdown.</p></div></div><div class="section-introduction">
+<div class="section-title"><div><span class="pill">Diode behavior</span><h2>Diode Current-Voltage Relationship</h2><p>Forward bias produces exponential injection; reverse bias produces approximately \(-I_S\) until breakdown.</p></div></div>
+<aside class="m2-video" id="module2-video-7-diode" aria-labelledby="module2-video-title-7-diode" data-narration="available">
+<div class="m2-video-head"><div><span class="m2-video-label">Video 7 · Animated lesson</span><h3 id="module2-video-title-7-diode">Minority-Carrier Injection and the Diode I–V Curve</h3></div><span class="m2-video-time" aria-label="Video duration">4:29</span></div>
+<iframe id="youtube-m2-v7-7" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/mAfPF1Cl2ZM?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module2 Video7 Diode IV and Incremental Resistance" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module2-video-status-7-diode"></iframe>
+<p class="m2-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m2-video-links"><span class="m2-video-status" id="module2-video-status-7-diode">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=mAfPF1Cl2ZM" target="_blank" rel="noopener">Watch on YouTube</a><a href="scripts/Module2_Video7_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+<div class="section-introduction">
 <span class="intro-kicker">Section introduction</span>
 <h3>Translate barrier control into the diode current-voltage curve</h3>
 <p>
@@ -2574,7 +2697,7 @@ function niceSign(x){return x>0?'+':x<0?'−':'0'}
 // Navigation and theme
 const navBtns=[...document.querySelectorAll('.nav-btn')];
 const views=[...document.querySelectorAll('.view')];
-function openView(name){$("sidebar").classList.remove("open");$("menuBtn").setAttribute("aria-expanded","false");
+function openView(name){window.pauseCourseVideos();$("sidebar").classList.remove("open");$("menuBtn").setAttribute("aria-expanded","false");
   views.forEach(v=>v.classList.toggle('active',v.id===`view-${name}`));
   navBtns.forEach(b=>b.classList.toggle('active',b.dataset.view===name));
   const idx=Math.max(0,navBtns.findIndex(b=>b.dataset.view===name));
@@ -2948,5 +3071,7 @@ initF2();
  els('[data-visual-open]').forEach(b=>b.onclick=()=>{document.querySelector(`.nav-btn[data-view="${b.dataset.section}"]`).click();setTimeout(()=>get(b.dataset.visualOpen).scrollIntoView({block:'start',behavior:'smooth'}),140)});
  drawBonding();drawPair();drawHole();drawDoping();drawNeutral();drawMotion();drawJunction();drawBias();
 })();
-</script></body>
+</script>
+
+</body>
 </html>

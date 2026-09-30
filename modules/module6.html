@@ -565,7 +565,81 @@ body.dark .bla-show-all[aria-pressed=true],body.dark .bla-states button[aria-pre
 @media(max-width:1250px){.bla-grid{grid-template-columns:1fr}.bla-circuit{width:100%;max-width:720px;margin:auto}}
 @media(max-width:620px){.bla-eq-row{grid-template-columns:1fr;gap:3px;padding:12px}.bla-equation,.bla-eq-row,.bla-reason li>div{font-size:15px}.bla-push-result{font-size:16px}.bla-grid{gap:14px}.lesson-step:has(.bla-module){padding:48px 10px 12px}.bla-minihead{flex-wrap:wrap}.bla-circuit figcaption{padding:9px}.bla-states button{flex:1 1 100%;text-align:left}}
 @media(prefers-reduced-motion:reduce){.bla-module[data-focus] [data-term]{transition:none}}
-</style></head>
+</style>
+<style id="module6-video-styles">
+.m6-video{margin:18px 0 28px;padding:18px 20px;border:1px solid var(--line);border-radius:18px;background:var(--panel);box-shadow:var(--shadow)}
+.m6-video-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;max-width:880px;margin:0 auto 13px}
+.m6-video-label{font-size:12px;font-weight:800;color:var(--blue);letter-spacing:.025em}
+.m6-video h3{font-size:20px;line-height:1.35;margin:5px 0 0;color:var(--ink)}
+.m6-video-time{flex:none;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;padding-top:5px}
+.m6-video .course-youtube{display:block;width:100%;max-width:880px;height:auto;aspect-ratio:16/9;object-fit:contain;margin:0 auto;background:#edf3fb;border:1px solid var(--line);border-radius:12px}
+.m6-video-links{max-width:880px;margin:12px auto 0;display:flex;align-items:center;flex-wrap:wrap;gap:10px 18px;font-size:13px}
+.m6-video-status{color:var(--muted);margin-right:auto}.m6-video a{color:var(--blue);font-weight:700;text-underline-offset:3px}
+.m6-video a:focus-visible{outline:3px solid var(--blue);outline-offset:4px;border-radius:3px}
+.m6-video-error{max-width:880px;margin:12px auto 0;color:var(--red);font-size:13px}
+.m6-video [hidden]{display:none!important}
+@media(max-width:620px){.m6-video{padding:13px}.m6-video h3{font-size:18px}.m6-video-head{gap:10px}.m6-video-status{flex-basis:100%;margin-right:0}.m6-video .course-youtube{border-radius:8px}}
+@media print{.m6-video{display:none!important}}
+</style>
+<script id="course-youtube-controls">
+(function(){
+  const players = new Map();
+  window.pauseCourseVideos = function(except){
+    players.forEach(player => {
+      if(player !== except && typeof player.pauseVideo === 'function') player.pauseVideo();
+    });
+  };
+  function setup(){
+    const frames = Array.from(document.querySelectorAll('iframe.course-youtube'));
+    if(location.protocol === 'https:' || location.protocol === 'http:'){
+      frames.forEach(frame => {
+        const url = new URL(frame.src);
+        url.searchParams.set('origin', location.origin);
+        frame.src = url.href;
+      });
+    }
+    document.querySelectorAll('details.lesson-video').forEach(box => {
+      box.addEventListener('toggle', function(){
+        if(!box.open){
+          const frame = box.querySelector('iframe.course-youtube');
+          const player = frame && players.get(frame.id);
+          if(player && typeof player.pauseVideo === 'function') player.pauseVideo();
+        }
+      });
+    });
+    window.onYouTubeIframeAPIReady = function(){
+      frames.forEach(frame => {
+        const card = frame.closest('.lesson-video, aside');
+        const error = card && card.querySelector('[data-youtube-error]');
+        const player = new YT.Player(frame.id, {events:{
+          onStateChange: function(event){
+            if(event.data === YT.PlayerState.PLAYING){
+              window.pauseCourseVideos(event.target);
+              if(error) error.hidden = true;
+            }
+          },
+          onError: function(){if(error) error.hidden = false;}
+        }});
+        players.set(frame.id, player);
+      });
+    };
+    if(window.YT && window.YT.Player) window.onYouTubeIframeAPIReady();
+    else {
+      const script = document.createElement('script');
+      script.src = 'https://www.youtube.com/iframe_api';
+      script.async = true;
+      document.head.appendChild(script);
+    }
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setup);
+  else setup();
+})();
+</script>
+<style id="course-youtube-style">
+iframe.course-youtube{display:block;width:100%;height:auto;min-height:200px;aspect-ratio:16/9;border:0;border-radius:10px;background:#111;margin:0 auto;max-width:960px}
+@media print{iframe.course-youtube{display:none!important}}
+</style>
+</head>
 <body>
 <div class="app">
 <aside class="sidebar" id="sidebar">
@@ -700,6 +774,13 @@ body.dark .bla-show-all[aria-pressed=true],body.dark .bla-states button[aria-pre
 
 <section class="view" id="view-structure">
   <div class="section-title"><div><span class="pill">Topic 6.1</span><h2>BJT Structure and Modes of Operation</h2><p>Use the two pn-junction viewpoint before memorizing circuit models.</p></div></div>
+<aside class="m6-video" id="module6-video-1" aria-labelledby="module6-video-title-1" data-narration="available">
+<div class="m6-video-head"><div><span class="m6-video-label">Video 1 · Animated lesson</span><h3 id="module6-video-title-1">BJT Structure and Carrier Flow</h3></div><span class="m6-video-time" aria-label="Video duration">3:30</span></div>
+<iframe id="youtube-m6-v1-1" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/1Cai7rce5wE?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module6 Video1 Structure and Carrier Flow" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module6-video-status-1"></iframe>
+<p class="m6-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m6-video-links"><span class="m6-video-status" id="module6-video-status-1">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=1Cai7rce5wE" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module6_Video1_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+
 
   <div class="intro-panel">
     <span class="intro-kicker">Section introduction</span>
@@ -733,6 +814,13 @@ body.dark .bla-show-all[aria-pressed=true],body.dark .bla-states button[aria-pre
       </div>
     </div>
 
+
+<aside class="m6-video" id="module6-video-2" aria-labelledby="module6-video-title-2" data-narration="available">
+<div class="m6-video-head"><div><span class="m6-video-label">Video 2 · Animated lesson</span><h3 id="module6-video-title-2">BJT Operating Modes: Check the Two Junctions</h3></div><span class="m6-video-time" aria-label="Video duration">3:30</span></div>
+<iframe id="youtube-m6-v2-2" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/aW9I9tdU058?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module6 Video2 Operating Modes" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module6-video-status-2"></iframe>
+<p class="m6-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m6-video-links"><span class="m6-video-status" id="module6-video-status-2">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=aW9I9tdU058" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module6_Video2_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
     <div class="lesson-wide">
       <h4>Junction-bias test for an npn</h4>
       <div class="table-wrap">
@@ -858,6 +946,13 @@ body.dark .bla-show-all[aria-pressed=true],body.dark .bla-states button[aria-pre
 
 <section class="view" id="view-large-signal">
   <div class="section-title"><div><span class="pill">Topic 6.2</span><h2>Large-Signal Exponential Relations</h2><p>Connect carrier injection to terminal currents.</p></div></div>
+<aside class="m6-video" id="module6-video-3" aria-labelledby="module6-video-title-3" data-narration="available">
+<div class="m6-video-head"><div><span class="m6-video-label">Video 3 · Animated lesson</span><h3 id="module6-video-title-3">Exponential Current Control and Current Gain</h3></div><span class="m6-video-time" aria-label="Video duration">3:34</span></div>
+<iframe id="youtube-m6-v3-3" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/V4G9mn7liKk?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module6 Video3 Exponential Control and Gain" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module6-video-status-3"></iframe>
+<p class="m6-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m6-video-links"><span class="m6-video-status" id="module6-video-status-3">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=V4G9mn7liKk" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module6_Video3_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+
 
   <div class="intro-panel">
     <span class="intro-kicker">Section introduction</span>
@@ -6223,7 +6318,14 @@ z
 </section>
 
 <section class="view" id="view-output">
-  <div class="section-title"><div><span class="pill">Topic 6.3</span><h2>Output Characteristics and Early Effect</h2><p>Read the common-emitter curve family as a map of operating behavior.</p></div></div><aside class="review-note"><strong>Interpreting the output family</strong><p>Each curve holds base current fixed. The laboratory uses Ebers–Moll transport with a first-order Early correction and classifies the region from v<sub>BC</sub>. The displayed r<sub>o</sub> is an active-region estimate; very near the mode boundary, the complete derivative includes both junction terms. Breakdown, heating, and high-level injection are excluded.</p></aside>
+  <div class="section-title"><div><span class="pill">Topic 6.3</span><h2>Output Characteristics and Early Effect</h2><p>Read the common-emitter curve family as a map of operating behavior.</p></div></div>
+<aside class="m6-video" id="module6-video-4" aria-labelledby="module6-video-title-4" data-narration="available">
+<div class="m6-video-head"><div><span class="m6-video-label">Video 4 · Animated lesson</span><h3 id="module6-video-title-4">Output Characteristics and the Early Effect</h3></div><span class="m6-video-time" aria-label="Video duration">3:32</span></div>
+<iframe id="youtube-m6-v4-4" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/Icp8EWDKd5A?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module6 Video4 Output Characteristics and Early Effect" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module6-video-status-4"></iframe>
+<p class="m6-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m6-video-links"><span class="m6-video-status" id="module6-video-status-4">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=Icp8EWDKd5A" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module6_Video4_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+<aside class="review-note"><strong>Interpreting the output family</strong><p>Each curve holds base current fixed. The laboratory uses Ebers–Moll transport with a first-order Early correction and classifies the region from v<sub>BC</sub>. The displayed r<sub>o</sub> is an active-region estimate; very near the mode boundary, the complete derivative includes both junction terms. Breakdown, heating, and high-level injection are excluded.</p></aside>
 
   <div class="intro-panel">
     <span class="intro-kicker">Section introduction</span>
@@ -10816,6 +10918,13 @@ z
 
 <section class="view" id="view-dc-bias">
   <div class="section-title"><div><span class="pill">Topic 6.4 · Example 1</span><h2>Two-Supply BJT DC Bias</h2><p>Assume, solve, and verify—then change the model if verification fails.</p></div></div>
+<aside class="m6-video" id="module6-video-5" aria-labelledby="module6-video-title-5" data-narration="available">
+<div class="m6-video-head"><div><span class="m6-video-label">Video 5 · Animated lesson</span><h3 id="module6-video-title-5">Two-Supply BJT Bias: Analyze, Design, and Verify</h3></div><span class="m6-video-time" aria-label="Video duration">4:07</span></div>
+<iframe id="youtube-m6-v5-5" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/MmuelrL_K9k?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module6 Video5 Two Supply Bias" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module6-video-status-5"></iframe>
+<p class="m6-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m6-video-links"><span class="m6-video-status" id="module6-video-status-5">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=MmuelrL_K9k" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module6_Video5_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+
 
   <div class="intro-panel">
     <span class="intro-kicker">Section introduction</span>
@@ -10907,6 +11016,13 @@ z
 
 <section class="view" id="view-divider">
   <div class="section-title"><div><span class="pill">Topic 6.4 · Example 2</span><h2>Voltage-Divider Bias with Emitter Feedback</h2><p>Reduce the divider to a Thevenin source and solve the base loop.</p></div></div>
+<aside class="m6-video" id="module6-video-6" aria-labelledby="module6-video-title-6" data-narration="available">
+<div class="m6-video-head"><div><span class="m6-video-label">Video 6 · Animated lesson</span><h3 id="module6-video-title-6">Voltage-Divider Bias and Emitter Feedback</h3></div><span class="m6-video-time" aria-label="Video duration">3:33</span></div>
+<iframe id="youtube-m6-v6-6" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/wFFtGh0x1e4?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module6 Video6 Divider Bias and Feedback" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module6-video-status-6"></iframe>
+<p class="m6-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m6-video-links"><span class="m6-video-status" id="module6-video-status-6">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=wFFtGh0x1e4" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module6_Video6_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+
 
   <div class="intro-panel">
     <span class="intro-kicker">Section introduction</span>
@@ -10991,6 +11107,13 @@ z
 
 <section class="view" id="view-pushpull">
   <div class="section-title"><div><span class="pill">Topic 6.4 · Example 3</span><h2>Complementary Push-Pull Emitter Follower</h2><p>Use polarity to decide which transistor conducts.</p></div></div>
+<aside class="m6-video" id="module6-video-7" aria-labelledby="module6-video-title-7" data-narration="available">
+<div class="m6-video-head"><div><span class="m6-video-label">Video 7 · Animated lesson</span><h3 id="module6-video-title-7">Complementary Push-Pull Emitter Follower</h3></div><span class="m6-video-time" aria-label="Video duration">3:36</span></div>
+<iframe id="youtube-m6-v7-7" class="course-youtube" width="960" height="540" src="https://www.youtube.com/embed/CYKmM_ZUkPw?enablejsapi=1&amp;playsinline=1&amp;rel=0" title="Module6 Video7 Complementary Push Pull" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen aria-describedby="module6-video-status-7"></iframe>
+<p class="m6-video-error" role="status" hidden data-youtube-error>This video cannot play here. Use Watch on YouTube below.</p>
+<div class="m6-video-links"><span class="m6-video-status" id="module6-video-status-7">Narrated video · Voice included</span><a href="https://www.youtube.com/watch?v=CYKmM_ZUkPw" target="_blank" rel="noopener">Watch on YouTube</a><a href="../scripts/Module6_Video7_ElevenLabs_Script.txt" download>Narration script</a></div>
+</aside>
+
 
   <div class="intro-panel">
     <span class="intro-kicker">Section introduction</span>
@@ -11147,7 +11270,7 @@ function axes(ctx,w,h,xmin,xmax,ymin,ymax,xlabel,ylabel,xticks=6,yticks=5){
 }
 
 const viewNames=['overview','structure','large-signal','output','dc-bias','divider','pushpull','quiz'];
-function openView(name){
+function openView(name){window.pauseCourseVideos();
   qsa('.view').forEach(v=>v.classList.toggle('active',v.id===`view-${name}`));
   qsa('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===name));
   const i=viewNames.indexOf(name);
@@ -11447,7 +11570,9 @@ qsa('[data-export-figure]').forEach(b=>b.addEventListener('click',()=>exportFigu
   }catch(e){b.textContent='Export unavailable';console.error(e)}
   finally{setTimeout(()=>{URL.revokeObjectURL(url);if(out!==url)URL.revokeObjectURL(out)},2000)}
  });
-})();</script></body>
+})();</script>
+
+</body>
 </html>
 <!-- Embedded font and MathJax licenses
 spacegrotesk
