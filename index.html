@@ -59,7 +59,20 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;let
 button.open-homework,button.homework-launch{border:0;cursor:pointer;font-family:inherit}button.open-homework{background:transparent}
 .hw-dialog{width:min(420px,calc(100% - 32px));padding:28px;border:1px solid var(--line);border-radius:18px;background:var(--surface);color:var(--ink);box-shadow:0 24px 80px #0005}
 .hw-dialog::backdrop{background:#081d32a6;backdrop-filter:blur(4px)}.hw-dialog h2{margin:0 0 9px;font-size:23px;letter-spacing:-.03em}.hw-dialog p{color:var(--muted);font-size:13px;margin:0 0 20px}.hw-dialog label{display:block;font-size:12px;font-weight:700;margin-bottom:7px}.hw-dialog input{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);padding:12px;font:inherit}.hw-dialog input:focus-visible{outline:2px solid var(--sky);outline-offset:3px}.hw-dialog .hw-error{min-height:20px;font-size:12px;color:var(--warning);margin:9px 0 14px}.hw-dialog-actions{display:flex;justify-content:flex-end;gap:10px}
-</style></head><body>
+</style><style>
+body.course-locked > :not(#courseAccessGate):not(script):not(style){display:none!important}
+body.course-locked{min-height:100vh;min-height:100dvh;display:grid;place-items:center;margin:0;padding:24px;box-sizing:border-box;background:#edf3f7}
+#courseAccessGate{box-sizing:border-box;width:min(100%,420px);padding:36px;background:#fff;color:#163347;border:1px solid #d5e0e8;border-radius:18px;box-shadow:0 16px 50px #15384c12;font-family:system-ui,sans-serif}
+#courseAccessGate h1{font-size:27px;margin:0 0 8px}#courseAccessGate p{font-size:14px;color:#536977;margin:0 0 25px}
+#courseAccessGate label{display:block;font-size:14px;font-weight:600;margin-bottom:8px}
+#courseAccessGate input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #9aafbd;border-radius:8px;font:inherit;background:#fff;color:#163347}
+#courseAccessGate button{width:100%;border:0;border-radius:8px;padding:13px;background:#125e79;color:white;font:600 15px system-ui;cursor:pointer;margin-top:12px}
+#courseAccessGate input:focus-visible,#courseAccessGate button:focus-visible{outline:3px solid #44a9ca;outline-offset:3px}
+#courseAccessError{min-height:20px;margin-top:9px;color:#a12323;font-size:13px}
+</style></head><body class="course-locked"><section id="courseAccessGate" aria-labelledby="courseAccessTitle">
+<h1 id="courseAccessTitle">Course access</h1><p>Enter your password to view the course.</p>
+<form id="courseAccessForm"><label for="courseAccessPassword">Password</label><input id="courseAccessPassword" type="password" autocomplete="current-password" required autofocus aria-describedby="courseAccessError"><div id="courseAccessError" role="alert" aria-live="polite"></div><button type="submit">Enter course</button></form>
+<noscript>Enable JavaScript to enter the course.</noscript></section>
 <a class="skip-link" href="#modules">Skip to modules</a>
 <div id="courseView">
  <header class="site-header"><div class="header-inner">
@@ -337,44 +350,28 @@ guideVideos.forEach(video=>video.addEventListener('play',()=>{
 }));
 renderReaderOptions();renderModules();renderHomework();updateProgress();handleHash();
 
-// A homepage access prompt, not server-side authentication.
-const homeworkDialog=document.getElementById('homeworkDialog');
-const homeworkPassword=document.getElementById('homeworkPassword');
-const homeworkPasswordError=document.getElementById('homeworkPasswordError');
-let pendingHomework=null;
-function homeworkPasswordMatches(value){return value==='ECE314';}
-document.addEventListener('click',event=>{
- const button=event.target.closest('[data-homework]');
- if(!button)return;
+// This static-page gate controls the index display, not server authorization.
+const accessForm=document.getElementById('courseAccessForm');
+accessForm.addEventListener('submit',event=>{
  event.preventDefault();
- const file=button.dataset.homework;
- const assignment=HOMEWORKS.find(item=>item.file===file);
- if(!assignment)return;
- pendingHomework=assignment.file;
- document.getElementById('homeworkDialogTitle').textContent=`Homework ${assignment.id} access`;
- homeworkPassword.value='';
- homeworkPassword.removeAttribute('aria-invalid');
- homeworkPasswordError.textContent='';
- homeworkDialog.showModal();
- homeworkPassword.focus();
-});
-document.getElementById('homeworkPasswordForm').addEventListener('submit',event=>{
- event.preventDefault();
- if(!pendingHomework)return;
- if(!homeworkPasswordMatches(homeworkPassword.value)){
-  homeworkPasswordError.textContent='Incorrect password. Please try again.';
-  homeworkPassword.setAttribute('aria-invalid','true');
-  homeworkPassword.focus();homeworkPassword.select();return;
+ const input=document.getElementById('courseAccessPassword');
+ const error=document.getElementById('courseAccessError');
+ if(input.value!=='ECE314'){
+  error.textContent='Incorrect password. Please try again.';
+  input.setAttribute('aria-invalid','true');input.focus();input.select();return;
  }
- const destination=pendingHomework;
- homeworkDialog.close();
- window.open(destination,'_blank','noopener');
+ input.value='';error.textContent='';
+ document.body.classList.remove('course-locked');
+ document.getElementById('courseAccessGate').remove();
+ document.querySelector('main h1, h1')?.setAttribute('tabindex','-1');
+ document.querySelector('main h1, h1')?.focus();
+ handleHash();
 });
-document.getElementById('homeworkPasswordCancel').addEventListener('click',()=>homeworkDialog.close());
-homeworkDialog.addEventListener('close',()=>{
- pendingHomework=null;homeworkPassword.value='';homeworkPasswordError.textContent='';
- homeworkPassword.removeAttribute('aria-invalid');
+// The course has already been unlocked; open assignments directly.
+document.addEventListener('click',event=>{
+ const button=event.target.closest('[data-homework]');if(!button)return;
+ const assignment=HOMEWORKS.find(item=>item.file===button.dataset.homework);if(!assignment)return;
+ event.preventDefault();window.open(assignment.file,'_blank','noopener');
 });
-
 </script>
 </body></html>
