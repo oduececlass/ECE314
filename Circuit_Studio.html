@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Draw circuits, solve edited problems, and learn with prediction questions, checked practice, progressive hints, and interactive parameter exploration.">
 <title>Circuit Studio V1.0 — circuit examples & guided learning</title>
 <style id="cs-label-visibility-style">
@@ -6278,7 +6278,7 @@ function onSegment(p,a,b,tolerance=.1){return (a.x===b.x&&Math.abs(p.x-a.x)<=tol
 function closestWirePoint(w,p){const ps=wirePoints(w);let best=null,dist=Infinity;for(let i=0;i<ps.length-1;i++){const a=ps[i],b=ps[i+1],q=a.x===b.x?{x:a.x,y:Math.max(Math.min(a.y,b.y),Math.min(Math.max(a.y,b.y),snap(p.y)))}:{x:Math.max(Math.min(a.x,b.x),Math.min(Math.max(a.x,b.x),snap(p.x))),y:a.y},d=Math.hypot(p.x-q.x,p.y-q.y);if(d<dist){dist=d;best=q}}return best}
 function splitWire(w,p,jref=null){const ps=wirePoints(w);if(eq(p,ps[0]))return w.a;if(eq(p,ps[ps.length-1]))return w.b;const i=ps.findIndex((a,i)=>i<ps.length-1&&onSegment(p,a,ps[i+1]));if(i<0)return null;let j=jref;if(!j){j={id:uid('j'),x:p.x,y:p.y};model.junctions.push(j)}const ref={j:j.id},idx=model.wires.indexOf(w);const first={id:w.id,a:w.a,b:ref,color:w.color,vias:simplify([...ps.slice(0,i+1),p]).slice(1,-1)};const second={id:uid('w'),a:ref,b:w.b,color:w.color,vias:simplify([p,...ps.slice(i+1)]).slice(1,-1)};model.wires.splice(idx,1,first,second);return ref}
 function joinAt(p){const wires=model.wires.filter(w=>{const ps=wirePoints(w);return ps.some((a,i)=>i<ps.length-1&&onSegment(p,a,ps[i+1]))});if(!wires.length)return toast('Click a wire or a crossing to create a junction.');checkpoint();let j=model.junctions.find(j=>eq(j,p));if(!j){j={id:uid('j'),x:p.x,y:p.y};model.junctions.push(j)}const ref={j:j.id};for(const w of wires){const a=endpoint(w.a),b=endpoint(w.b);if(eq(a,p)||eq(b,p)){const old=eq(a,p)?w.a:w.b;if(old.j){const oldid=old.j;for(const ww of model.wires){if(ww.a.j===oldid)ww.a=ref;if(ww.b.j===oldid)ww.b=ref}}else if(!model.wires.some(ww=>(ekey(ww.a)===ekey(old)&&ekey(ww.b)===ekey(ref))||(ekey(ww.b)===ekey(old)&&ekey(ww.a)===ekey(ref))))model.wires.push({id:uid('w'),a:old,b:ref,vias:[]})}else splitWire(w,p,j)}cleanupJunctions();selected=new Set([j.id]);changed();message('Junction added. Wires meeting at this dot are connected.')}
-function resolveTarget(e,p){const terminal=nearestTerminal(p);if(terminal)return{kind:'terminal',...terminal};const wg=e.target.closest('[data-w]');if(wg){const w=model.wires.find(w=>w.id===wg.dataset.w);return{kind:'wire',w,p:closestWirePoint(w,p)}}return{kind:'blank',p:snapped(p)}}
+function resolveTarget(e,p){const terminal=nearestTerminal(p,(e.pointerType==='touch'?22:12)/zoom);if(terminal)return{kind:'terminal',...terminal};const wg=e.target.closest('[data-w]');if(wg){const w=model.wires.find(w=>w.id===wg.dataset.w);return{kind:'wire',w,p:closestWirePoint(w,p)}}return{kind:'blank',p:snapped(p)}}
 function wireClick(e,p){const target=resolveTarget(e,p);if(!draft){if(target.kind==='blank'){message('Start a wire at a component pin, junction, or existing wire.');return}draft={a:target.e||null,start:target.p,startWire:target.w?.id,vias:[]};hoverPoint=target.p;message('Click to add bends; click a pin or wire to connect. Double-click blank space to finish a free end. Esc cancels.');renderOverlay();return}
  if(target.kind==='blank'){if(!draft.vias.length||!eq(draft.vias[draft.vias.length-1],target.p))draft.vias.push(target.p);hoverPoint=target.p;renderOverlay();return}finishWire(target)}
 function finishWire(target){if(!draft)return;const start=endpoint(draft.a)||draft.start;if(eq(start,target.p)&&!draft.vias.length){draft=null;renderOverlay();return}checkpoint();let a=draft.a;if(!a){const w=model.wires.find(w=>w.id===draft.startWire);a=w?splitWire(w,draft.start):null}if(!a){model=JSON.parse(history.pop());toast('Wire start is no longer available.');draft=null;render();return}let b=target.e;if(!b&&target.kind==='wire'){let w=model.wires.find(w=>w.id===target.w.id);if(!w||!wirePoints(w).some((p,i,ps)=>i<ps.length-1&&onSegment(target.p,p,ps[i+1])))w=model.wires.find(w=>wirePoints(w).some((p,i,ps)=>i<ps.length-1&&onSegment(target.p,p,ps[i+1])));b=w?splitWire(w,target.p):null}if(!b){const j={id:uid('j'),x:target.p.x,y:target.p.y};model.junctions.push(j);b={j:j.id}}if(ekey(a)!==ekey(b))model.wires.push({id:uid('w'),a,b,vias:clone(draft.vias)});draft=null;selected.clear();changed();message('Wire connected. Click another pin to start a new wire.')}
@@ -8853,7 +8853,7 @@ function initTemplateMenu(){const host=$('templateMenuHost');setMarkup(host,temp
 function closeEquivalentForEditing(){ssView.open=false;ssView.follow=false;mosView.open=false;mosView.follow=false;bjtView.open=false;bjtView.follow=false;ssRenderCanvas()}
 
 // Independent panel visibility is a workspace preference, not circuit data.
-const workspacePanels={desktop:window.matchMedia('(min-width:821px)'),left:false,right:true,mobileLeft:false,mobileRight:false,focus:false,restore:null};
+const workspacePanels={desktop:window.matchMedia('(min-width:1025px)'),left:false,right:true,mobileLeft:false,mobileRight:false,focus:false,restore:null};
 try{const p=JSON.parse(localStorage.getItem('circuit-studio-panels-v1'));for(const side of ['left','right'])if(typeof p?.[side]==='boolean')workspacePanels[side]=p[side]}catch{}
 function workspacePanelVisible(side){return !workspacePanels.focus&&(workspacePanels.desktop.matches?workspacePanels[side]:workspacePanels[side==='left'?'mobileLeft':'mobileRight'])}
 function syncWorkspacePanels(){
@@ -11811,7 +11811,7 @@ function currentModule(){const t=today(),dated=COURSE.modules.find(m=>m.start&&m
 
 /* ---------- opening activities ---------- */
 function closeOverlays(){try{window.CSLesson?.close()}catch{}try{window.CSChapters?.active()&&window.CSChapters.close()}catch{}try{window.CSExplore?.active()&&window.CSExplore.close()}catch{}const d=$('dialog');if(d?.open)d.close()}
-function showStudyPanel(){try{if(!workspacePanelVisible('right'))$('propsToggle')?.click()}catch{}}
+function showStudyPanel(){try{if(workspacePanels.desktop.matches&&!workspacePanelVisible('right'))$('propsToggle')?.click()}catch{}}
 function openActivity(a,exampleId){if(window.CSActivity&&!window.CSActivity.launching){window.CSActivity.begin(a,exampleId);return}if(dlg.open)dlg.close();closeOverlays();
  try{
   if(a.kind==='chapter')window.CSChapters.open(a.id);
@@ -20656,7 +20656,7 @@ function bbTrayIds(d,e){
  return footprint(d.p.type,h,1);
 }
 $('bbBinList').addEventListener('pointerdown',e=>{
- const card=e.target.closest('[data-kit],[data-bin],[data-bench-tray]');if(!card||e.button!==0)return;
+ const card=e.target.closest('[data-kit],[data-bin],[data-bench-tray]');if(!card||e.button!==0||e.pointerType==='touch')return; // Touch: scroll the tray, tap to place; mouse keeps drag-and-drop.
  if(card.dataset.benchTray){bbTrayDrag={card,bench:card.dataset.benchTray,x:e.clientX,y:e.clientY,active:false};return;}
  const existing=card.dataset.bin?S().parts.find(p=>p.id===card.dataset.bin):null;
  const type=existing?.type||card.dataset.kit;if(!KIT[type])return;
@@ -20830,14 +20830,20 @@ svg.addEventListener('pointercancel',bbEndBenchDrag,true);
 
 /* Independent panel controls and a quieter workspace palette. */
 const bbPanelPrefs={left:true,right:true};try{const saved=JSON.parse(localStorage.getItem('cs-bb-panels')||'{}');for(const k of ['left','right'])if(typeof saved[k]==='boolean')bbPanelPrefs[k]=saved[k]}catch{}
+// Keep narrow-screen drawer choices separate from saved desktop layout.
+const bbCompact=matchMedia('(max-width:1024px)'),bbDesktopPanels={...bbPanelPrefs};
+if(bbCompact.matches)bbPanelPrefs.left=bbPanelPrefs.right=false;
+bbCompact.addEventListener('change',()=>{if(bbCompact.matches){Object.assign(bbDesktopPanels,bbPanelPrefs);bbPanelPrefs.left=bbPanelPrefs.right=false}else Object.assign(bbPanelPrefs,bbDesktopPanels);bbApplyPanelPrefs()});
+function bbSetPanel(side,on){if(!['left','right'].includes(side))return;bbPanelPrefs[side]=!!on;if(bbCompact.matches&&on)bbPanelPrefs[side==='left'?'right':'left']=false;bbApplyPanelPrefs()}
 const bbPanelControls=doc.createElement('div');bbPanelControls.className='bb-panel-controls';bbPanelControls.innerHTML='<button type="button" id="bbToggleParts" aria-controls="bbPartsPanel">◧ Parts</button><button type="button" id="bbToggleAssistant" aria-controls="bbAssistantPanel">◨ Assistant</button>';
 lab.querySelector('.bb-bar').insertBefore(bbPanelControls,$('bbClose'));
 const bbPartsPanel=lab.querySelector('.bb-bin'),bbAssistantPanel=lab.querySelector('.bb-right');bbPartsPanel.id='bbPartsPanel';bbAssistantPanel.id='bbAssistantPanel';
 function bbApplyPanelPrefs(){
+ if(bbCompact.matches&&bbPanelPrefs.left&&bbPanelPrefs.right)bbPanelPrefs.left=false;
  for(const [key,id,panel,label] of [['left','bbToggleParts',bbPartsPanel,'Parts'],['right','bbToggleAssistant',bbAssistantPanel,'Assistant']]){const on=bbPanelPrefs[key];lab.classList.toggle('bb-hide-'+key,!on);panel.inert=!on;const b=$(id);b.setAttribute('aria-expanded',String(on));b.textContent=(on?'Hide ':'Show ')+label;b.title=(on?'Minimize ':'Restore ')+label.toLowerCase()+' panel'}
- try{localStorage.setItem('cs-bb-panels',JSON.stringify(bbPanelPrefs))}catch{}
+ if(!bbCompact.matches){Object.assign(bbDesktopPanels,bbPanelPrefs);try{localStorage.setItem('cs-bb-panels',JSON.stringify(bbPanelPrefs))}catch{}}
 }
-$('bbToggleParts').onclick=()=>{bbPanelPrefs.left=!bbPanelPrefs.left;bbApplyPanelPrefs()};$('bbToggleAssistant').onclick=()=>{bbPanelPrefs.right=!bbPanelPrefs.right;bbApplyPanelPrefs()};
+$('bbToggleParts').onclick=()=>bbSetPanel('left',!bbPanelPrefs.left);$('bbToggleAssistant').onclick=()=>bbSetPanel('right',!bbPanelPrefs.right);
 const bbTheme=doc.createElement('style');bbTheme.textContent=`
 #bbLab{--bb-left:252px;--bb-right:350px;color:#243449;background:#f5f7fa}
 #bbLab .bb-body{display:grid!important;grid-template-columns:var(--bb-left) minmax(0,1fr) var(--bb-right)!important;grid-template-rows:minmax(0,1fr)!important}
@@ -21153,7 +21159,7 @@ try{const raw=localStorage.getItem('circuit-studio-v1'),saved=raw&&JSON.parse(ra
 // the editor restored the last drawing before this module loaded: bring its board back too
 try{if(!model.breadboard||(!model.breadboard.wires?.length&&!model.breadboard.parts?.some(p=>p.pins?.length&&KIT[p.type]?.fp!=='inst'))){const saved=JSON.parse(localStorage.getItem('circuit-studio-v1')||'null');const ids=new Set(model.components.map(c=>c.id));if(saved&&saved.breadboard&&Array.isArray(saved.components)&&saved.components.length===ids.size&&saved.components.every(c=>ids.has(c.id)))model.breadboard=cleanBoard(saved.breadboard)}}catch{}
 
-window.CSBreadboard={fit,autoFit:()=>bbViewAutoFit&&!bbStartupPending,learning:{version:LR_VERSION,activeTime:lrClock,event:lrEvent,policy:()=>window.CSStudyPolicy||null,metrics:lrMetrics,csv:lrCSV,export:lrJSON,concept:()=>{const f=lrConceptFocus();return{part:f.p?.id||null,terminals:f.ids,nets:[...f.sr]}},startFault:lrStartFault,endFault:lrEndFault,diagnose:lrDiagnose,saveReflection:lrSaveReflection,cleanBoard,experimentSnapshot},redesign:applyCircuitRedesign,compare:openComparison,referenceState:()=>comparison.reference?clone(comparison.reference.breadboard):null,cleanLayout,prepareBuild,guide:()=>builder.plan,signalTest:signalAction,open,close,isOpen:()=>ui.open,testCircuit:(kind='rc')=>{if(!ui.open)open();loadTestCircuit(kind)},ledNow:()=>ui.ledNow?Object.fromEntries(ui.ledNow):null,facts,coachHint,aiRules:()=>AI_RULES,command:labCommand,runTool,aiTools:()=>AI_TOOLS,scope:()=>ui.scope,sweep:()=>{bodeRun();return true},bode:()=>ui.bode,report:reportHTML,power:on=>{if(on&&window.CSResearch?.powerBlocked?.()){lrNotice('Lock a prediction for this measurement first.');return false}ui.power=!!on;recompute();renderAll()},check:()=>{sync();return check()},state:()=>S(),refresh:()=>{if(ui.open){layout();recompute();renderAll()}}};
+window.CSBreadboard={panels:{set:bbSetPanel,state:()=>({...bbPanelPrefs})},touchView:{read:()=>ui.view?({...ui.view}):null,write:v=>{if(!v||!['x','y','w','h'].every(k=>Number.isFinite(v[k]))||v.w<=0||v.h<=0)return;bbViewAutoFit=false;ui.view={...v};applyView()}},fit,autoFit:()=>bbViewAutoFit&&!bbStartupPending,learning:{version:LR_VERSION,activeTime:lrClock,event:lrEvent,policy:()=>window.CSStudyPolicy||null,metrics:lrMetrics,csv:lrCSV,export:lrJSON,concept:()=>{const f=lrConceptFocus();return{part:f.p?.id||null,terminals:f.ids,nets:[...f.sr]}},startFault:lrStartFault,endFault:lrEndFault,diagnose:lrDiagnose,saveReflection:lrSaveReflection,cleanBoard,experimentSnapshot},redesign:applyCircuitRedesign,compare:openComparison,referenceState:()=>comparison.reference?clone(comparison.reference.breadboard):null,cleanLayout,prepareBuild,guide:()=>builder.plan,signalTest:signalAction,open,close,isOpen:()=>ui.open,testCircuit:(kind='rc')=>{if(!ui.open)open();loadTestCircuit(kind)},ledNow:()=>ui.ledNow?Object.fromEntries(ui.ledNow):null,facts,coachHint,aiRules:()=>AI_RULES,command:labCommand,runTool,aiTools:()=>AI_TOOLS,scope:()=>ui.scope,sweep:()=>{bodeRun();return true},bode:()=>ui.bode,report:reportHTML,power:on=>{if(on&&window.CSResearch?.powerBlocked?.()){lrNotice('Lock a prediction for this measurement first.');return false}ui.power=!!on;recompute();renderAll()},check:()=>{sync();return check()},state:()=>S(),refresh:()=>{if(ui.open){layout();recompute();renderAll()}}};
 })();
 </script>
 
@@ -21852,5 +21858,202 @@ new MutationObserver(place).observe(lab,{attributes:true,attributeFilter:['class
 #bbConceptDock .bb-concept-head button{box-sizing:border-box;height:25px!important;min-height:25px!important;max-height:25px!important;padding:2px 8px!important;margin:0!important;line-height:19px!important;white-space:nowrap;flex-shrink:0}
 #bbConceptDock .bb-concept-grid{height:calc(100% - 46px)!important}
 </style>
+<style id="cs-v15-mobile-style">
+/* V15 responsive workspace. Desktop panel dimensions remain independent. */
+.cs-touchbar{display:none}
+.cs-mobile-scrim{display:none!important}
+@media(max-width:1024px){
+ html,body{width:100%;max-width:100%;min-width:0;overscroll-behavior:none}
+ body{height:100dvh;padding-bottom:env(safe-area-inset-bottom);grid-template-rows:auto auto minmax(0,1fr) 28px}
+ header.top.cs12-header{min-height:0;padding:6px max(8px,env(safe-area-inset-right)) 5px max(8px,env(safe-area-inset-left));gap:5px 8px;flex-wrap:wrap!important;max-width:100%;overflow:hidden}
+ header.cs12-header .brand{font-size:14px}.brand small,header.cs12-header .project{display:none!important}
+ header.cs12-header .brand svg{width:24px;height:24px}
+ header.cs12-header .cs12-primary{order:5;flex:1 1 100%;width:100%;min-width:0!important;max-width:100%;margin:0;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:thin}
+ header.cs12-header .cv-dock{margin-left:auto;max-width:55%;min-width:0}
+ header.cs12-header #cvDock .cv-dock-status{display:none}
+ header.cs12-header #cvDock button .cv-button-label{display:none!important}
+ header.cs12-header #cvDock button{min-width:36px!important}
+ .cs12-right{margin-left:auto;min-width:0}
+ #csActivityBar{order:6;flex-wrap:nowrap;overflow-x:auto;min-width:0;padding:3px 6px;gap:5px}
+ #csActivityBar>div{flex-basis:auto;min-width:80px}#csActivityBar strong{max-width:170px;font-size:11px}#csActivityBar small{font-size:9px}
+ .toolbar{min-height:0;max-width:100%;min-width:0}.editor-tools{min-width:0;overflow-x:auto}.workspace-panel-tools{min-width:0;overflow-x:auto}
+ body.cs-panels-ready .workspace{grid-template-columns:minmax(0,1fr)!important;min-width:0;min-height:0}
+ body.cs-panels-ready .canvas-wrap{grid-column:1!important;grid-row:1;min-width:0;min-height:0}
+ body.cs-panels-ready .workspace>.panel{position:absolute!important;top:0;bottom:0;width:min(400px,90%)!important;max-width:90%;z-index:96;overflow:auto;overscroll-behavior:contain;box-shadow:0 5px 25px #10273e40;padding:12px;grid-column:auto!important}
+ body.cs-panels-ready .workspace>.panel:not([hidden]){display:block!important}
+ #leftPanel{left:0!important;right:auto!important}#rightPanel{right:0!important;left:auto!important}
+ #inspectorResize,.inspector-resize{display:none!important}
+ .cs-mobile-scrim:not([hidden]){display:block!important;position:absolute;inset:0;z-index:95;background:#10273e44;border:0;border-radius:0;width:100%;height:100%;padding:0}
+ .status{height:28px;padding-inline:8px}.status .counts{display:none}
+ #bbLab{display:grid!important;grid-template-rows:auto auto minmax(0,1fr)!important;overflow:hidden!important;padding-bottom:env(safe-area-inset-bottom)}
+ #bbLab[hidden]{display:none!important}
+ #bbLab .bb-body{position:relative;display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr)!important;min-height:0;overflow:hidden}
+ #bbLab .bb-stage{grid-column:1!important;grid-row:1!important;height:auto!important;min-height:0;min-width:0}
+ #bbLab #bbSvg{min-height:0!important}
+ #bbLab #bbPartsPanel,#bbLab #bbAssistantPanel{position:absolute!important;top:0!important;bottom:0!important;width:min(380px,90%)!important;max-width:90%!important;height:auto!important;max-height:100%!important;min-height:0!important;z-index:96;overflow:auto!important;resize:none!important;border-radius:0!important;overscroll-behavior:contain;box-shadow:0 5px 25px #10273e40;margin:0!important}
+ #bbLab #bbPartsPanel{left:0!important;right:auto!important}#bbLab #bbAssistantPanel{right:0!important;left:auto!important}
+ #bbLab.bb-hide-left #bbPartsPanel,#bbLab.bb-hide-right #bbAssistantPanel{display:none!important}
+ #bbLab:not(.bb-hide-left) #bbPartsPanel{display:flex!important}
+ #bbLab:not(.bb-hide-right) #bbAssistantPanel{display:block!important}
+ #bbLab .cs-side-grip,#bbLab [data-panel-float]{display:none!important}
+ #bbLab .bb-bar{padding:5px 8px;gap:6px;flex-wrap:wrap;overflow:visible}
+ #bbLab .bb-title{flex:1;min-width:80px}#bbLab .bb-title small{max-width:160px}
+ #bbLab .bb-bar>.bb-seg{order:3;overflow-x:auto;max-width:100%;border:0}
+ #bbLab .bb-spacer{display:none}
+ #bbLab .bb-panel-controls{margin-left:auto}
+ #bbLab .bb-taskbar{padding:4px 8px;gap:4px;min-width:0;flex-wrap:wrap}
+ #bbLab .bb-taskbar>strong,#bbLab .bb-taskbar>span{display:none}
+ #bbLab .bb-task-menu-content{position:fixed;left:8px;right:8px;top:calc(var(--bb-top,90px) + 100px);width:auto;max-width:none;max-height:45dvh;z-index:110}
+ #bbLab .bb-stage-bar{max-width:calc(100% - 12px);top:6px;left:6px;max-height:88px;overflow:auto;gap:4px}
+ #bbLab .bb-chip{display:none}
+ #bbLab #bbConceptDock:not([hidden]){position:relative!important;inset:auto!important;width:100%!important;max-width:100%!important;height:clamp(140px,32dvh,280px)!important;flex:0 0 clamp(140px,32dvh,280px)!important;min-height:0!important;max-height:45%!important;resize:none!important;border-radius:0;padding:0 8px 8px!important;z-index:5}
+ #bbConceptDock .bb-concept-head{height:46px!important;min-height:46px!important;max-height:46px!important;gap:6px!important}
+ #bbConceptDock .bb-concept-grid{height:calc(100% - 54px)!important;overflow:auto!important;grid-template-columns:repeat(3,minmax(180px,1fr))!important}
+ #csConceptResize{display:none!important}
+ #bbLab.bb-concept-on .bb-zoom{bottom:calc(clamp(140px,32dvh,280px) + 8px)!important}
+ #bbLab .bb-zoom{right:8px;gap:2px}
+ #bbLab .bb-touchbar{top:auto;bottom:8px}
+ #bbLab.bb-concept-on .bb-touchbar{bottom:calc(clamp(140px,32dvh,280px) + 8px)}
+ dialog{max-width:calc(100vw - 16px)!important;max-height:90dvh!important;padding:16px;overflow:auto;overscroll-behavior:contain}
+ dialog .opamp-cards,.problem-example-grid{grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))!important}
+ .cs12-pop{max-height:75dvh;overflow:auto;max-width:calc(100vw - 16px)}
+ #csVisualPanel{width:min(338px,calc(100% - 16px))!important;left:auto!important;right:8px!important;top:56px!important;max-height:calc(100% - 116px)!important;min-width:0}
+ #cs12LensDrawer{max-width:calc(100vw - 20px);max-height:60dvh;overflow:auto}
+ .cslearn-dock{max-width:calc(100% - 16px)!important}
+ #benchDock .bn-body{display:flex;flex-direction:column;overflow:auto;min-height:0}
+ #benchDock .bn-body>*{flex:none;min-width:0;max-width:100%}
+ #benchDock .bn-head{overflow-x:auto;flex-wrap:nowrap;min-width:0}
+ #benchDock .bn-body svg{max-width:100%}
+ .comparison-panes{grid-template-columns:minmax(0,1fr)!important}
+ .comparison-layout{padding:8px}
+ .comparison-sheet{height:clamp(240px,45dvh,420px)}
+}
+@media(pointer:coarse),(max-width:1024px){
+ .cs-touchbar{position:absolute;display:flex;align-items:center;gap:4px;left:8px;bottom:8px;z-index:14;padding:4px;background:#fffffff2;border:1px solid #acc5cf;border-radius:9px;box-shadow:0 3px 12px #10273e18;max-width:calc(100% - 16px)}
+ .cs-touchbar button{min-height:40px!important;padding:5px 9px!important;font-size:12px!important;white-space:nowrap}
+ .cs-touchbar button[aria-pressed=true]{background:#087d6a!important;color:white!important;border-color:#087d6a!important}
+ .cs-touchbar .cs-touch-help{min-width:36px}
+ .cs-touchbar[hidden]{display:none!important}
+ button,input,select,textarea,summary{touch-action:manipulation}
+ :is(.toolbar,.cs12-primary,.workspace-panel-tools,.zoom-controls,.panel,.ss-compare-toolbar) button{min-height:42px!important}
+ :is(#bbLab,#benchDock,dialog,.cs12-pop) button:not(.bb-swatch){min-height:42px!important}
+ input:not([type=range]):not([type=checkbox]):not([type=radio]),textarea,select{font-size:16px!important}
+ #bbLab #bbBinList :is([data-kit],[data-bin],[data-bench-tray]){touch-action:pan-y!important}
+ #bbLab .bb-swatch{min-width:32px!important;min-height:32px!important}
+ #bbLab .bb-zoom button,.zoom-controls button{min-width:38px}
+ #bbLab #bbConceptDock .bb-concept-head button{height:40px!important;min-height:40px!important;max-height:40px!important}
+ .drawing,#bbSvg{touch-action:none!important;-webkit-user-select:none;user-select:none}
+}
+@media(max-width:600px){
+ #bbLab .bb-title small{display:none}#bbLab .bb-title b{font-size:12px}
+ #bbLab .bb-concept-grid{grid-template-columns:minmax(0,1fr)!important;gap:10px!important}
+ #bbLab .bb-concept-grid>div{min-height:160px;overflow:visible!important;border:0!important;padding:6px!important}
+ #bbConceptEquations{min-height:130px!important}
+ #bbConceptName,#csActivityBar>div,#csActivityBar [data-activity-tools]{display:none!important}
+ #csActivityBar{justify-content:flex-start}
+ #bbConceptDock #bbDisplayControls{gap:6px}
+ #bbConceptDock #bbDisplayControls input[type=range]{width:60px}
+ .cs-touchbar button{font-size:11px!important;padding:5px 7px!important}
+ .cs-touchbar .cs-touch-help{min-width:30px}
+ .zoom-controls{bottom:60px!important;right:8px!important}
+ #bbLab .bb-zoom{bottom:60px!important}
+ #bbLab.bb-concept-on .bb-zoom{bottom:calc(clamp(140px,32dvh,280px) + 60px)!important}
+ .draft-bar{bottom:110px!important;left:8px;max-width:calc(100% - 16px)}
+}
+@media(max-width:1024px) and (max-height:500px){
+ header.cs12-header>.brand,header.cs12-header>.cv-dock,#csActivityBar{display:none!important}
+ header.cs12-header .cs12-primary{order:0}
+ #bbLab .bb-stage-bar{max-height:45px}
+ #bbLab #bbConceptDock:not([hidden]){height:140px!important;flex-basis:140px!important;max-height:48%!important}
+}
+@media print{.cs-touchbar,.cs-mobile-scrim{display:none!important}}
+</style>
+<script id="cs-v15-mobile-script">
+(()=>{'use strict';
+ const $=id=>document.getElementById(id),compact=matchMedia('(max-width:1024px)'),touch=matchMedia('(pointer:coarse)');
+ const enabled=()=>compact.matches||touch.matches;
+ // Camera-only gestures never modify the circuit, wires, or undo history.
+ function camera(base,start,current,ratio,minWidth,maxWidth){
+  const w=Math.max(minWidth,Math.min(maxWidth,base.v.w/ratio)),k=w/base.v.w;
+  return {x:base.anchor.x-(current.x-base.left)/(base.scale/k),y:base.anchor.y-(current.y-base.top)/(base.scale/k),w,h:base.v.h*k};
+ }
+ const controllers=[];
+ function mount(id,host,adapter,minWidth,maxWidth){
+  const surface=$(id);if(!surface||!host)return;
+  let navigation=true,points=new Map(),baseline=null,editPointer=null,suppressClick=0;
+  const bar=document.createElement('div');bar.className='cs-touchbar'+(id==='bbSvg'?' bb-touchbar':'');bar.setAttribute('aria-label','Touch controls');
+  bar.innerHTML='<button type="button" data-touch="move" aria-pressed="true">Move view</button><button type="button" data-touch="edit" aria-pressed="false">Edit</button><button type="button" class="cs-touch-help" data-touch="help" aria-label="Touch instructions">?</button>';
+  host.append(bar);
+  function setMode(on){navigation=on;bar.querySelector('[data-touch="move"]').setAttribute('aria-pressed',String(on));bar.querySelector('[data-touch="edit"]').setAttribute('aria-pressed',String(!on));surface.dataset.touchMode=on?'navigate':'edit'}
+  bar.addEventListener('click',e=>{const key=e.target.closest('[data-touch]')?.dataset.touch;if(key==='move')setMode(true);if(key==='edit')setMode(false);if(key==='help')openDialog('Using Circuit Studio on a touch screen','<p><b>Move view:</b> drag with one finger to pan; pinch with two fingers to zoom. Your circuit stays unchanged.</p><p><b>Edit:</b> use one finger to select or drag components. Choose Wire, then tap its endpoints. Choose a part from Parts, then tap the circuit or breadboard to place it.</p><p>Use the Study or Assistant panel to edit values. Tap Text or Equation to add an annotation at the center of the schematic. Use Fit to see the whole circuit again. Side panels close when you tap outside them.</p>')});
+  function middle(){const p=[...points.values()].slice(0,2);return{x:p.reduce((n,q)=>n+q.x,0)/p.length,y:p.reduce((n,q)=>n+q.y,0)/p.length,d:p.length===2?Math.max(1,Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y)):1}}
+  function reset(){if(!points.size){baseline=null;return}const v=adapter.read(),m=surface.getScreenCTM();if(!v||!m||m.a<=0){baseline=null;return}const c=middle();baseline={v,c,scale:m.a,left:m.e+v.x*m.a,top:m.f+v.y*m.d,anchor:{x:(c.x-m.e)/m.a,y:(c.y-m.f)/m.d}}}
+  const stop=e=>{e.preventDefault();e.stopImmediatePropagation()};
+  function down(e){
+   if(!enabled()||e.pointerType!=='touch'||!surface.contains(e.target))return;
+   if(!navigation){if(editPointer!==null&&editPointer!==e.pointerId){stop(e);return}editPointer=e.pointerId;return}
+   stop(e);points.set(e.pointerId,{x:e.clientX,y:e.clientY});try{surface.setPointerCapture(e.pointerId)}catch{}reset();
+  }
+  function move(e){
+   if(e.pointerType!=='touch')return;
+   if(!navigation){if(editPointer!==null&&e.pointerId!==editPointer&&surface.contains(e.target))stop(e);return}
+   if(!points.has(e.pointerId))return;stop(e);points.set(e.pointerId,{x:e.clientX,y:e.clientY});if(!baseline)return;
+   const c=middle(),ratio=c.d/baseline.c.d;adapter.write(camera(baseline,baseline.c,c,ratio,minWidth,maxWidth));
+  }
+  function up(e){
+   if(e.pointerType!=='touch')return;
+   if(!navigation){if(editPointer===e.pointerId)editPointer=null;else if(surface.contains(e.target))stop(e);return}
+   if(!points.has(e.pointerId))return;stop(e);points.delete(e.pointerId);try{if(surface.hasPointerCapture(e.pointerId))surface.releasePointerCapture(e.pointerId)}catch{}suppressClick=Date.now()+400;reset();
+  }
+  document.addEventListener('pointerdown',down,{capture:true,passive:false});document.addEventListener('pointermove',move,{capture:true,passive:false});
+  document.addEventListener('pointerup',up,{capture:true,passive:false});document.addEventListener('pointercancel',up,{capture:true,passive:false});
+  document.addEventListener('click',e=>{if(surface.contains(e.target)&&Date.now()<suppressClick)stop(e)},true);
+  surface.addEventListener('lostpointercapture',e=>{if(points.delete(e.pointerId))reset()});
+  controllers.push({id,setMode,reset:()=>{points.clear();baseline=null;editPointer=null},bar});setMode(true);
+ }
+ mount('drawing',document.querySelector('.canvas-wrap'),{read:()=>({...view}),write:v=>{fitToCanvas=false;zoom=view.w/v.w*zoom;Object.assign(view,v);render()}},80,20000);
+ mount('bbSvg',document.querySelector('#bbLab .bb-stage'),CSBreadboard.touchView,180,10000);
+ function edit(id){controllers.find(c=>c.id===id)?.setMode(false)}
+ function drawer(host,id,close){const b=document.createElement('button');b.id=id;b.className='cs-mobile-scrim';b.type='button';b.hidden=true;b.setAttribute('aria-label','Close side panel');b.onclick=close;host.append(b);return b}
+ const work=document.querySelector('.workspace'),lab=$('bbLab');
+ const scrim=drawer(work,'csMobilePanelShade',()=>{workspacePanel('left',false,false);workspacePanel('right',false,false)});
+ const boardScrim=drawer(lab.querySelector('.bb-body'),'csMobileBoardShade',()=>{CSBreadboard.panels.set('left',false);CSBreadboard.panels.set('right',false)});
+ const relocated=new Map();
+ function relocatePanels(){
+  if(compact.matches){
+   for(const[id,host]of [['bbPartsPanel',lab.querySelector('.bb-body')],['bbAssistantPanel',lab.querySelector('.bb-body')],['bbConceptDock',lab.querySelector('.bb-stage')]]){
+    const panel=$(id);if(!panel.classList.contains('cs-floating')||panel.parentNode===host)continue;
+    if(!relocated.has(panel)){const home=document.createComment('mobile-panel-home');panel.before(home);relocated.set(panel,home)}host.append(panel);
+   }
+  }else{for(const[panel,home]of relocated){home.after(panel);home.remove()}relocated.clear()}
+ }
+ function sync(){
+  relocatePanels();
+  scrim.hidden=!compact.matches||(!workspacePanelVisible('left')&&!workspacePanelVisible('right'));
+  const p=CSBreadboard.panels.state();boardScrim.hidden=!compact.matches||(!p.left&&!p.right);
+  const head=document.querySelector('header.top'),bottom=head?.getBoundingClientRect().bottom;
+  if(Number.isFinite(bottom))lab.style.setProperty('--bb-top',Math.round(bottom)+'px');
+ }
+ new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['class']});
+ new MutationObserver(sync).observe(lab,{attributes:true,attributeFilter:['class','hidden']});
+ new ResizeObserver(sync).observe(document.querySelector('header.top'));
+ for(const mq of [compact,touch])mq.addEventListener('change',()=>{controllers.forEach(c=>c.reset());sync()});
+ window.addEventListener('resize',()=>{controllers.forEach(c=>c.reset());sync()});
+ // Existing native handlers still own selection, placement, wiring and undo.
+ document.addEventListener('click',e=>{
+  if(!enabled())return;
+  // Capture intent before native handlers redraw and detach the clicked card.
+  const part=e.target.closest('#palette [data-part]'),tool=e.target.closest('[data-mode="select"],[data-mode="wire"],[data-mode="junction"]');
+  const boardPart=e.target.closest('#bbBinList [data-kit],#bbBinList [data-bin],#bbBinList [data-bench-tray]'),boardTool=e.target.closest('#bbLab [data-tool]');
+  queueMicrotask(()=>{if(part||tool)edit('drawing');if(part&&compact.matches)workspacePanel('left',false,false);if(boardPart||boardTool)edit('bbSvg');if(boardPart&&compact.matches)CSBreadboard.panels.set('left',false)});
+ },true);
+ const originalAnnotation=addEEAnnotation;
+ addEEAnnotation=function(kind){if(!enabled())return originalAnnotation(kind);setMode('select');edit('drawing');if(compact.matches)workspacePanel('left',false,false);const c=newComponent('text',view.x+view.w/2,view.y+view.h/2);editEEAnnotation(c,kind,true)};
+ document.addEventListener('keydown',e=>{if(e.key!=='Escape'||!compact.matches||document.querySelector('dialog[open]'))return;if(!boardScrim.hidden)boardScrim.click();else if(!scrim.hidden)scrim.click()});
+ window.CSMobile={camera,compact:()=>compact.matches,navigate:(id,on)=>controllers.find(c=>c.id===id)?.setMode(on)};
+ sync();
+})();
+</script>
+
 </body>
 </html>
