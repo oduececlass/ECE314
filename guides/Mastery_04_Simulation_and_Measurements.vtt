@@ -1,0 +1,221 @@
+WEBVTT
+
+1
+00:00:00.450 --> 00:00:03.056
+Select Simulate at the top of Circuit Studio.
+
+2
+00:00:03.306 --> 00:00:08.772
+The bench combines a function generator. oscilloscope. Bode plot. transfer curve. DC values.
+
+3
+00:00:08.772 --> 00:00:10.454
+and a data log.
+
+4
+00:00:10.704 --> 00:00:13.768
+We will use the built-in RC low-pass experiment.
+
+5
+00:00:14.018 --> 00:00:18.647
+Its resistor is one kilo-ohm and its capacitor is one microfarad.
+
+6
+00:00:18.897 --> 00:00:23.268
+These values give a corner frequency near one hundred fifty-nine hertz.
+
+7
+00:00:25.068 --> 00:00:28.055
+In the function generator. choose the source to drive.
+
+8
+00:00:28.305 --> 00:00:33.647
+Set Sine. one volt peak amplitude. zero DC offset. and one hundred hertz.
+
+9
+00:00:33.897 --> 00:00:39.443
+Peak amplitude is not peak-to-peak amplitude: this input spans two volts peak to peak.
+
+10
+00:00:39.693 --> 00:00:44.653
+Live reruns after changes; Run performs a new simulation explicitly.
+
+11
+00:00:46.453 --> 00:00:50.110
+Use the channel menus or Pick buttons to select the probes.
+
+12
+00:00:50.360 --> 00:00:53.891
+Put channel one at V in. the node before the resistor.
+
+13
+00:00:54.141 --> 00:00:57.991
+Put channel two at V out. where the resistor and capacitor meet.
+
+14
+00:00:58.241 --> 00:01:01.463
+These node voltages are referenced to circuit ground.
+
+15
+00:01:01.713 --> 00:01:07.792
+Keeping channel one as input and channel two as output makes the gain interpretation clear.
+
+16
+00:01:09.592 --> 00:01:13.538
+The oscilloscope displays input in yellow and output in green.
+
+17
+00:01:13.788 --> 00:01:17.905
+Set both voltage scales to the same value when comparing their heights.
+
+18
+00:01:18.155 --> 00:01:21.388
+Auto scaling can make a smaller signal look taller.
+
+19
+00:01:21.638 --> 00:01:27.817
+At one hundred hertz. the output is about zero point eight five times the input and lags it
+
+20
+00:01:27.817 --> 00:01:29.190
+by about thirty-two degrees.
+
+21
+00:01:30.990 --> 00:01:35.916
+Drag the separator above the bench upward when you need more room for plots and readings.
+
+22
+00:01:36.166 --> 00:01:39.358
+The Pop out button opens the bench in a separate window.
+
+23
+00:01:39.608 --> 00:01:44.690
+Settle controls how many cycles are allowed before measurement. and Show controls the
+
+24
+00:01:44.690 --> 00:01:45.472
+displayed cycles.
+
+25
+00:01:45.722 --> 00:01:50.307
+Use enough settling time. especially for circuits with long time constants.
+
+26
+00:01:52.107 --> 00:01:56.138
+Choose Bode plot to examine the small-signal frequency response.
+
+27
+00:01:56.388 --> 00:02:02.493
+With channel one on input and channel two on output. the plotted ratio is output divided by
+
+28
+00:02:02.493 --> 00:02:02.852
+input.
+
+29
+00:02:03.102 --> 00:02:08.320
+This low-pass circuit is close to unity at low frequency. then attenuates higher
+
+30
+00:02:08.320 --> 00:02:08.722
+frequencies.
+
+31
+00:02:08.972 --> 00:02:14.347
+The minus three decibel corner is near one hundred fifty-nine hertz. consistent with one
+
+32
+00:02:14.347 --> 00:02:16.267
+over two pi R C.
+
+33
+00:02:18.067 --> 00:02:20.544
+Transfer curve is a different experiment.
+
+34
+00:02:20.794 --> 00:02:25.158
+It sweeps the generator’s DC level and plots output against input.
+
+35
+00:02:25.408 --> 00:02:29.226
+Capacitors are open circuits in this DC calculation.
+
+36
+00:02:29.476 --> 00:02:34.436
+Our unloaded RC output therefore follows the input with a slope near one.
+
+37
+00:02:34.686 --> 00:02:40.464
+That does not contradict the high-frequency attenuation in the Bode plot: the two analyses
+
+38
+00:02:40.464 --> 00:02:41.702
+ask different questions.
+
+39
+00:02:43.502 --> 00:02:47.404
+Return to the oscilloscope and raise frequency to one kilohertz.
+
+40
+00:02:47.654 --> 00:02:49.566
+Keep the same channel scales.
+
+41
+00:02:49.816 --> 00:02:56.218
+The output is now much smaller. about zero point one six times the input. with a lag near
+
+42
+00:02:56.218 --> 00:02:56.930
+eighty-one degrees.
+
+43
+00:02:57.180 --> 00:03:00.655
+This is the behavior predicted by the low-pass response.
+
+44
+00:03:00.905 --> 00:03:05.002
+Change one setting at a time so the comparison remains meaningful.
+
+45
+00:03:06.802 --> 00:03:10.790
+Select Record after a useful measurement. then open Data log.
+
+46
+00:03:11.040 --> 00:03:15.348
+Here we have recorded the one hundred hertz case and the one kilohertz case.
+
+47
+00:03:15.598 --> 00:03:20.858
+Compare the generator settings and output amplitudes. then use the instrument readouts to
+
+48
+00:03:20.858 --> 00:03:22.476
+inspect gain and phase.
+
+49
+00:03:22.726 --> 00:03:28.408
+A saved measurement table makes your explanation more convincing than a screenshot of a
+
+50
+00:03:28.408 --> 00:03:30.437
+waveform with no setup information.
+
+51
+00:03:32.237 --> 00:03:37.827
+Use the available export controls to keep plots or measurement data for your lab report.
+
+52
+00:03:38.077 --> 00:03:43.909
+Results depend on the device models and assumptions. so inspect those when working with
+
+53
+00:03:43.909 --> 00:03:45.159
+transistors or amplifiers.
+
+54
+00:03:45.409 --> 00:03:50.710
+Finish by stating what you changed. what you measured. and why the circuit behaved that way.
+
+55
+00:03:50.960 --> 00:03:54.789
+Save the editable project so you can reproduce the experiment.

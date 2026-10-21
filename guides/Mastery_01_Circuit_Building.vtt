@@ -1,0 +1,185 @@
+WEBVTT
+
+1
+00:00:00.450 --> 00:00:02.651
+Welcome to Circuit Studio Mastery.
+
+2
+00:00:02.901 --> 00:00:08.433
+In this tutorial. we will build a voltage divider. edit a component. check the result. and
+
+3
+00:00:08.433 --> 00:00:09.471
+save the project.
+
+4
+00:00:09.721 --> 00:00:15.008
+The Parts panel is on the left. the circuit canvas is in the center. and the Study panel is
+
+5
+00:00:15.008 --> 00:00:15.843
+on the right.
+
+6
+00:00:16.093 --> 00:00:18.645
+Open or close these panels to make room.
+
+7
+00:00:20.445 --> 00:00:24.129
+Choose a component from Parts. then click the canvas to place it.
+
+8
+00:00:24.379 --> 00:00:26.686
+You can also drag a part onto the sheet.
+
+9
+00:00:26.936 --> 00:00:31.095
+Use a voltage source. two resistors. and ground for this example.
+
+10
+00:00:31.345 --> 00:00:36.427
+Press Escape when you finish placing a type. so the next click selects rather than adds
+
+11
+00:00:36.427 --> 00:00:37.062
+another component.
+
+12
+00:00:38.862 --> 00:00:42.860
+Arrange the source to the left and the resistors in a vertical chain.
+
+13
+00:00:43.110 --> 00:00:47.962
+Select a resistor and use Rotate. or press R. to turn it ninety degrees.
+
+14
+00:00:48.212 --> 00:00:50.646
+Keep space between symbols and labels.
+
+15
+00:00:50.896 --> 00:00:56.255
+The grid helps align terminals. and Fit. or the F key. brings the complete drawing into
+
+16
+00:00:56.255 --> 00:00:56.590
+view.
+
+17
+00:00:58.390 --> 00:01:00.558
+Select Wire. or press W.
+
+18
+00:01:00.808 --> 00:01:06.256
+Click a component pin to start. click empty space to add a bend. and click the destination
+
+19
+00:01:06.256 --> 00:01:07.218
+pin to finish.
+
+20
+00:01:07.468 --> 00:01:11.210
+Connect the source through both resistors and back to the return.
+
+21
+00:01:11.460 --> 00:01:13.169
+Add ground to that return.
+
+22
+00:01:13.419 --> 00:01:18.783
+A connected junction has a dot; a plain crossing is not automatically a connection.
+
+23
+00:01:20.583 --> 00:01:22.603
+Here is the completed divider.
+
+24
+00:01:22.853 --> 00:01:25.977
+The same branch current flows through both resistors.
+
+25
+00:01:26.227 --> 00:01:29.630
+The midpoint is the output. measured relative to ground.
+
+26
+00:01:29.880 --> 00:01:35.691
+With a ten volt source and two equal ten kilo-ohm resistors. predict five volts at the
+
+27
+00:01:35.691 --> 00:01:38.597
+midpoint before asking the software to calculate it.
+
+28
+00:01:42.397 --> 00:01:44.598
+Click the lower resistor. R two.
+
+29
+00:01:44.848 --> 00:01:49.552
+Its reference. value. position. and orientation appear in the Edit panel.
+
+30
+00:01:49.802 --> 00:01:53.311
+Change the value to twenty kilo-ohms and commit the edit.
+
+31
+00:01:53.561 --> 00:01:56.892
+You can also double-click a name or value on the drawing.
+
+32
+00:01:57.142 --> 00:02:01.398
+Before solving. predict whether the midpoint voltage will rise or fall.
+
+33
+00:02:03.198 --> 00:02:04.631
+Select Show values.
+
+34
+00:02:04.881 --> 00:02:11.117
+The midpoint is now about six point six seven volts. and the series current is about three
+
+35
+00:02:11.117 --> 00:02:12.218
+hundred thirty-three microamps.
+
+36
+00:02:12.468 --> 00:02:16.552
+The lower resistor receives a larger share of the source voltage.
+
+37
+00:02:16.802 --> 00:02:19.364
+These are DC operating-point results.
+
+38
+00:02:19.614 --> 00:02:23.762
+Use Simulate when you need time waveforms or a frequency response.
+
+39
+00:02:25.562 --> 00:02:31.220
+Open File and choose Save As to keep the circuit. breadboard. notes. and progress together.
+
+40
+00:02:31.470 --> 00:02:35.012
+Save circuit only keeps a smaller circuit-focused copy.
+
+41
+00:02:35.262 --> 00:02:37.621
+Load circuit restores a saved file.
+
+42
+00:02:37.871 --> 00:02:42.168
+Folder selection depends on your browser; a download is the fallback.
+
+43
+00:02:42.418 --> 00:02:49.176
+Export gives presentation formats such as SVG or PNG. which do not replace the editable
+
+44
+00:02:49.176 --> 00:02:49.627
+project.
+
+45
+00:02:49.877 --> 00:02:53.600
+A circuit project file is different from your course progress file.
+
+46
+00:02:53.850 --> 00:02:57.776
+Use the floating Save progress button for your complete learning record.

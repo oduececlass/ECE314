@@ -1,0 +1,189 @@
+WEBVTT
+
+1
+00:00:00.450 --> 00:00:05.356
+Circuit Studio connects equations. circuit behavior. and visual explanations.
+
+2
+00:00:05.606 --> 00:00:11.005
+Begin with a question. such as: where does the voltage change. or why is the branch current
+
+3
+00:00:11.005 --> 00:00:11.640
+the same?
+
+4
+00:00:11.890 --> 00:00:17.902
+We will use the ten volt divider first. then briefly examine model conversion in a MOSFET
+
+5
+00:00:17.902 --> 00:00:18.278
+amplifier.
+
+6
+00:00:20.078 --> 00:00:21.374
+Select X-ray.
+
+7
+00:00:21.624 --> 00:00:26.968
+Wire color and moving markers help you follow node voltage and conventional current.
+
+8
+00:00:27.218 --> 00:00:32.935
+In this series divider. current is the same through both resistors. while voltage changes
+
+9
+00:00:32.935 --> 00:00:34.161
+across each resistor.
+
+10
+00:00:34.411 --> 00:00:38.284
+Use the numerical labels and legend to interpret the picture.
+
+11
+00:00:38.534 --> 00:00:43.537
+The animation is a teaching representation. not literal electron motion.
+
+12
+00:00:45.337 --> 00:00:48.698
+Open Visual Aids and choose KCL and KVL.
+
+13
+00:00:48.948 --> 00:00:52.129
+At the midpoint. current entering equals current leaving.
+
+14
+00:00:52.379 --> 00:00:56.622
+Around the loop. the ten volt rise balances two five volt drops.
+
+15
+00:00:56.872 --> 00:01:02.850
+Use this view to connect the displayed values to conservation of charge and energy. rather
+
+16
+00:01:02.850 --> 00:01:06.039
+than memorizing a divider formula without understanding it.
+
+17
+00:01:07.839 --> 00:01:12.019
+The Thermal and Power lens highlights electrical power dissipation.
+
+18
+00:01:12.269 --> 00:01:16.291
+Each equal resistor absorbs the same power in this example.
+
+19
+00:01:16.541 --> 00:01:21.010
+The displayed energy balance relates source power to component dissipation.
+
+20
+00:01:21.260 --> 00:01:26.997
+Treat the colors as a qualitative power visualization; they are not a prediction of the
+
+21
+00:01:26.997 --> 00:01:29.292
+physical temperature of a real resistor.
+
+22
+00:01:31.092 --> 00:01:33.132
+Use What-If to test a prediction.
+
+23
+00:01:33.382 --> 00:01:36.743
+Select R two and raise it from its baseline value.
+
+24
+00:01:36.993 --> 00:01:42.557
+In this view. increasing the lower resistance increases the midpoint voltage while reducing
+
+25
+00:01:42.557 --> 00:01:43.840
+the series current.
+
+26
+00:01:44.090 --> 00:01:49.311
+Change one parameter at a time. compare the before and after values. and explain the
+
+27
+00:01:49.311 --> 00:01:50.703
+direction of the change.
+
+28
+00:01:52.503 --> 00:01:55.553
+The Visual Aids menu groups tools by purpose.
+
+29
+00:01:55.803 --> 00:02:01.200
+Some controls are grayed out when the required devices or circuit features are absent.
+
+30
+00:02:01.450 --> 00:02:05.748
+A resistor divider does not need a transistor operating-region view.
+
+31
+00:02:05.998 --> 00:02:10.759
+Choose an aid that matches your question. and turn it off when it no longer helps you read
+
+32
+00:02:10.759 --> 00:02:11.288
+the circuit.
+
+33
+00:02:13.088 --> 00:02:17.354
+For a transistor example. open the common-source MOSFET amplifier.
+
+34
+00:02:17.604 --> 00:02:23.021
+The Original circuit contains supplies. bias resistors. and coupling capacitors.
+
+35
+00:02:23.271 --> 00:02:26.908
+First establish the DC bias and operating region.
+
+36
+00:02:27.158 --> 00:02:32.711
+Small-signal parameters are calculated around that operating point. so a signal model is
+
+37
+00:02:32.711 --> 00:02:36.128
+meaningful only when the bias assumptions are appropriate.
+
+38
+00:02:37.928 --> 00:02:42.343
+Use DC equivalent and Small-signal model to follow the conversion.
+
+39
+00:02:42.593 --> 00:02:46.923
+In the DC view. coupling and bypass capacitors are open circuits.
+
+40
+00:02:47.173 --> 00:02:52.790
+In the midband small-signal view. suitable large capacitors are treated as shorts. constant
+
+41
+00:02:52.790 --> 00:02:58.840
+voltage supplies become AC ground. and the transistor is replaced by a linear model.
+
+42
+00:02:59.090 --> 00:03:03.251
+Follow the guided steps to connect each replacement to its assumption.
+
+43
+00:03:05.051 --> 00:03:09.212
+A useful study cycle is predict. reveal. change. and explain.
+
+44
+00:03:09.462 --> 00:03:15.805
+State what the aid shows. identify the equation or conservation law behind it. and check the
+
+45
+00:03:15.805 --> 00:03:16.598
+result numerically.
+
+46
+00:03:16.848 --> 00:03:22.381
+For waveform timing. clipping. and frequency response. continue to the Simulation and
+
+47
+00:03:22.381 --> 00:03:26.070
+Measurements tutorial and use the simulator’s instrument results.

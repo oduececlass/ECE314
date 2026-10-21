@@ -1,0 +1,159 @@
+1
+00:00:00,450 --> 00:00:06,060
+This lab mystery uses the diode rectifier example in Circuit Studio Mastery.
+
+2
+00:00:06,310 --> 00:00:08,923
+First establish what a healthy circuit does.
+
+3
+00:00:09,173 --> 00:00:12,152
+Then use measurements to diagnose one hidden fault.
+
+4
+00:00:12,402 --> 00:00:18,184
+This is a worked demonstration: pause before the diagnosis if you want to test your own
+
+5
+00:00:18,184 --> 00:00:18,545
+explanation.
+
+6
+00:00:21,345 --> 00:00:25,601
+The source drives a diode, a load resistor, and a smoothing capacitor.
+
+7
+00:00:25,851 --> 00:00:28,914
+The diode passes the positive part of the input.
+
+8
+00:00:29,164 --> 00:00:33,366
+The capacitor charges near the peak and supplies the load between peaks.
+
+9
+00:00:33,616 --> 00:00:39,036
+A working smoothing capacitor therefore keeps the output from falling all the way to zero
+
+10
+00:00:39,036 --> 00:00:39,759
+every cycle.
+
+11
+00:00:42,559 --> 00:00:45,663
+In breadboard mode, open the fault challenge panel.
+
+12
+00:00:45,913 --> 00:00:50,159
+Read the controls and start a challenge after checking the healthy circuit.
+
+13
+00:00:50,409 --> 00:00:55,336
+For this demonstration, one reproducible open lead fault has been selected.
+
+14
+00:00:55,586 --> 00:01:00,893
+Your own challenge can produce a different fault, so diagnose the evidence you actually
+
+15
+00:01:00,893 --> 00:01:01,272
+observe.
+
+16
+00:01:04,072 --> 00:01:09,766
+The input still oscillates, but the output now falls close to zero between positive peaks.
+
+17
+00:01:10,016 --> 00:01:13,182
+Rectification remains, while smoothing is lost.
+
+18
+00:01:13,432 --> 00:01:18,742
+This narrows the possibilities, but a waveform alone is not a complete diagnosis.
+
+19
+00:01:18,992 --> 00:01:24,446
+Consider an open capacitor connection, a missing supply, and a problem in the load path.
+
+20
+00:01:27,246 --> 00:01:30,236
+Turn power off before making a resistance measurement.
+
+21
+00:01:30,486 --> 00:01:32,058
+Probe the load resistor.
+
+22
+00:01:32,308 --> 00:01:37,885
+In this example, it reads about one kilo ohm, consistent with its nominal value.
+
+23
+00:01:38,135 --> 00:01:43,448
+That supports the load resistor being present, although other connected paths can affect
+
+24
+00:01:43,448 --> 00:01:45,900
+resistance measurements in a real circuit.
+
+25
+00:01:48,700 --> 00:01:51,856
+Check continuity between the load return and ground.
+
+26
+00:01:52,106 --> 00:01:54,828
+The return path is intact in this example.
+
+27
+00:01:55,078 --> 00:01:58,479
+Combine this with the known input and the load resistance.
+
+28
+00:01:58,729 --> 00:02:03,596
+The missing smoothing is now more consistent with the capacitor branch being disconnected
+
+29
+00:02:03,596 --> 00:02:05,842
+than with a missing ground return.
+
+30
+00:02:08,642 --> 00:02:12,664
+Select the suspected component and fault type in the challenge panel.
+
+31
+00:02:12,914 --> 00:02:16,818
+Here the diagnosis is an open lead on capacitor C one.
+
+32
+00:02:17,068 --> 00:02:22,449
+Explain that the input remains present, the output has lost smoothing, and the load and
+
+33
+00:02:22,449 --> 00:02:25,678
+return checks are consistent with a working load path.
+
+34
+00:02:25,928 --> 00:02:27,816
+Then submit the diagnosis.
+
+35
+00:02:30,616 --> 00:02:35,863
+After the diagnosis is checked and the fault is repaired, inspect the waveform again.
+
+36
+00:02:36,113 --> 00:02:37,600
+Smoothing should return.
+
+37
+00:02:37,850 --> 00:02:42,884
+A repair is supported by the restored circuit behavior, not just a success message.
+
+38
+00:02:43,134 --> 00:02:45,036
+Save progress before leaving.
+
+39
+00:02:45,286 --> 00:02:51,045
+For a course assignment, also check its own completion requirements; a free exploration is
+
+40
+00:02:51,045 --> 00:02:54,747
+not automatically the same as finishing an assigned activity.
