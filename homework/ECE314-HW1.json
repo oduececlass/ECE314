@@ -1,0 +1,3950 @@
+{
+  "schema": "edu.odu.circuit-assessment",
+  "schemaVersion": "1.0",
+  "assessment": {
+    "id": "ECE314-HW1",
+    "title": "Homework #1 · Operational amplifiers",
+    "course": "ECE 314",
+    "topic": "Module 1 · Op amps",
+    "version": "1.0",
+    "instructions": "Assume ideal op amps unless a finite open-loop gain or output rails are given. Show your model assumptions, the KCL equations at the op-amp inputs, and a rail (headroom) check. Numeric answers use the units shown.",
+    "maximumScore": 65
+  },
+  "questions": [
+    {
+      "id": "hw1-p1-open-loop",
+      "title": "1) Open-loop saturation",
+      "promptHtml": "<p>An op amp has open-loop gain A = 2 × 10<sup>5</sup> and supply rails ±12 V. With v<sub>+</sub> = 1.001 V and v<sub>−</sub> = 1.000 V, find v<sub>o</sub>.</p><ol><li>Compute the output predicted by the linear model v<sub>o</sub> = A(v<sub>+</sub> − v<sub>−</sub>).</li><li>Compare it with the rails and state the actual output.</li></ol>",
+      "hints": [
+        "There is no feedback path, so the virtual-short assumption does not apply.",
+        "A 1 mV differential input times 2×10⁵ is far beyond the rails."
+      ],
+      "checklist": [
+        "Compute the differential input.",
+        "Apply the open-loop linear model.",
+        "Clamp to the rail and state the sign."
+      ],
+      "responseFields": [
+        {
+          "id": "vlin",
+          "type": "numeric",
+          "label": "Linear-model output A(v₊ − v₋)",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vo",
+          "type": "numeric",
+          "label": "Actual output v_o",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "why",
+          "type": "text",
+          "label": "Explain why the output saturates",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "independent",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Open-loop comparator",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_74600a3d-d843-475d-8c02-c7b5947c6a87",
+              "type": "opamp",
+              "x": 640,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "U_1",
+              "value": "A = 2e5",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_9e18ca4b-1255-4206-b977-98d52a3041ac",
+              "type": "voltage",
+              "x": 300,
+              "y": 340,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "v_-",
+              "value": "1.000 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_dc9f4e01-b044-43ba-ab4c-eced8fe565f4",
+              "type": "voltage",
+              "x": 460,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "v_+",
+              "value": "1.001 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_a87e1f6d-bfdf-42c2-9991-2d413007a997",
+              "type": "ground",
+              "x": 300,
+              "y": 400,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_bd74262f-2e31-405a-b2d0-37f0fa71e3bc",
+              "type": "ground",
+              "x": 460,
+              "y": 500,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_1ec5084e-dbf2-45eb-aff7-5c1fd6ca14f3",
+              "type": "text",
+              "x": 900,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "v_o",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_fc1ab4bf-347a-428b-8f87-62158e7e495b",
+              "type": "text",
+              "x": 640,
+              "y": 420,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T1",
+              "value": "±12 V rails",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_e2968c67-05aa-4c0c-be1e-0355187539bc",
+              "x": 880,
+              "y": 320
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_b745dd4c-aacc-42df-8423-9bf2d01ac5e1",
+              "a": {
+                "c": "c_9e18ca4b-1255-4206-b977-98d52a3041ac",
+                "p": 0
+              },
+              "b": {
+                "c": "c_74600a3d-d843-475d-8c02-c7b5947c6a87",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_74a81bde-a1e7-4a45-9641-2acfe4129cec",
+              "a": {
+                "c": "c_9e18ca4b-1255-4206-b977-98d52a3041ac",
+                "p": 1
+              },
+              "b": {
+                "c": "c_a87e1f6d-bfdf-42c2-9991-2d413007a997",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_6af2e259-eebd-4a45-b39f-7af162f9d20b",
+              "a": {
+                "c": "c_dc9f4e01-b044-43ba-ab4c-eced8fe565f4",
+                "p": 0
+              },
+              "b": {
+                "c": "c_74600a3d-d843-475d-8c02-c7b5947c6a87",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 460,
+                  "y": 340
+                }
+              ]
+            },
+            {
+              "id": "w_1cf3eb20-8f9e-437d-997c-404370179071",
+              "a": {
+                "c": "c_dc9f4e01-b044-43ba-ab4c-eced8fe565f4",
+                "p": 1
+              },
+              "b": {
+                "c": "c_bd74262f-2e31-405a-b2d0-37f0fa71e3bc",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_215cd902-051c-4594-b155-a0d222d9172a",
+              "a": {
+                "c": "c_74600a3d-d843-475d-8c02-c7b5947c6a87",
+                "p": 2
+              },
+              "b": {
+                "j": "j_e2968c67-05aa-4c0c-be1e-0355187539bc"
+              },
+              "color": "#365a72",
+              "vias": []
+            }
+          ]
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"754\" height=\"410\" viewBox=\"210 178.64877319335938 753.6898193359375 409.3512268066406\"><title>Open-loop comparator</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"210\" y=\"178.64877319335938\" width=\"753.6898193359375\" height=\"409.3512268066406\" fill=\"white\"/><path d=\"M300 300L580 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M300 380\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M460 400L460 340L580 340\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M460 480\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 320L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"880\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_74600a3d-d843-475d-8c02-c7b5947c6a87\"><g transform=\"translate(640 320) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-60 -20H-35M-60 20H-35M-35 -42V42L40 0ZM40 0H60M-28 -20H-16M-28 20H-16M-22 14V26\"/></g></g><g class=\"drawing-label\" data-label=\"c_74600a3d-d843-475d-8c02-c7b5947c6a87\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"241\" font-size=\"19\"><tspan font-size=\"19.00\">U</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_74600a3d-d843-475d-8c02-c7b5947c6a87\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"264\" font-size=\"17\"><tspan font-size=\"17.00\">A = 2e5</tspan></text></g></g><g class=\"component\" data-c=\"c_9e18ca4b-1255-4206-b977-98d52a3041ac\"><g transform=\"translate(300 340) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_9e18ca4b-1255-4206-b977-98d52a3041ac\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"348\" y=\"333\" font-size=\"19\"><tspan font-size=\"19.00\">v</tspan><tspan dy=\"5.70\" font-size=\"13.30\">-</tspan></text></g><g class=\"drawing-label\" data-label=\"c_9e18ca4b-1255-4206-b977-98d52a3041ac\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"348\" y=\"356\" font-size=\"17\"><tspan font-size=\"17.00\">1.000 V</tspan></text></g></g><g class=\"component\" data-c=\"c_dc9f4e01-b044-43ba-ab4c-eced8fe565f4\"><g transform=\"translate(460 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_dc9f4e01-b044-43ba-ab4c-eced8fe565f4\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"508\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">v</tspan><tspan dy=\"5.70\" font-size=\"13.30\">+</tspan></text></g><g class=\"drawing-label\" data-label=\"c_dc9f4e01-b044-43ba-ab4c-eced8fe565f4\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"508\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">1.001 V</tspan></text></g></g><g class=\"component\" data-c=\"c_a87e1f6d-bfdf-42c2-9991-2d413007a997\"><g transform=\"translate(300 400) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_bd74262f-2e31-405a-b2d0-37f0fa71e3bc\"><g transform=\"translate(460 500) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_1ec5084e-dbf2-45eb-aff7-5c1fd6ca14f3\"><g class=\"drawing-label\" data-label=\"c_1ec5084e-dbf2-45eb-aff7-5c1fd6ca14f3\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"900\" y=\"320\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">o</tspan></text></g></g><g class=\"component\" data-c=\"c_fc1ab4bf-347a-428b-8f87-62158e7e495b\"><g class=\"drawing-label\" data-label=\"c_fc1ab4bf-347a-428b-8f87-62158e7e495b\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"640\" y=\"420\" font-size=\"22\"><tspan font-size=\"22.00\">±12 V rails</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Linear-model output A(v₊ − v₋)",
+          "points": 2
+        },
+        {
+          "label": "Actual output v_o",
+          "points": 2
+        },
+        {
+          "label": "Explain why the output saturates",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw1-p2-inverting",
+      "title": "2) Inverting amplifier: gain and currents",
+      "promptHtml": "<p>Ideal inverting amplifier with R<sub>1</sub> = 10 kΩ, R<sub>f</sub> = 100 kΩ, and v<sub>i</sub> = 0.15 V. Find v<sub>o</sub> and the current through R<sub>1</sub> and R<sub>f</sub>.</p><p>Report i<sub>1</sub> flowing from v<sub>i</sub> toward the inverting node and i<sub>f</sub> flowing from the inverting node toward v<sub>o</sub>.</p>",
+      "hints": [
+        "The noninverting input is grounded, so v₋ ≈ 0 V (virtual ground).",
+        "No current enters the op-amp input, so i_f = i₁."
+      ],
+      "checklist": [
+        "State the ideal op-amp assumptions.",
+        "Write KCL at the inverting node.",
+        "Check v_o against the rails."
+      ],
+      "responseFields": [
+        {
+          "id": "gain",
+          "type": "numeric",
+          "label": "Closed-loop gain",
+          "unit": "V/V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vo",
+          "type": "numeric",
+          "label": "Output voltage v_o",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "i1",
+          "type": "numeric",
+          "label": "Current i₁ through R₁",
+          "unit": "µA",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "if",
+          "type": "numeric",
+          "label": "Current i_f through R_f",
+          "unit": "µA",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "kcl",
+          "type": "text",
+          "label": "Show the KCL at the inverting node",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "independent",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Inverting amplifier",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_18a7010a-04f1-4a52-9bef-6f81f06d9480",
+              "type": "opamp",
+              "x": 640,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "U_1",
+              "value": "Ideal op amp",
+              "label": {
+                "dx": 5,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_22b61d8c-4c36-43d2-8993-feff84460de9",
+              "type": "text",
+              "x": 1060,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "v_o",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_6ffc1bab-199c-4f3b-a107-7320cab24f42",
+              "type": "voltage",
+              "x": 120,
+              "y": 400,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "v_i",
+              "value": "0.15 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_adb4cd01-f76b-48f7-922a-75f656a8efa6",
+              "type": "ground",
+              "x": 120,
+              "y": 500,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_7b291c79-af32-41fc-8477-d1e063fabfc5",
+              "type": "resistor",
+              "x": 320,
+              "y": 300,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_1",
+              "value": "10 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_74defe71-742f-4ee8-863b-a792979048f7",
+              "type": "resistor",
+              "x": 640,
+              "y": 140,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_f",
+              "value": "100 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_1cd02cfb-c75f-40a5-9fb4-3ea3f440c89b",
+              "type": "ground",
+              "x": 540,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_14f4e8ad-4a21-41ce-b975-125a2d4a82bb",
+              "type": "text",
+              "x": 430,
+              "y": 280,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T1",
+              "value": "v_{-}",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_d0088513-acfc-4442-a876-3499107ee38c",
+              "x": 880,
+              "y": 320
+            },
+            {
+              "id": "j_c272fdc8-dd7b-482b-902e-f91afc6b12fd",
+              "x": 1040,
+              "y": 320
+            },
+            {
+              "id": "j_d2b9abe4-8641-48d2-84d4-1fbb62cb530b",
+              "x": 480,
+              "y": 300
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_66a9413b-02d3-43bf-9876-6c199ab138a3",
+              "a": {
+                "c": "c_18a7010a-04f1-4a52-9bef-6f81f06d9480",
+                "p": 2
+              },
+              "b": {
+                "j": "j_d0088513-acfc-4442-a876-3499107ee38c"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_9b62ebee-ed37-417d-ba9a-545739ce3dfb",
+              "a": {
+                "j": "j_d0088513-acfc-4442-a876-3499107ee38c"
+              },
+              "b": {
+                "j": "j_c272fdc8-dd7b-482b-902e-f91afc6b12fd"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_23c5a93d-e4d1-438b-8223-cd68975bf1d0",
+              "a": {
+                "c": "c_6ffc1bab-199c-4f3b-a107-7320cab24f42",
+                "p": 1
+              },
+              "b": {
+                "c": "c_adb4cd01-f76b-48f7-922a-75f656a8efa6",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_1b5f29b8-0337-429f-8cec-6799d9bad089",
+              "a": {
+                "c": "c_6ffc1bab-199c-4f3b-a107-7320cab24f42",
+                "p": 0
+              },
+              "b": {
+                "c": "c_7b291c79-af32-41fc-8477-d1e063fabfc5",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 120,
+                  "y": 300
+                }
+              ]
+            },
+            {
+              "id": "w_87ac9d77-165a-4695-a603-3e5e167e0b06",
+              "a": {
+                "c": "c_7b291c79-af32-41fc-8477-d1e063fabfc5",
+                "p": 1
+              },
+              "b": {
+                "j": "j_d2b9abe4-8641-48d2-84d4-1fbb62cb530b"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_6f64b584-a08e-4b00-9314-f827eac111b8",
+              "a": {
+                "j": "j_d2b9abe4-8641-48d2-84d4-1fbb62cb530b"
+              },
+              "b": {
+                "c": "c_18a7010a-04f1-4a52-9bef-6f81f06d9480",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_a10480bc-ab31-4898-9dd9-f128530d7192",
+              "a": {
+                "j": "j_d2b9abe4-8641-48d2-84d4-1fbb62cb530b"
+              },
+              "b": {
+                "c": "c_74defe71-742f-4ee8-863b-a792979048f7",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 480,
+                  "y": 140
+                }
+              ]
+            },
+            {
+              "id": "w_d4197b1e-cfe8-48e2-8841-e66de9b5c957",
+              "a": {
+                "c": "c_74defe71-742f-4ee8-863b-a792979048f7",
+                "p": 1
+              },
+              "b": {
+                "j": "j_d0088513-acfc-4442-a876-3499107ee38c"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 880,
+                  "y": 140
+                }
+              ]
+            },
+            {
+              "id": "w_00c22bef-923e-43ea-9c9c-0ca3c6c3a8af",
+              "a": {
+                "c": "c_18a7010a-04f1-4a52-9bef-6f81f06d9480",
+                "p": 1
+              },
+              "b": {
+                "c": "c_1cd02cfb-c75f-40a5-9fb4-3ea3f440c89b",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 540,
+                  "y": 340
+                }
+              ]
+            }
+          ],
+          "lesson": {
+            "key": "inverting",
+            "roles": {
+              "U": "c_18a7010a-04f1-4a52-9bef-6f81f06d9480",
+              "Vi": "c_6ffc1bab-199c-4f3b-a107-7320cab24f42",
+              "R1": "c_7b291c79-af32-41fc-8477-d1e063fabfc5",
+              "Rf": "c_74defe71-742f-4ee8-863b-a792979048f7"
+            },
+            "params": {
+              "low": -12,
+              "high": 12,
+              "aol": 200000,
+              "tms": 2,
+              "initial": 0
+            }
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1094\" height=\"557\" viewBox=\"30 31.689804077148438 1093.859375 556.3101806640625\"><title>Inverting amplifier</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"30\" y=\"31.689804077148438\" width=\"1093.859375\" height=\"556.3101806640625\" fill=\"white\"/><path d=\"M700 320L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M880 320L1040 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M120 440L120 480\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M120 360L120 300L280 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M360 300L480 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 300L580 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 300L480 140L600 140\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M680 140L880 140L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M580 340L540 340L540 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"880\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"1040\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"480\" cy=\"300\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_18a7010a-04f1-4a52-9bef-6f81f06d9480\"><g transform=\"translate(640 320) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-60 -20H-35M-60 20H-35M-35 -42V42L40 0ZM40 0H60M-28 -20H-16M-28 20H-16M-22 14V26\"/></g></g><g class=\"drawing-label\" data-label=\"c_18a7010a-04f1-4a52-9bef-6f81f06d9480\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"241\" font-size=\"19\"><tspan font-size=\"19.00\">U</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_18a7010a-04f1-4a52-9bef-6f81f06d9480\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"264\" font-size=\"17\"><tspan font-size=\"17.00\">Ideal op amp</tspan></text></g></g><g class=\"component\" data-c=\"c_22b61d8c-4c36-43d2-8993-feff84460de9\"><g class=\"drawing-label\" data-label=\"c_22b61d8c-4c36-43d2-8993-feff84460de9\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1060\" y=\"320\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">o</tspan></text></g></g><g class=\"component\" data-c=\"c_6ffc1bab-199c-4f3b-a107-7320cab24f42\"><g transform=\"translate(120 400) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_6ffc1bab-199c-4f3b-a107-7320cab24f42\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"168\" y=\"393\" font-size=\"19\"><tspan font-size=\"19.00\">v</tspan><tspan dy=\"5.70\" font-size=\"13.30\">i</tspan></text></g><g class=\"drawing-label\" data-label=\"c_6ffc1bab-199c-4f3b-a107-7320cab24f42\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"168\" y=\"416\" font-size=\"17\"><tspan font-size=\"17.00\">0.15 V</tspan></text></g></g><g class=\"component\" data-c=\"c_adb4cd01-f76b-48f7-922a-75f656a8efa6\"><g transform=\"translate(120 500) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_7b291c79-af32-41fc-8477-d1e063fabfc5\"><g transform=\"translate(320 300) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_7b291c79-af32-41fc-8477-d1e063fabfc5\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"292\" y=\"254\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_7b291c79-af32-41fc-8477-d1e063fabfc5\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"292\" y=\"277\" font-size=\"17\"><tspan font-size=\"17.00\">10 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_74defe71-742f-4ee8-863b-a792979048f7\"><g transform=\"translate(640 140) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_74defe71-742f-4ee8-863b-a792979048f7\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"94\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">f</tspan></text></g><g class=\"drawing-label\" data-label=\"c_74defe71-742f-4ee8-863b-a792979048f7\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"117\" font-size=\"17\"><tspan font-size=\"17.00\">100 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_1cd02cfb-c75f-40a5-9fb4-3ea3f440c89b\"><g transform=\"translate(540 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_14f4e8ad-4a21-41ce-b975-125a2d4a82bb\"><g class=\"drawing-label\" data-label=\"c_14f4e8ad-4a21-41ce-b975-125a2d4a82bb\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"430\" y=\"280\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">-</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Closed-loop gain",
+          "points": 2
+        },
+        {
+          "label": "Output voltage v_o",
+          "points": 2
+        },
+        {
+          "label": "Current i₁ through R₁",
+          "points": 2
+        },
+        {
+          "label": "Current i_f through R_f",
+          "points": 2
+        },
+        {
+          "label": "Show the KCL at the inverting node",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw1-p3-inverting-design",
+      "title": "3) Inverting amplifier design",
+      "promptHtml": "<p>Design an inverting amplifier with gain −20 and input resistance R<sub>in</sub> = 5 kΩ. Choose R<sub>1</sub> and R<sub>f</sub>.</p><p>Enter your resistor values into the starting circuit (currently marked ?) to check the design.</p>",
+      "hints": [
+        "For an inverting amplifier the input sees R₁ to virtual ground, so R_in = R₁.",
+        "|gain| = R_f/R₁."
+      ],
+      "checklist": [
+        "Relate R_in to R₁.",
+        "Solve the gain equation for R_f.",
+        "Confirm the sign of the gain."
+      ],
+      "responseFields": [
+        {
+          "id": "r1",
+          "type": "numeric",
+          "label": "R₁",
+          "unit": "kΩ",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "rf",
+          "type": "numeric",
+          "label": "R_f",
+          "unit": "kΩ",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "justify",
+          "type": "text",
+          "label": "Justify the design",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "independent",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Inverting amplifier design",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_8998f86c-fb2e-485d-a77e-8558e04e8d42",
+              "type": "opamp",
+              "x": 640,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "U_1",
+              "value": "Ideal op amp",
+              "label": {
+                "dx": 5,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_9ad5ade4-64ec-4452-971c-d73fdd339ec1",
+              "type": "text",
+              "x": 1060,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "v_o",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_e5c2ec84-2964-4bf8-97fe-d56410e6b904",
+              "type": "voltage",
+              "x": 120,
+              "y": 400,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "v_i",
+              "value": "0.1 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_3568bce7-90c1-4685-af8f-31e8ebdbbc9e",
+              "type": "ground",
+              "x": 120,
+              "y": 500,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_f9e5141f-7586-482d-ad9f-5cf7feee3498",
+              "type": "resistor",
+              "x": 320,
+              "y": 300,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_1",
+              "value": "?",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_e01dee31-7732-4554-8fd7-974e9577b6b5",
+              "type": "resistor",
+              "x": 640,
+              "y": 140,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_f",
+              "value": "?",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_97b7c6c9-96d8-4436-9d8a-91e4b721f2ca",
+              "type": "ground",
+              "x": 540,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_145e21c1-6da7-46ec-9bd9-7a43424b0f6d",
+              "type": "text",
+              "x": 430,
+              "y": 280,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T1",
+              "value": "v_{-}",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_88df1eb8-b3a7-4ab5-88c5-637a318396a9",
+              "x": 880,
+              "y": 320
+            },
+            {
+              "id": "j_40bb59f1-fee1-4df7-9008-6a4e74628396",
+              "x": 1040,
+              "y": 320
+            },
+            {
+              "id": "j_96f687f0-ffd6-4d34-b5db-80a0e700185b",
+              "x": 480,
+              "y": 300
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_d6d2788a-683f-4416-8695-b26e0823ff33",
+              "a": {
+                "c": "c_8998f86c-fb2e-485d-a77e-8558e04e8d42",
+                "p": 2
+              },
+              "b": {
+                "j": "j_88df1eb8-b3a7-4ab5-88c5-637a318396a9"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_0fcdbae9-cd1f-4ce7-baf5-d68d37669431",
+              "a": {
+                "j": "j_88df1eb8-b3a7-4ab5-88c5-637a318396a9"
+              },
+              "b": {
+                "j": "j_40bb59f1-fee1-4df7-9008-6a4e74628396"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_def19d06-1a67-45ff-b098-0179433a42a0",
+              "a": {
+                "c": "c_e5c2ec84-2964-4bf8-97fe-d56410e6b904",
+                "p": 1
+              },
+              "b": {
+                "c": "c_3568bce7-90c1-4685-af8f-31e8ebdbbc9e",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_f2c24267-a96c-4eb3-89ed-d6d8bde1dfda",
+              "a": {
+                "c": "c_e5c2ec84-2964-4bf8-97fe-d56410e6b904",
+                "p": 0
+              },
+              "b": {
+                "c": "c_f9e5141f-7586-482d-ad9f-5cf7feee3498",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 120,
+                  "y": 300
+                }
+              ]
+            },
+            {
+              "id": "w_72c63c32-8326-4b05-8168-0531479fe286",
+              "a": {
+                "c": "c_f9e5141f-7586-482d-ad9f-5cf7feee3498",
+                "p": 1
+              },
+              "b": {
+                "j": "j_96f687f0-ffd6-4d34-b5db-80a0e700185b"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_eb50d117-4a11-4fa0-b2eb-3dea8d8eff5b",
+              "a": {
+                "j": "j_96f687f0-ffd6-4d34-b5db-80a0e700185b"
+              },
+              "b": {
+                "c": "c_8998f86c-fb2e-485d-a77e-8558e04e8d42",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_364e5a60-ef5c-49ef-9f2b-480aab106dc7",
+              "a": {
+                "j": "j_96f687f0-ffd6-4d34-b5db-80a0e700185b"
+              },
+              "b": {
+                "c": "c_e01dee31-7732-4554-8fd7-974e9577b6b5",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 480,
+                  "y": 140
+                }
+              ]
+            },
+            {
+              "id": "w_b8d7e877-3f0f-4103-9c32-78ca2265328a",
+              "a": {
+                "c": "c_e01dee31-7732-4554-8fd7-974e9577b6b5",
+                "p": 1
+              },
+              "b": {
+                "j": "j_88df1eb8-b3a7-4ab5-88c5-637a318396a9"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 880,
+                  "y": 140
+                }
+              ]
+            },
+            {
+              "id": "w_a781176a-5914-4b6a-af61-1cd7051a49e0",
+              "a": {
+                "c": "c_8998f86c-fb2e-485d-a77e-8558e04e8d42",
+                "p": 1
+              },
+              "b": {
+                "c": "c_97b7c6c9-96d8-4436-9d8a-91e4b721f2ca",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 540,
+                  "y": 340
+                }
+              ]
+            }
+          ],
+          "lesson": {
+            "key": "inverting",
+            "roles": {
+              "U": "c_8998f86c-fb2e-485d-a77e-8558e04e8d42",
+              "Vi": "c_e5c2ec84-2964-4bf8-97fe-d56410e6b904",
+              "R1": "c_f9e5141f-7586-482d-ad9f-5cf7feee3498",
+              "Rf": "c_e01dee31-7732-4554-8fd7-974e9577b6b5"
+            },
+            "params": {
+              "low": -12,
+              "high": 12,
+              "aol": 200000,
+              "tms": 2,
+              "initial": 0
+            }
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1094\" height=\"557\" viewBox=\"30 31.687118530273438 1093.8621826171875 556.3128662109375\"><title>Inverting amplifier design</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"30\" y=\"31.687118530273438\" width=\"1093.8621826171875\" height=\"556.3128662109375\" fill=\"white\"/><path d=\"M700 320L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M880 320L1040 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M120 440L120 480\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M120 360L120 300L280 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M360 300L480 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 300L580 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 300L480 140L600 140\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M680 140L880 140L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M580 340L540 340L540 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"880\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"1040\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"480\" cy=\"300\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_8998f86c-fb2e-485d-a77e-8558e04e8d42\"><g transform=\"translate(640 320) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-60 -20H-35M-60 20H-35M-35 -42V42L40 0ZM40 0H60M-28 -20H-16M-28 20H-16M-22 14V26\"/></g></g><g class=\"drawing-label\" data-label=\"c_8998f86c-fb2e-485d-a77e-8558e04e8d42\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"241\" font-size=\"19\"><tspan font-size=\"19.00\">U</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_8998f86c-fb2e-485d-a77e-8558e04e8d42\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"264\" font-size=\"17\"><tspan font-size=\"17.00\">Ideal op amp</tspan></text></g></g><g class=\"component\" data-c=\"c_9ad5ade4-64ec-4452-971c-d73fdd339ec1\"><g class=\"drawing-label\" data-label=\"c_9ad5ade4-64ec-4452-971c-d73fdd339ec1\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1060\" y=\"320\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">o</tspan></text></g></g><g class=\"component\" data-c=\"c_e5c2ec84-2964-4bf8-97fe-d56410e6b904\"><g transform=\"translate(120 400) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_e5c2ec84-2964-4bf8-97fe-d56410e6b904\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"168\" y=\"393\" font-size=\"19\"><tspan font-size=\"19.00\">v</tspan><tspan dy=\"5.70\" font-size=\"13.30\">i</tspan></text></g><g class=\"drawing-label\" data-label=\"c_e5c2ec84-2964-4bf8-97fe-d56410e6b904\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"168\" y=\"416\" font-size=\"17\"><tspan font-size=\"17.00\">0.1 V</tspan></text></g></g><g class=\"component\" data-c=\"c_3568bce7-90c1-4685-af8f-31e8ebdbbc9e\"><g transform=\"translate(120 500) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_f9e5141f-7586-482d-ad9f-5cf7feee3498\"><g transform=\"translate(320 300) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_f9e5141f-7586-482d-ad9f-5cf7feee3498\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"292\" y=\"254\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_f9e5141f-7586-482d-ad9f-5cf7feee3498\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"292\" y=\"277\" font-size=\"17\"><tspan font-size=\"17.00\">?</tspan></text></g></g><g class=\"component\" data-c=\"c_e01dee31-7732-4554-8fd7-974e9577b6b5\"><g transform=\"translate(640 140) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_e01dee31-7732-4554-8fd7-974e9577b6b5\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"94\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">f</tspan></text></g><g class=\"drawing-label\" data-label=\"c_e01dee31-7732-4554-8fd7-974e9577b6b5\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"117\" font-size=\"17\"><tspan font-size=\"17.00\">?</tspan></text></g></g><g class=\"component\" data-c=\"c_97b7c6c9-96d8-4436-9d8a-91e4b721f2ca\"><g transform=\"translate(540 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_145e21c1-6da7-46ec-9bd9-7a43424b0f6d\"><g class=\"drawing-label\" data-label=\"c_145e21c1-6da7-46ec-9bd9-7a43424b0f6d\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"430\" y=\"280\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">-</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "R₁",
+          "points": 2
+        },
+        {
+          "label": "R_f",
+          "points": 2
+        },
+        {
+          "label": "Justify the design",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw1-p4-summer",
+      "title": "4) Inverting summing amplifier",
+      "promptHtml": "<p>Ideal inverting summer with R<sub>f</sub> = 40 kΩ. Input v<sub>1</sub> drives the summing node through R<sub>1</sub> = 10 kΩ, and v<sub>2</sub> through R<sub>2</sub> = 20 kΩ. If v<sub>1</sub> = 0.60 V and v<sub>2</sub> = −0.20 V, find v<sub>o</sub>.</p>",
+      "hints": [
+        "The summing node is a virtual ground, so each input current is v_k/R_k independently.",
+        "All input currents leave through R_f."
+      ],
+      "checklist": [
+        "Find each branch current.",
+        "Sum them at the node.",
+        "Compute v_o and check the rails."
+      ],
+      "responseFields": [
+        {
+          "id": "i1",
+          "type": "numeric",
+          "label": "Branch current v₁/R₁",
+          "unit": "µA",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "i2",
+          "type": "numeric",
+          "label": "Branch current v₂/R₂",
+          "unit": "µA",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vo",
+          "type": "numeric",
+          "label": "Output voltage v_o",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "super",
+          "type": "text",
+          "label": "Explain the superposition at the summing node",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "independent",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Two-input inverting summer",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_768bb248-9c94-467c-8022-10c759e08170",
+              "type": "opamp",
+              "x": 640,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "U_1",
+              "value": "Ideal op amp",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_7e3f5ae0-4f14-48d4-b886-081a2c5edf6b",
+              "type": "text",
+              "x": 1060,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "v_o",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_f6c732bb-b986-4266-94db-7cf97bb811cf",
+              "type": "voltage",
+              "x": 100,
+              "y": 280,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "v_1",
+              "value": "0.60 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_32db74fc-a6e5-4b70-bed1-f6b6d5f47a70",
+              "type": "resistor",
+              "x": 340,
+              "y": 200,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_1",
+              "value": "10 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_3e4b8bf9-e581-4aed-bfe8-375a4443eadf",
+              "type": "voltage",
+              "x": 100,
+              "y": 500,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "v_2",
+              "value": "-0.20 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_952a7c98-435f-47f5-8bf1-811109f162dd",
+              "type": "resistor",
+              "x": 340,
+              "y": 420,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_2",
+              "value": "20 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_e50f0ae2-254a-47b3-8fdb-1967d0ca65b1",
+              "type": "ground",
+              "x": 100,
+              "y": 360,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_5d0fd859-020b-45c9-bc9b-79f830e97012",
+              "type": "ground",
+              "x": 100,
+              "y": 580,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_28682893-9956-49d1-b0aa-2dcadf7c0720",
+              "type": "resistor",
+              "x": 640,
+              "y": 80,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_f",
+              "value": "40 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_f98d7db0-b3c3-4800-86a7-38129bd3ffb8",
+              "type": "ground",
+              "x": 580,
+              "y": 460,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G3",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_634596b7-a751-4341-ab76-86a0bd45790b",
+              "type": "text",
+              "x": 500,
+              "y": 280,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T1",
+              "value": "v_{-}",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_28231f50-ee9a-49b3-8533-95c1df9fd883",
+              "x": 880,
+              "y": 320
+            },
+            {
+              "id": "j_ea6069bc-595c-478b-b363-f789ad6ccb2c",
+              "x": 1040,
+              "y": 320
+            },
+            {
+              "id": "j_5428f7e2-d038-482a-8368-0fafed62eda3",
+              "x": 480,
+              "y": 200
+            },
+            {
+              "id": "j_0cd4f272-e88a-494c-bb58-6a49727816e3",
+              "x": 480,
+              "y": 420
+            },
+            {
+              "id": "j_2457174a-01e0-41a5-93e4-ad7a2dc52b30",
+              "x": 480,
+              "y": 300
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_fd00c793-35c2-4069-b844-9b436df88a22",
+              "a": {
+                "c": "c_768bb248-9c94-467c-8022-10c759e08170",
+                "p": 2
+              },
+              "b": {
+                "j": "j_28231f50-ee9a-49b3-8533-95c1df9fd883"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_a7ca07e2-5ef4-4135-bfcb-a69e5cbce2be",
+              "a": {
+                "j": "j_28231f50-ee9a-49b3-8533-95c1df9fd883"
+              },
+              "b": {
+                "j": "j_ea6069bc-595c-478b-b363-f789ad6ccb2c"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_2cee9c1e-0c94-4f6a-84a1-8c9ddedd1ad5",
+              "a": {
+                "c": "c_f6c732bb-b986-4266-94db-7cf97bb811cf",
+                "p": 0
+              },
+              "b": {
+                "c": "c_32db74fc-a6e5-4b70-bed1-f6b6d5f47a70",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 100,
+                  "y": 200
+                }
+              ]
+            },
+            {
+              "id": "w_ccccca81-fe8e-4297-840e-55ee0dd2d98b",
+              "a": {
+                "c": "c_f6c732bb-b986-4266-94db-7cf97bb811cf",
+                "p": 1
+              },
+              "b": {
+                "c": "c_e50f0ae2-254a-47b3-8fdb-1967d0ca65b1",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_4484ef85-5834-474c-98a9-5af88397a10d",
+              "a": {
+                "c": "c_3e4b8bf9-e581-4aed-bfe8-375a4443eadf",
+                "p": 0
+              },
+              "b": {
+                "c": "c_952a7c98-435f-47f5-8bf1-811109f162dd",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 100,
+                  "y": 420
+                }
+              ]
+            },
+            {
+              "id": "w_f5512b54-9a71-40f2-bf3d-4885bf5947a1",
+              "a": {
+                "c": "c_3e4b8bf9-e581-4aed-bfe8-375a4443eadf",
+                "p": 1
+              },
+              "b": {
+                "c": "c_5d0fd859-020b-45c9-bc9b-79f830e97012",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_f7d9fb5f-6dc7-4f1d-bcbd-38128ee06610",
+              "a": {
+                "c": "c_32db74fc-a6e5-4b70-bed1-f6b6d5f47a70",
+                "p": 1
+              },
+              "b": {
+                "j": "j_5428f7e2-d038-482a-8368-0fafed62eda3"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_d9e99b7c-d3c9-4b7b-ada4-b712514a4c94",
+              "a": {
+                "c": "c_952a7c98-435f-47f5-8bf1-811109f162dd",
+                "p": 1
+              },
+              "b": {
+                "j": "j_0cd4f272-e88a-494c-bb58-6a49727816e3"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_dbb5d2cd-6d22-4fea-95b2-d8374b229b5c",
+              "a": {
+                "j": "j_5428f7e2-d038-482a-8368-0fafed62eda3"
+              },
+              "b": {
+                "j": "j_2457174a-01e0-41a5-93e4-ad7a2dc52b30"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_de5b157f-243b-4d27-9b9a-8e7573ac50d9",
+              "a": {
+                "j": "j_2457174a-01e0-41a5-93e4-ad7a2dc52b30"
+              },
+              "b": {
+                "j": "j_0cd4f272-e88a-494c-bb58-6a49727816e3"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_54f3df48-e583-4eeb-96e4-9b7c125cde57",
+              "a": {
+                "j": "j_2457174a-01e0-41a5-93e4-ad7a2dc52b30"
+              },
+              "b": {
+                "c": "c_768bb248-9c94-467c-8022-10c759e08170",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_d8a4384a-00ff-4ed8-948d-a9f7a093e21d",
+              "a": {
+                "j": "j_5428f7e2-d038-482a-8368-0fafed62eda3"
+              },
+              "b": {
+                "c": "c_28682893-9956-49d1-b0aa-2dcadf7c0720",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 480,
+                  "y": 80
+                }
+              ]
+            },
+            {
+              "id": "w_cab71b58-6436-4462-b8c0-f47d06446318",
+              "a": {
+                "c": "c_28682893-9956-49d1-b0aa-2dcadf7c0720",
+                "p": 1
+              },
+              "b": {
+                "j": "j_28231f50-ee9a-49b3-8533-95c1df9fd883"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 880,
+                  "y": 80
+                }
+              ]
+            },
+            {
+              "id": "w_61e45c79-6200-4108-a494-c828a9fb0e6a",
+              "a": {
+                "c": "c_768bb248-9c94-467c-8022-10c759e08170",
+                "p": 1
+              },
+              "b": {
+                "c": "c_f98d7db0-b3c3-4800-86a7-38129bd3ffb8",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            }
+          ]
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1115\" height=\"697\" viewBox=\"10 -28.629474639892578 1114.0068359375 696.6294555664062\"><title>Two-input inverting summer</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"10\" y=\"-28.629474639892578\" width=\"1114.0068359375\" height=\"696.6294555664062\" fill=\"white\"/><path d=\"M700 320L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M880 320L1040 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M100 240L100 200L300 200\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M100 320L100 340\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M100 460L100 420L300 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M100 540L100 560\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M380 200L480 200\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M380 420L480 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 200L480 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 300L480 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 300L580 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 200L480 80L600 80\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M680 80L880 80L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M580 340L580 440\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"880\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"1040\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"480\" cy=\"200\" r=\"4\" fill=\"#365a72\"/><circle cx=\"480\" cy=\"420\" r=\"4\" fill=\"#365a72\"/><circle cx=\"480\" cy=\"300\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_768bb248-9c94-467c-8022-10c759e08170\"><g transform=\"translate(640 320) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-60 -20H-35M-60 20H-35M-35 -42V42L40 0ZM40 0H60M-28 -20H-16M-28 20H-16M-22 14V26\"/></g></g><g class=\"drawing-label\" data-label=\"c_768bb248-9c94-467c-8022-10c759e08170\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"241\" font-size=\"19\"><tspan font-size=\"19.00\">U</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_768bb248-9c94-467c-8022-10c759e08170\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"264\" font-size=\"17\"><tspan font-size=\"17.00\">Ideal op amp</tspan></text></g></g><g class=\"component\" data-c=\"c_7e3f5ae0-4f14-48d4-b886-081a2c5edf6b\"><g class=\"drawing-label\" data-label=\"c_7e3f5ae0-4f14-48d4-b886-081a2c5edf6b\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1060\" y=\"320\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">o</tspan></text></g></g><g class=\"component\" data-c=\"c_f6c732bb-b986-4266-94db-7cf97bb811cf\"><g transform=\"translate(100 280) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_f6c732bb-b986-4266-94db-7cf97bb811cf\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"148\" y=\"273\" font-size=\"19\"><tspan font-size=\"19.00\">v</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_f6c732bb-b986-4266-94db-7cf97bb811cf\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"148\" y=\"296\" font-size=\"17\"><tspan font-size=\"17.00\">0.60 V</tspan></text></g></g><g class=\"component\" data-c=\"c_32db74fc-a6e5-4b70-bed1-f6b6d5f47a70\"><g transform=\"translate(340 200) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_32db74fc-a6e5-4b70-bed1-f6b6d5f47a70\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"312\" y=\"154\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_32db74fc-a6e5-4b70-bed1-f6b6d5f47a70\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"312\" y=\"177\" font-size=\"17\"><tspan font-size=\"17.00\">10 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_3e4b8bf9-e581-4aed-bfe8-375a4443eadf\"><g transform=\"translate(100 500) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_3e4b8bf9-e581-4aed-bfe8-375a4443eadf\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"148\" y=\"493\" font-size=\"19\"><tspan font-size=\"19.00\">v</tspan><tspan dy=\"5.70\" font-size=\"13.30\">2</tspan></text></g><g class=\"drawing-label\" data-label=\"c_3e4b8bf9-e581-4aed-bfe8-375a4443eadf\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"148\" y=\"516\" font-size=\"17\"><tspan font-size=\"17.00\">-0.20 V</tspan></text></g></g><g class=\"component\" data-c=\"c_952a7c98-435f-47f5-8bf1-811109f162dd\"><g transform=\"translate(340 420) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_952a7c98-435f-47f5-8bf1-811109f162dd\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"312\" y=\"374\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">2</tspan></text></g><g class=\"drawing-label\" data-label=\"c_952a7c98-435f-47f5-8bf1-811109f162dd\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"312\" y=\"397\" font-size=\"17\"><tspan font-size=\"17.00\">20 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_e50f0ae2-254a-47b3-8fdb-1967d0ca65b1\"><g transform=\"translate(100 360) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_5d0fd859-020b-45c9-bc9b-79f830e97012\"><g transform=\"translate(100 580) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_28682893-9956-49d1-b0aa-2dcadf7c0720\"><g transform=\"translate(640 80) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_28682893-9956-49d1-b0aa-2dcadf7c0720\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"34\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">f</tspan></text></g><g class=\"drawing-label\" data-label=\"c_28682893-9956-49d1-b0aa-2dcadf7c0720\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"57\" font-size=\"17\"><tspan font-size=\"17.00\">40 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_f98d7db0-b3c3-4800-86a7-38129bd3ffb8\"><g transform=\"translate(580 460) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_634596b7-a751-4341-ab76-86a0bd45790b\"><g class=\"drawing-label\" data-label=\"c_634596b7-a751-4341-ab76-86a0bd45790b\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"500\" y=\"280\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">-</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Branch current v₁/R₁",
+          "points": 2
+        },
+        {
+          "label": "Branch current v₂/R₂",
+          "points": 2
+        },
+        {
+          "label": "Output voltage v_o",
+          "points": 2
+        },
+        {
+          "label": "Explain the superposition at the summing node",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw1-p5-noninverting",
+      "title": "5) Noninverting amplifier: gain and output",
+      "promptHtml": "<p>Noninverting amplifier with R<sub>1</sub> = 2 kΩ to ground and R<sub>f</sub> = 18 kΩ. If v<sub>i</sub> = 0.25 V, find the gain and v<sub>o</sub>.</p>",
+      "hints": [
+        "Virtual short: v₋ ≈ v₊ = v_i.",
+        "R₁ and R_f form a divider from v_o to v₋."
+      ],
+      "checklist": [
+        "State the virtual-short assumption.",
+        "Write the divider equation.",
+        "Check the rails."
+      ],
+      "responseFields": [
+        {
+          "id": "gain",
+          "type": "numeric",
+          "label": "Closed-loop gain",
+          "unit": "V/V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vo",
+          "type": "numeric",
+          "label": "Output voltage v_o",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "work",
+          "type": "text",
+          "label": "Show the derivation",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "independent",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Noninverting amplifier",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_b82a36ab-769f-4182-81ae-09ab308b2b87",
+              "type": "opamp",
+              "x": 640,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "U_1",
+              "value": "Ideal op amp",
+              "label": {
+                "dx": 5,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_e13145ee-a6cc-44a8-8c77-cc919885d33b",
+              "type": "text",
+              "x": 1060,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "v_o",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_24491012-63f4-4517-86ff-1553a6e9b71c",
+              "type": "voltage",
+              "x": 240,
+              "y": 480,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "v_i",
+              "value": "0.25 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_08940c24-e88d-4e59-a22e-0a24061d0d04",
+              "type": "ground",
+              "x": 240,
+              "y": 580,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_aca91a3d-9b9b-4633-83d6-be44e59b5890",
+              "type": "resistor",
+              "x": 640,
+              "y": 140,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_f",
+              "value": "18 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_84113b10-5b6c-4531-9fc6-b45dc39810dd",
+              "type": "resistor",
+              "x": 380,
+              "y": 300,
+              "rotation": 180,
+              "mirror": false,
+              "ref": "R_1",
+              "value": "2 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_a0b0a3f1-142f-4317-8317-d22ed342fa8a",
+              "type": "ground",
+              "x": 180,
+              "y": 400,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_7ba8e1de-3c4a-4bd3-810a-bf8049c1ef8c",
+              "type": "text",
+              "x": 420,
+              "y": 260,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T1",
+              "value": "v_{-}",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_b29d0590-dd9c-4203-aeb8-84719d7658c4",
+              "x": 880,
+              "y": 320
+            },
+            {
+              "id": "j_e754a18d-7847-4a3d-8195-f988ce61ac3c",
+              "x": 1040,
+              "y": 320
+            },
+            {
+              "id": "j_e666388c-4959-4933-9c75-b31e3002ede7",
+              "x": 480,
+              "y": 300
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_91803ebe-8246-4e4e-9f76-9fa60a1a7437",
+              "a": {
+                "c": "c_b82a36ab-769f-4182-81ae-09ab308b2b87",
+                "p": 2
+              },
+              "b": {
+                "j": "j_b29d0590-dd9c-4203-aeb8-84719d7658c4"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_fb73c09c-e33d-4efe-b2a6-4ce269dcec26",
+              "a": {
+                "j": "j_b29d0590-dd9c-4203-aeb8-84719d7658c4"
+              },
+              "b": {
+                "j": "j_e754a18d-7847-4a3d-8195-f988ce61ac3c"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_90db5f4c-0b36-428e-8533-f1eae430c20a",
+              "a": {
+                "c": "c_24491012-63f4-4517-86ff-1553a6e9b71c",
+                "p": 1
+              },
+              "b": {
+                "c": "c_08940c24-e88d-4e59-a22e-0a24061d0d04",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_d4bf5e11-8d8e-4273-837b-51c669053cf7",
+              "a": {
+                "c": "c_24491012-63f4-4517-86ff-1553a6e9b71c",
+                "p": 0
+              },
+              "b": {
+                "c": "c_b82a36ab-769f-4182-81ae-09ab308b2b87",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 240,
+                  "y": 340
+                }
+              ]
+            },
+            {
+              "id": "w_35860e87-4a88-40cb-9a97-d78b5bde3edf",
+              "a": {
+                "j": "j_e666388c-4959-4933-9c75-b31e3002ede7"
+              },
+              "b": {
+                "c": "c_b82a36ab-769f-4182-81ae-09ab308b2b87",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_9e769fe0-17ac-47ec-aa9e-1da9ef38cd33",
+              "a": {
+                "c": "c_84113b10-5b6c-4531-9fc6-b45dc39810dd",
+                "p": 0
+              },
+              "b": {
+                "j": "j_e666388c-4959-4933-9c75-b31e3002ede7"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_936597f0-4e86-48e0-b47c-5a9630fe31fc",
+              "a": {
+                "c": "c_84113b10-5b6c-4531-9fc6-b45dc39810dd",
+                "p": 1
+              },
+              "b": {
+                "c": "c_a0b0a3f1-142f-4317-8317-d22ed342fa8a",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 180,
+                  "y": 300
+                }
+              ]
+            },
+            {
+              "id": "w_26cca2b8-7a2b-45aa-9f46-96e744e69b8d",
+              "a": {
+                "j": "j_e666388c-4959-4933-9c75-b31e3002ede7"
+              },
+              "b": {
+                "c": "c_aca91a3d-9b9b-4633-83d6-be44e59b5890",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 480,
+                  "y": 140
+                }
+              ]
+            },
+            {
+              "id": "w_6dac82ad-afc5-4b83-95aa-2299760d4d3e",
+              "a": {
+                "c": "c_aca91a3d-9b9b-4633-83d6-be44e59b5890",
+                "p": 1
+              },
+              "b": {
+                "j": "j_b29d0590-dd9c-4203-aeb8-84719d7658c4"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 880,
+                  "y": 140
+                }
+              ]
+            }
+          ],
+          "lesson": {
+            "key": "noninverting",
+            "roles": {
+              "U": "c_b82a36ab-769f-4182-81ae-09ab308b2b87",
+              "Vi": "c_24491012-63f4-4517-86ff-1553a6e9b71c",
+              "R1": "c_84113b10-5b6c-4531-9fc6-b45dc39810dd",
+              "Rf": "c_aca91a3d-9b9b-4633-83d6-be44e59b5890"
+            },
+            "params": {
+              "low": -12,
+              "high": 12,
+              "aol": 200000,
+              "tms": 2,
+              "initial": 0
+            }
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1034\" height=\"636\" viewBox=\"90 32.634422302246094 1033.690185546875 635.3656005859375\"><title>Noninverting amplifier</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"90\" y=\"32.634422302246094\" width=\"1033.690185546875\" height=\"635.3656005859375\" fill=\"white\"/><path d=\"M700 320L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M880 320L1040 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M240 520L240 560\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M240 440L240 340L580 340\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 300L580 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M420 300L480 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M340 300L180 300L180 380\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 300L480 140L600 140\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M680 140L880 140L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"880\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"1040\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"480\" cy=\"300\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_b82a36ab-769f-4182-81ae-09ab308b2b87\"><g transform=\"translate(640 320) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-60 -20H-35M-60 20H-35M-35 -42V42L40 0ZM40 0H60M-28 -20H-16M-28 20H-16M-22 14V26\"/></g></g><g class=\"drawing-label\" data-label=\"c_b82a36ab-769f-4182-81ae-09ab308b2b87\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"241\" font-size=\"19\"><tspan font-size=\"19.00\">U</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_b82a36ab-769f-4182-81ae-09ab308b2b87\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"264\" font-size=\"17\"><tspan font-size=\"17.00\">Ideal op amp</tspan></text></g></g><g class=\"component\" data-c=\"c_e13145ee-a6cc-44a8-8c77-cc919885d33b\"><g class=\"drawing-label\" data-label=\"c_e13145ee-a6cc-44a8-8c77-cc919885d33b\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1060\" y=\"320\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">o</tspan></text></g></g><g class=\"component\" data-c=\"c_24491012-63f4-4517-86ff-1553a6e9b71c\"><g transform=\"translate(240 480) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_24491012-63f4-4517-86ff-1553a6e9b71c\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"288\" y=\"473\" font-size=\"19\"><tspan font-size=\"19.00\">v</tspan><tspan dy=\"5.70\" font-size=\"13.30\">i</tspan></text></g><g class=\"drawing-label\" data-label=\"c_24491012-63f4-4517-86ff-1553a6e9b71c\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"288\" y=\"496\" font-size=\"17\"><tspan font-size=\"17.00\">0.25 V</tspan></text></g></g><g class=\"component\" data-c=\"c_08940c24-e88d-4e59-a22e-0a24061d0d04\"><g transform=\"translate(240 580) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_aca91a3d-9b9b-4633-83d6-be44e59b5890\"><g transform=\"translate(640 140) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_aca91a3d-9b9b-4633-83d6-be44e59b5890\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"94\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">f</tspan></text></g><g class=\"drawing-label\" data-label=\"c_aca91a3d-9b9b-4633-83d6-be44e59b5890\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"117\" font-size=\"17\"><tspan font-size=\"17.00\">18 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_84113b10-5b6c-4531-9fc6-b45dc39810dd\"><g transform=\"translate(380 300) rotate(180) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_84113b10-5b6c-4531-9fc6-b45dc39810dd\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"352\" y=\"254\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_84113b10-5b6c-4531-9fc6-b45dc39810dd\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"352\" y=\"277\" font-size=\"17\"><tspan font-size=\"17.00\">2 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_a0b0a3f1-142f-4317-8317-d22ed342fa8a\"><g transform=\"translate(180 400) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_7ba8e1de-3c4a-4bd3-810a-bf8049c1ef8c\"><g class=\"drawing-label\" data-label=\"c_7ba8e1de-3c4a-4bd3-810a-bf8049c1ef8c\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"420\" y=\"260\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">-</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Closed-loop gain",
+          "points": 2
+        },
+        {
+          "label": "Output voltage v_o",
+          "points": 2
+        },
+        {
+          "label": "Show the derivation",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw1-p6-noninverting-design",
+      "title": "6) Noninverting design: choose Rf",
+      "promptHtml": "<p>Design a noninverting amplifier with gain 11. Let R<sub>1</sub> = 10 kΩ. Find R<sub>f</sub>.</p><p>Enter your value for R<sub>f</sub> (currently ?) in the starting circuit to check it.</p>",
+      "hints": [
+        "Gain = 1 + R_f/R₁."
+      ],
+      "checklist": [
+        "Write the gain expression.",
+        "Solve for R_f."
+      ],
+      "responseFields": [
+        {
+          "id": "rf",
+          "type": "numeric",
+          "label": "R_f",
+          "unit": "kΩ",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "justify",
+          "type": "text",
+          "label": "Show the design equation",
+          "unit": "",
+          "options": [],
+          "points": 1
+        }
+      ],
+      "workspace": {
+        "support": "independent",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Noninverting amplifier design",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_7edf8f86-b559-4a2f-a211-1cf7698fd90d",
+              "type": "opamp",
+              "x": 640,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "U_1",
+              "value": "Ideal op amp",
+              "label": {
+                "dx": 5,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_39edd4af-e9fb-402e-959b-7cdef7ce8daa",
+              "type": "text",
+              "x": 1060,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "v_o",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_7dc2837d-582b-4ca8-959d-62f8a182f235",
+              "type": "voltage",
+              "x": 240,
+              "y": 480,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "v_i",
+              "value": "0.1 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_82bc29d3-a63c-4404-b2f6-5372be44ec2c",
+              "type": "ground",
+              "x": 240,
+              "y": 580,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_5c8195b2-ac27-45a8-b07b-7107fe78fea8",
+              "type": "resistor",
+              "x": 640,
+              "y": 140,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_f",
+              "value": "?",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_01309679-fe0e-43c3-a1cf-4d87351ea139",
+              "type": "resistor",
+              "x": 380,
+              "y": 300,
+              "rotation": 180,
+              "mirror": false,
+              "ref": "R_1",
+              "value": "10 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_c7b6c90b-51f5-4015-ba33-35136cdf545d",
+              "type": "ground",
+              "x": 180,
+              "y": 400,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_a4c629d2-5c1e-4ba8-8b88-817c7dc4b430",
+              "type": "text",
+              "x": 420,
+              "y": 260,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T1",
+              "value": "v_{-}",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_34083202-7e16-4bd5-989a-bab60cf7afbe",
+              "x": 880,
+              "y": 320
+            },
+            {
+              "id": "j_c7c12f4a-c0d4-4978-8c1e-bdbf09474756",
+              "x": 1040,
+              "y": 320
+            },
+            {
+              "id": "j_974c774b-51af-4bbd-a28a-c188fc57fd1e",
+              "x": 480,
+              "y": 300
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_2743b731-e995-4f95-9978-cd0afc23a388",
+              "a": {
+                "c": "c_7edf8f86-b559-4a2f-a211-1cf7698fd90d",
+                "p": 2
+              },
+              "b": {
+                "j": "j_34083202-7e16-4bd5-989a-bab60cf7afbe"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_47027568-e6be-41c5-8313-f55cbe652dad",
+              "a": {
+                "j": "j_34083202-7e16-4bd5-989a-bab60cf7afbe"
+              },
+              "b": {
+                "j": "j_c7c12f4a-c0d4-4978-8c1e-bdbf09474756"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_9870e986-42f5-4683-a609-6b14fbd143ea",
+              "a": {
+                "c": "c_7dc2837d-582b-4ca8-959d-62f8a182f235",
+                "p": 1
+              },
+              "b": {
+                "c": "c_82bc29d3-a63c-4404-b2f6-5372be44ec2c",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_8bebb4f0-91d3-405e-80a6-9bd6c8c553d6",
+              "a": {
+                "c": "c_7dc2837d-582b-4ca8-959d-62f8a182f235",
+                "p": 0
+              },
+              "b": {
+                "c": "c_7edf8f86-b559-4a2f-a211-1cf7698fd90d",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 240,
+                  "y": 340
+                }
+              ]
+            },
+            {
+              "id": "w_09ee9f5e-aac9-4759-b459-333f5f1f17af",
+              "a": {
+                "j": "j_974c774b-51af-4bbd-a28a-c188fc57fd1e"
+              },
+              "b": {
+                "c": "c_7edf8f86-b559-4a2f-a211-1cf7698fd90d",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_5276481d-0190-4440-b785-9a59a1b73be3",
+              "a": {
+                "c": "c_01309679-fe0e-43c3-a1cf-4d87351ea139",
+                "p": 0
+              },
+              "b": {
+                "j": "j_974c774b-51af-4bbd-a28a-c188fc57fd1e"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_f9f96fdc-4697-463e-a248-d24a3e042bde",
+              "a": {
+                "c": "c_01309679-fe0e-43c3-a1cf-4d87351ea139",
+                "p": 1
+              },
+              "b": {
+                "c": "c_c7b6c90b-51f5-4015-ba33-35136cdf545d",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 180,
+                  "y": 300
+                }
+              ]
+            },
+            {
+              "id": "w_d370a0c1-ca75-4487-9bbb-fb71dc421eb9",
+              "a": {
+                "j": "j_974c774b-51af-4bbd-a28a-c188fc57fd1e"
+              },
+              "b": {
+                "c": "c_5c8195b2-ac27-45a8-b07b-7107fe78fea8",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 480,
+                  "y": 140
+                }
+              ]
+            },
+            {
+              "id": "w_7a07c8d2-59b0-4592-aeb8-d3069ddf49c0",
+              "a": {
+                "c": "c_5c8195b2-ac27-45a8-b07b-7107fe78fea8",
+                "p": 1
+              },
+              "b": {
+                "j": "j_34083202-7e16-4bd5-989a-bab60cf7afbe"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 880,
+                  "y": 140
+                }
+              ]
+            }
+          ],
+          "lesson": {
+            "key": "noninverting",
+            "roles": {
+              "U": "c_7edf8f86-b559-4a2f-a211-1cf7698fd90d",
+              "Vi": "c_7dc2837d-582b-4ca8-959d-62f8a182f235",
+              "R1": "c_01309679-fe0e-43c3-a1cf-4d87351ea139",
+              "Rf": "c_5c8195b2-ac27-45a8-b07b-7107fe78fea8"
+            },
+            "params": {
+              "low": -12,
+              "high": 12,
+              "aol": 200000,
+              "tms": 2,
+              "initial": 0
+            }
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1034\" height=\"636\" viewBox=\"90 32.639434814453125 1033.6844482421875 635.360595703125\"><title>Noninverting amplifier design</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"90\" y=\"32.639434814453125\" width=\"1033.6844482421875\" height=\"635.360595703125\" fill=\"white\"/><path d=\"M700 320L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M880 320L1040 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M240 520L240 560\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M240 440L240 340L580 340\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 300L580 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M420 300L480 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M340 300L180 300L180 380\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 300L480 140L600 140\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M680 140L880 140L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"880\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"1040\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"480\" cy=\"300\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_7edf8f86-b559-4a2f-a211-1cf7698fd90d\"><g transform=\"translate(640 320) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-60 -20H-35M-60 20H-35M-35 -42V42L40 0ZM40 0H60M-28 -20H-16M-28 20H-16M-22 14V26\"/></g></g><g class=\"drawing-label\" data-label=\"c_7edf8f86-b559-4a2f-a211-1cf7698fd90d\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"241\" font-size=\"19\"><tspan font-size=\"19.00\">U</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_7edf8f86-b559-4a2f-a211-1cf7698fd90d\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"264\" font-size=\"17\"><tspan font-size=\"17.00\">Ideal op amp</tspan></text></g></g><g class=\"component\" data-c=\"c_39edd4af-e9fb-402e-959b-7cdef7ce8daa\"><g class=\"drawing-label\" data-label=\"c_39edd4af-e9fb-402e-959b-7cdef7ce8daa\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1060\" y=\"320\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">o</tspan></text></g></g><g class=\"component\" data-c=\"c_7dc2837d-582b-4ca8-959d-62f8a182f235\"><g transform=\"translate(240 480) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_7dc2837d-582b-4ca8-959d-62f8a182f235\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"288\" y=\"473\" font-size=\"19\"><tspan font-size=\"19.00\">v</tspan><tspan dy=\"5.70\" font-size=\"13.30\">i</tspan></text></g><g class=\"drawing-label\" data-label=\"c_7dc2837d-582b-4ca8-959d-62f8a182f235\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"288\" y=\"496\" font-size=\"17\"><tspan font-size=\"17.00\">0.1 V</tspan></text></g></g><g class=\"component\" data-c=\"c_82bc29d3-a63c-4404-b2f6-5372be44ec2c\"><g transform=\"translate(240 580) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_5c8195b2-ac27-45a8-b07b-7107fe78fea8\"><g transform=\"translate(640 140) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_5c8195b2-ac27-45a8-b07b-7107fe78fea8\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"94\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">f</tspan></text></g><g class=\"drawing-label\" data-label=\"c_5c8195b2-ac27-45a8-b07b-7107fe78fea8\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"117\" font-size=\"17\"><tspan font-size=\"17.00\">?</tspan></text></g></g><g class=\"component\" data-c=\"c_01309679-fe0e-43c3-a1cf-4d87351ea139\"><g transform=\"translate(380 300) rotate(180) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_01309679-fe0e-43c3-a1cf-4d87351ea139\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"352\" y=\"254\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_01309679-fe0e-43c3-a1cf-4d87351ea139\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"352\" y=\"277\" font-size=\"17\"><tspan font-size=\"17.00\">10 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_c7b6c90b-51f5-4015-ba33-35136cdf545d\"><g transform=\"translate(180 400) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_a4c629d2-5c1e-4ba8-8b88-817c7dc4b430\"><g class=\"drawing-label\" data-label=\"c_a4c629d2-5c1e-4ba8-8b88-817c7dc4b430\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"420\" y=\"260\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">-</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "R_f",
+          "points": 2
+        },
+        {
+          "label": "Show the design equation",
+          "points": 1
+        }
+      ]
+    },
+    {
+      "id": "hw1-p7-buffer",
+      "title": "7) Why a voltage follower matters",
+      "promptHtml": "<p>A source v<sub>s</sub> with source resistance R<sub>s</sub> = 10 kΩ drives a load R<sub>L</sub> = 1 kΩ.</p><ol><li>Find v<sub>L</sub> without a buffer.</li><li>Find v<sub>L</sub> with an ideal voltage follower between source and load.</li></ol><p>Report each answer as the ratio v<sub>L</sub>/v<sub>s</sub>. The workspace draws both cases with v<sub>s</sub> = 1 V.</p>",
+      "hints": [
+        "Without a buffer, R_s and R_L form a voltage divider.",
+        "An ideal follower draws no input current and has zero output resistance."
+      ],
+      "checklist": [
+        "Write the divider for case 1.",
+        "Explain why no current flows in R_s in case 2.",
+        "Compare the two results."
+      ],
+      "responseFields": [
+        {
+          "id": "ratioA",
+          "type": "numeric",
+          "label": "v_L/v_s without buffer",
+          "unit": "V/V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "ratioB",
+          "type": "numeric",
+          "label": "v_L/v_s with follower",
+          "unit": "V/V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "why",
+          "type": "text",
+          "label": "Explain what the buffer changes",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "independent",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Loading with and without a follower",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_8a339e71-1bef-45e9-af42-a82fd46fddb6",
+              "type": "voltage",
+              "x": 120,
+              "y": 400,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "v_s",
+              "value": "1 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_5f4ce813-97e2-4508-a2a6-8bbb4c2ee428",
+              "type": "resistor",
+              "x": 320,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_s",
+              "value": "10 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_41da5c3e-336e-4e89-8d24-d782779473d1",
+              "type": "resistor",
+              "x": 480,
+              "y": 400,
+              "rotation": 90,
+              "mirror": false,
+              "ref": "R_L",
+              "value": "1 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_d5e6f75f-daf7-4700-82e9-ffc1ba330887",
+              "type": "ground",
+              "x": 120,
+              "y": 460,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_b910621b-3693-4c95-8250-60201aa539de",
+              "type": "ground",
+              "x": 480,
+              "y": 460,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_123ec543-3a37-41fd-8c6a-76763142fad2",
+              "type": "text",
+              "x": 580,
+              "y": 400,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "v_L",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_22b7ac54-23d1-42ea-a4a3-e64e95028054",
+              "type": "text",
+              "x": 300,
+              "y": 220,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T1",
+              "value": "(a) No buffer",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_931c9995-e51c-4166-b5c5-bac0351a60ee",
+              "type": "voltage",
+              "x": 820,
+              "y": 400,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "v_s'",
+              "value": "1 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_9f2f34c1-ae17-44ab-acb0-4d162abde852",
+              "type": "resistor",
+              "x": 1020,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_s'",
+              "value": "10 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_7a901298-6f91-40a0-938e-b241eb1edb06",
+              "type": "opamp",
+              "x": 1240,
+              "y": 300,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "U_1",
+              "value": "Ideal op amp",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_29febf5e-6ba5-458c-a0f8-aa2b96cb81f6",
+              "type": "resistor",
+              "x": 1400,
+              "y": 400,
+              "rotation": 90,
+              "mirror": false,
+              "ref": "R_L'",
+              "value": "1 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_18e789a9-12af-49b3-8b5e-411039833f20",
+              "type": "ground",
+              "x": 820,
+              "y": 460,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G3",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_003d4916-d951-4c0f-897e-74043fc82aff",
+              "type": "ground",
+              "x": 1400,
+              "y": 460,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G4",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_26acd33d-ebd6-46ba-b2da-b9ff9d956e63",
+              "type": "text",
+              "x": 1500,
+              "y": 400,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T2",
+              "value": "v_L",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_80b5c05c-0b9f-4e2f-9c99-7a4a80a7293e",
+              "type": "text",
+              "x": 1100,
+              "y": 140,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T3",
+              "value": "(b) Voltage follower",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_60ff2d5a-376f-41f0-b543-25d99fa9c0a0",
+              "x": 1400,
+              "y": 300
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_ee71654e-4878-41d5-bbac-08437fedd069",
+              "a": {
+                "c": "c_8a339e71-1bef-45e9-af42-a82fd46fddb6",
+                "p": 0
+              },
+              "b": {
+                "c": "c_5f4ce813-97e2-4508-a2a6-8bbb4c2ee428",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 120,
+                  "y": 320
+                }
+              ]
+            },
+            {
+              "id": "w_4111488d-5b1d-4741-b101-c964c99b77b7",
+              "a": {
+                "c": "c_5f4ce813-97e2-4508-a2a6-8bbb4c2ee428",
+                "p": 1
+              },
+              "b": {
+                "c": "c_41da5c3e-336e-4e89-8d24-d782779473d1",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 480,
+                  "y": 320
+                }
+              ]
+            },
+            {
+              "id": "w_bb366fe0-9c32-4ff2-b304-d7ced6213eb5",
+              "a": {
+                "c": "c_8a339e71-1bef-45e9-af42-a82fd46fddb6",
+                "p": 1
+              },
+              "b": {
+                "c": "c_d5e6f75f-daf7-4700-82e9-ffc1ba330887",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_6066499c-f4cc-4933-b42d-f09ad3e974cb",
+              "a": {
+                "c": "c_41da5c3e-336e-4e89-8d24-d782779473d1",
+                "p": 1
+              },
+              "b": {
+                "c": "c_b910621b-3693-4c95-8250-60201aa539de",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_8a4ab149-1cf8-43d7-bf9a-6e3e576373b1",
+              "a": {
+                "c": "c_931c9995-e51c-4166-b5c5-bac0351a60ee",
+                "p": 0
+              },
+              "b": {
+                "c": "c_9f2f34c1-ae17-44ab-acb0-4d162abde852",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 820,
+                  "y": 320
+                }
+              ]
+            },
+            {
+              "id": "w_2e46e97b-a9bf-4c8e-b146-c3de00c6aab7",
+              "a": {
+                "c": "c_931c9995-e51c-4166-b5c5-bac0351a60ee",
+                "p": 1
+              },
+              "b": {
+                "c": "c_18e789a9-12af-49b3-8b5e-411039833f20",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_7fa7cb0e-373f-42a9-a47b-2ec41cac455c",
+              "a": {
+                "c": "c_9f2f34c1-ae17-44ab-acb0-4d162abde852",
+                "p": 1
+              },
+              "b": {
+                "c": "c_7a901298-6f91-40a0-938e-b241eb1edb06",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_0db9efb1-fe2e-406a-ae2b-0a949bfb8737",
+              "a": {
+                "c": "c_7a901298-6f91-40a0-938e-b241eb1edb06",
+                "p": 2
+              },
+              "b": {
+                "j": "j_60ff2d5a-376f-41f0-b543-25d99fa9c0a0"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_b5c36faa-9a96-4044-ac7f-2a3c63c4df6d",
+              "a": {
+                "c": "c_7a901298-6f91-40a0-938e-b241eb1edb06",
+                "p": 0
+              },
+              "b": {
+                "j": "j_60ff2d5a-376f-41f0-b543-25d99fa9c0a0"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 1140,
+                  "y": 280
+                },
+                {
+                  "x": 1140,
+                  "y": 200
+                },
+                {
+                  "x": 1400,
+                  "y": 200
+                }
+              ]
+            },
+            {
+              "id": "w_2b1704f8-00b5-49f1-96e7-1f38e5a9ea86",
+              "a": {
+                "j": "j_60ff2d5a-376f-41f0-b543-25d99fa9c0a0"
+              },
+              "b": {
+                "c": "c_29febf5e-6ba5-458c-a0f8-aa2b96cb81f6",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_80536a8d-94b3-4bd7-92ce-f77188f00988",
+              "a": {
+                "c": "c_29febf5e-6ba5-458c-a0f8-aa2b96cb81f6",
+                "p": 1
+              },
+              "b": {
+                "c": "c_003d4916-d951-4c0f-897e-74043fc82aff",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            }
+          ]
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1536\" height=\"473\" viewBox=\"30 75.1170654296875 1535.4007568359375 472.8829345703125\"><title>Loading with and without a follower</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"30\" y=\"75.1170654296875\" width=\"1535.4007568359375\" height=\"472.8829345703125\" fill=\"white\"/><path d=\"M120 360L120 320L280 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M360 320L480 320L480 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M120 440\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 440\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M820 360L820 320L980 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M820 440\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1060 320L1180 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1300 300L1400 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1180 280L1140 280L1140 200L1400 200L1400 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1400 300L1400 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1400 440\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"1400\" cy=\"300\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_8a339e71-1bef-45e9-af42-a82fd46fddb6\"><g transform=\"translate(120 400) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_8a339e71-1bef-45e9-af42-a82fd46fddb6\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"168\" y=\"393\" font-size=\"19\"><tspan font-size=\"19.00\">v</tspan><tspan dy=\"5.70\" font-size=\"13.30\">s</tspan></text></g><g class=\"drawing-label\" data-label=\"c_8a339e71-1bef-45e9-af42-a82fd46fddb6\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"168\" y=\"416\" font-size=\"17\"><tspan font-size=\"17.00\">1 V</tspan></text></g></g><g class=\"component\" data-c=\"c_5f4ce813-97e2-4508-a2a6-8bbb4c2ee428\"><g transform=\"translate(320 320) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_5f4ce813-97e2-4508-a2a6-8bbb4c2ee428\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"292\" y=\"274\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">s</tspan></text></g><g class=\"drawing-label\" data-label=\"c_5f4ce813-97e2-4508-a2a6-8bbb4c2ee428\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"292\" y=\"297\" font-size=\"17\"><tspan font-size=\"17.00\">10 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_41da5c3e-336e-4e89-8d24-d782779473d1\"><g transform=\"translate(480 400) rotate(90) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_41da5c3e-336e-4e89-8d24-d782779473d1\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"528\" y=\"393\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">L</tspan></text></g><g class=\"drawing-label\" data-label=\"c_41da5c3e-336e-4e89-8d24-d782779473d1\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"528\" y=\"416\" font-size=\"17\"><tspan font-size=\"17.00\">1 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_d5e6f75f-daf7-4700-82e9-ffc1ba330887\"><g transform=\"translate(120 460) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_b910621b-3693-4c95-8250-60201aa539de\"><g transform=\"translate(480 460) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_123ec543-3a37-41fd-8c6a-76763142fad2\"><g class=\"drawing-label\" data-label=\"c_123ec543-3a37-41fd-8c6a-76763142fad2\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"580\" y=\"400\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">L</tspan></text></g></g><g class=\"component\" data-c=\"c_22b7ac54-23d1-42ea-a4a3-e64e95028054\"><g class=\"drawing-label\" data-label=\"c_22b7ac54-23d1-42ea-a4a3-e64e95028054\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"300\" y=\"220\" font-size=\"22\"><tspan font-size=\"22.00\">(a) No buffer</tspan></text></g></g><g class=\"component\" data-c=\"c_931c9995-e51c-4166-b5c5-bac0351a60ee\"><g transform=\"translate(820 400) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_931c9995-e51c-4166-b5c5-bac0351a60ee\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"868\" y=\"393\" font-size=\"19\"><tspan font-size=\"19.00\">v</tspan><tspan dy=\"5.70\" font-size=\"13.30\">s</tspan><tspan dy=\"-5.70\" font-size=\"19.00\">&#39;</tspan></text></g><g class=\"drawing-label\" data-label=\"c_931c9995-e51c-4166-b5c5-bac0351a60ee\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"868\" y=\"416\" font-size=\"17\"><tspan font-size=\"17.00\">1 V</tspan></text></g></g><g class=\"component\" data-c=\"c_9f2f34c1-ae17-44ab-acb0-4d162abde852\"><g transform=\"translate(1020 320) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_9f2f34c1-ae17-44ab-acb0-4d162abde852\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"992\" y=\"274\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">s</tspan><tspan dy=\"-5.70\" font-size=\"19.00\">&#39;</tspan></text></g><g class=\"drawing-label\" data-label=\"c_9f2f34c1-ae17-44ab-acb0-4d162abde852\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"992\" y=\"297\" font-size=\"17\"><tspan font-size=\"17.00\">10 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_7a901298-6f91-40a0-938e-b241eb1edb06\"><g transform=\"translate(1240 300) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-60 -20H-35M-60 20H-35M-35 -42V42L40 0ZM40 0H60M-28 -20H-16M-28 20H-16M-22 14V26\"/></g></g><g class=\"drawing-label\" data-label=\"c_7a901298-6f91-40a0-938e-b241eb1edb06\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1212\" y=\"221\" font-size=\"19\"><tspan font-size=\"19.00\">U</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_7a901298-6f91-40a0-938e-b241eb1edb06\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1212\" y=\"244\" font-size=\"17\"><tspan font-size=\"17.00\">Ideal op amp</tspan></text></g></g><g class=\"component\" data-c=\"c_29febf5e-6ba5-458c-a0f8-aa2b96cb81f6\"><g transform=\"translate(1400 400) rotate(90) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_29febf5e-6ba5-458c-a0f8-aa2b96cb81f6\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1448\" y=\"393\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">L</tspan><tspan dy=\"-5.70\" font-size=\"19.00\">&#39;</tspan></text></g><g class=\"drawing-label\" data-label=\"c_29febf5e-6ba5-458c-a0f8-aa2b96cb81f6\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1448\" y=\"416\" font-size=\"17\"><tspan font-size=\"17.00\">1 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_18e789a9-12af-49b3-8b5e-411039833f20\"><g transform=\"translate(820 460) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_003d4916-d951-4c0f-897e-74043fc82aff\"><g transform=\"translate(1400 460) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_26acd33d-ebd6-46ba-b2da-b9ff9d956e63\"><g class=\"drawing-label\" data-label=\"c_26acd33d-ebd6-46ba-b2da-b9ff9d956e63\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1500\" y=\"400\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">L</tspan></text></g></g><g class=\"component\" data-c=\"c_80b5c05c-0b9f-4e2f-9c99-7a4a80a7293e\"><g class=\"drawing-label\" data-label=\"c_80b5c05c-0b9f-4e2f-9c99-7a4a80a7293e\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1100\" y=\"140\" font-size=\"22\"><tspan font-size=\"22.00\">(b) Voltage follower</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "v_L/v_s without buffer",
+          "points": 2
+        },
+        {
+          "label": "v_L/v_s with follower",
+          "points": 2
+        },
+        {
+          "label": "Explain what the buffer changes",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw1-p8-difference",
+      "title": "8) Difference amplifier with matched ratios",
+      "promptHtml": "<p>Difference amplifier with matched ratios: R<sub>1</sub> = R<sub>3</sub> = 10 kΩ, R<sub>2</sub> = R<sub>4</sub> = 100 kΩ. If v<sub>2</sub> = 0.12 V (through R<sub>3</sub> to the + input) and v<sub>1</sub> = 0.10 V (through R<sub>1</sub> to the − input), find v<sub>o</sub>.</p>",
+      "hints": [
+        "v₊ = v₂·R₄/(R₃+R₄); then apply KCL at the inverting node with v₋ = v₊.",
+        "With matched ratios, v_o = (R₂/R₁)(v₂ − v₁)."
+      ],
+      "checklist": [
+        "Find v₊ from the divider.",
+        "Write KCL at v₋.",
+        "Simplify using the matched ratio."
+      ],
+      "responseFields": [
+        {
+          "id": "ad",
+          "type": "numeric",
+          "label": "Differential gain A_d",
+          "unit": "V/V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vo",
+          "type": "numeric",
+          "label": "Output voltage v_o",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "work",
+          "type": "text",
+          "label": "Show the derivation",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "independent",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Difference amplifier",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_34abac8f-dad0-4edf-827c-5170315508c2",
+              "type": "opamp",
+              "x": 640,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "U_1",
+              "value": "Ideal op amp",
+              "label": {
+                "dx": 5,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_51842040-ba5d-4670-8b51-1aa683d7e21a",
+              "type": "text",
+              "x": 1060,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "v_o",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_2de89d61-3316-46bd-a6ca-f74a2ac1998c",
+              "type": "voltage",
+              "x": 100,
+              "y": 340,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_1",
+              "value": "0.10 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_ef3c8d2c-9fb1-45d0-ae2a-d82a04d0a6cd",
+              "type": "ground",
+              "x": 100,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_766f0ee9-d741-4afe-8b32-d40745282c47",
+              "type": "voltage",
+              "x": 280,
+              "y": 560,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_2",
+              "value": "0.12 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_18f20711-306f-4f0e-ac75-cffb292bffb4",
+              "type": "ground",
+              "x": 280,
+              "y": 660,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_e68f8d10-2b4c-4e79-9415-f5b1a9dbc2dd",
+              "type": "resistor",
+              "x": 300,
+              "y": 220,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_1",
+              "value": "10 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_e19622d4-f4ad-4733-a07b-2002e6618577",
+              "type": "resistor",
+              "x": 640,
+              "y": 100,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_2",
+              "value": "100 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_703dd47a-6c7a-4993-9bd7-4023864052f5",
+              "type": "resistor",
+              "x": 420,
+              "y": 480,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_3",
+              "value": "10 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_cbec4168-e339-452c-bcc6-f805efc5f583",
+              "type": "resistor",
+              "x": 540,
+              "y": 620,
+              "rotation": 90,
+              "mirror": false,
+              "ref": "R_4",
+              "value": "100 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_94e1a8e8-5b6a-4712-9f13-21c8fdf01c3b",
+              "type": "ground",
+              "x": 540,
+              "y": 720,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G3",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_036233f9-8eb0-4715-ba8b-49f6c1eb9adb",
+              "type": "text",
+              "x": 560,
+              "y": 500,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T1",
+              "value": "v_{+}",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_98785487-db7b-4d10-b8b7-f42cce988148",
+              "x": 880,
+              "y": 320
+            },
+            {
+              "id": "j_1108f3ec-9d06-443b-b2a6-568278178fae",
+              "x": 1040,
+              "y": 320
+            },
+            {
+              "id": "j_54975d05-5cc1-4c83-8698-56a4ce772cb5",
+              "x": 480,
+              "y": 220
+            },
+            {
+              "id": "j_706f7f59-dc42-44f0-b1ad-057de021261f",
+              "x": 540,
+              "y": 480
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_682a8ce9-10c8-423f-8542-00be8278699d",
+              "a": {
+                "c": "c_34abac8f-dad0-4edf-827c-5170315508c2",
+                "p": 2
+              },
+              "b": {
+                "j": "j_98785487-db7b-4d10-b8b7-f42cce988148"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_5c3afe5c-8f73-4be3-b6fe-295285f13175",
+              "a": {
+                "j": "j_98785487-db7b-4d10-b8b7-f42cce988148"
+              },
+              "b": {
+                "j": "j_1108f3ec-9d06-443b-b2a6-568278178fae"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_d717d5a6-6c54-4c40-b6eb-8ad42ddf8126",
+              "a": {
+                "c": "c_2de89d61-3316-46bd-a6ca-f74a2ac1998c",
+                "p": 1
+              },
+              "b": {
+                "c": "c_ef3c8d2c-9fb1-45d0-ae2a-d82a04d0a6cd",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_d24874a1-1c8e-4136-8481-8fed00fc243f",
+              "a": {
+                "c": "c_766f0ee9-d741-4afe-8b32-d40745282c47",
+                "p": 1
+              },
+              "b": {
+                "c": "c_18f20711-306f-4f0e-ac75-cffb292bffb4",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_c1c82673-e029-4bb5-af51-aa334b136261",
+              "a": {
+                "c": "c_2de89d61-3316-46bd-a6ca-f74a2ac1998c",
+                "p": 0
+              },
+              "b": {
+                "c": "c_e68f8d10-2b4c-4e79-9415-f5b1a9dbc2dd",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 100,
+                  "y": 220
+                }
+              ]
+            },
+            {
+              "id": "w_127ac6d9-c547-4d26-b5d6-a2616d19a7e0",
+              "a": {
+                "c": "c_e68f8d10-2b4c-4e79-9415-f5b1a9dbc2dd",
+                "p": 1
+              },
+              "b": {
+                "j": "j_54975d05-5cc1-4c83-8698-56a4ce772cb5"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_53e7202c-30aa-42e0-959e-f5646e83ca55",
+              "a": {
+                "j": "j_54975d05-5cc1-4c83-8698-56a4ce772cb5"
+              },
+              "b": {
+                "c": "c_34abac8f-dad0-4edf-827c-5170315508c2",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 480,
+                  "y": 300
+                }
+              ]
+            },
+            {
+              "id": "w_be370ea6-f938-459f-bc77-a97dbc610e64",
+              "a": {
+                "j": "j_54975d05-5cc1-4c83-8698-56a4ce772cb5"
+              },
+              "b": {
+                "c": "c_e19622d4-f4ad-4733-a07b-2002e6618577",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 480,
+                  "y": 100
+                }
+              ]
+            },
+            {
+              "id": "w_ac954cda-fef0-47e5-b665-d6b414982b86",
+              "a": {
+                "c": "c_e19622d4-f4ad-4733-a07b-2002e6618577",
+                "p": 1
+              },
+              "b": {
+                "j": "j_98785487-db7b-4d10-b8b7-f42cce988148"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 880,
+                  "y": 100
+                }
+              ]
+            },
+            {
+              "id": "w_7b4b7ec8-1d14-4bbe-bba5-5d94ccd54847",
+              "a": {
+                "c": "c_766f0ee9-d741-4afe-8b32-d40745282c47",
+                "p": 0
+              },
+              "b": {
+                "c": "c_703dd47a-6c7a-4993-9bd7-4023864052f5",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 280,
+                  "y": 480
+                }
+              ]
+            },
+            {
+              "id": "w_00d7e430-439c-4715-be10-f39a90fc2794",
+              "a": {
+                "c": "c_703dd47a-6c7a-4993-9bd7-4023864052f5",
+                "p": 1
+              },
+              "b": {
+                "j": "j_706f7f59-dc42-44f0-b1ad-057de021261f"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_93dcdb90-8170-4134-806f-2ab64aca7c68",
+              "a": {
+                "j": "j_706f7f59-dc42-44f0-b1ad-057de021261f"
+              },
+              "b": {
+                "c": "c_34abac8f-dad0-4edf-827c-5170315508c2",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 540,
+                  "y": 340
+                }
+              ]
+            },
+            {
+              "id": "w_57856a68-cf63-4e0e-9c2c-1ba9d1c3afb6",
+              "a": {
+                "j": "j_706f7f59-dc42-44f0-b1ad-057de021261f"
+              },
+              "b": {
+                "c": "c_cbec4168-e339-452c-bcc6-f805efc5f583",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_786fcb14-0422-4c80-a3ba-5f6279aaea24",
+              "a": {
+                "c": "c_cbec4168-e339-452c-bcc6-f805efc5f583",
+                "p": 1
+              },
+              "b": {
+                "c": "c_94e1a8e8-5b6a-4712-9f13-21c8fdf01c3b",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            }
+          ],
+          "lesson": {
+            "key": "difference",
+            "roles": {
+              "U": "c_34abac8f-dad0-4edf-827c-5170315508c2",
+              "V1": "c_2de89d61-3316-46bd-a6ca-f74a2ac1998c",
+              "V2": "c_766f0ee9-d741-4afe-8b32-d40745282c47",
+              "R1": "c_e68f8d10-2b4c-4e79-9415-f5b1a9dbc2dd",
+              "R2": "c_e19622d4-f4ad-4733-a07b-2002e6618577",
+              "R3": "c_703dd47a-6c7a-4993-9bd7-4023864052f5",
+              "R4": "c_cbec4168-e339-452c-bcc6-f805efc5f583"
+            },
+            "params": {
+              "low": -12,
+              "high": 12,
+              "aol": 200000,
+              "tms": 2,
+              "initial": 0
+            }
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1115\" height=\"817\" viewBox=\"10 -8.644535064697266 1114.0230712890625 816.64453125\"><title>Difference amplifier</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"10\" y=\"-8.644535064697266\" width=\"1114.0230712890625\" height=\"816.64453125\" fill=\"white\"/><path d=\"M700 320L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M880 320L1040 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M100 380L100 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M280 600L280 640\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M100 300L100 220L260 220\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M340 220L480 220\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 220L480 300L580 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 220L480 100L600 100\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M680 100L880 100L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M280 520L280 480L380 480\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M460 480L540 480\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M540 480L540 340L580 340\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M540 480L540 580\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M540 660L540 700\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"880\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"1040\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"480\" cy=\"220\" r=\"4\" fill=\"#365a72\"/><circle cx=\"540\" cy=\"480\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_34abac8f-dad0-4edf-827c-5170315508c2\"><g transform=\"translate(640 320) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-60 -20H-35M-60 20H-35M-35 -42V42L40 0ZM40 0H60M-28 -20H-16M-28 20H-16M-22 14V26\"/></g></g><g class=\"drawing-label\" data-label=\"c_34abac8f-dad0-4edf-827c-5170315508c2\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"241\" font-size=\"19\"><tspan font-size=\"19.00\">U</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_34abac8f-dad0-4edf-827c-5170315508c2\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"264\" font-size=\"17\"><tspan font-size=\"17.00\">Ideal op amp</tspan></text></g></g><g class=\"component\" data-c=\"c_51842040-ba5d-4670-8b51-1aa683d7e21a\"><g class=\"drawing-label\" data-label=\"c_51842040-ba5d-4670-8b51-1aa683d7e21a\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1060\" y=\"320\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">o</tspan></text></g></g><g class=\"component\" data-c=\"c_2de89d61-3316-46bd-a6ca-f74a2ac1998c\"><g transform=\"translate(100 340) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_2de89d61-3316-46bd-a6ca-f74a2ac1998c\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"148\" y=\"333\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_2de89d61-3316-46bd-a6ca-f74a2ac1998c\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"148\" y=\"356\" font-size=\"17\"><tspan font-size=\"17.00\">0.10 V</tspan></text></g></g><g class=\"component\" data-c=\"c_ef3c8d2c-9fb1-45d0-ae2a-d82a04d0a6cd\"><g transform=\"translate(100 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_766f0ee9-d741-4afe-8b32-d40745282c47\"><g transform=\"translate(280 560) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_766f0ee9-d741-4afe-8b32-d40745282c47\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"328\" y=\"553\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">2</tspan></text></g><g class=\"drawing-label\" data-label=\"c_766f0ee9-d741-4afe-8b32-d40745282c47\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"328\" y=\"576\" font-size=\"17\"><tspan font-size=\"17.00\">0.12 V</tspan></text></g></g><g class=\"component\" data-c=\"c_18f20711-306f-4f0e-ac75-cffb292bffb4\"><g transform=\"translate(280 660) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_e68f8d10-2b4c-4e79-9415-f5b1a9dbc2dd\"><g transform=\"translate(300 220) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_e68f8d10-2b4c-4e79-9415-f5b1a9dbc2dd\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"272\" y=\"174\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_e68f8d10-2b4c-4e79-9415-f5b1a9dbc2dd\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"272\" y=\"197\" font-size=\"17\"><tspan font-size=\"17.00\">10 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_e19622d4-f4ad-4733-a07b-2002e6618577\"><g transform=\"translate(640 100) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_e19622d4-f4ad-4733-a07b-2002e6618577\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"54\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">2</tspan></text></g><g class=\"drawing-label\" data-label=\"c_e19622d4-f4ad-4733-a07b-2002e6618577\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"77\" font-size=\"17\"><tspan font-size=\"17.00\">100 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_703dd47a-6c7a-4993-9bd7-4023864052f5\"><g transform=\"translate(420 480) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_703dd47a-6c7a-4993-9bd7-4023864052f5\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"392\" y=\"434\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">3</tspan></text></g><g class=\"drawing-label\" data-label=\"c_703dd47a-6c7a-4993-9bd7-4023864052f5\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"392\" y=\"457\" font-size=\"17\"><tspan font-size=\"17.00\">10 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_cbec4168-e339-452c-bcc6-f805efc5f583\"><g transform=\"translate(540 620) rotate(90) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_cbec4168-e339-452c-bcc6-f805efc5f583\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"588\" y=\"613\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">4</tspan></text></g><g class=\"drawing-label\" data-label=\"c_cbec4168-e339-452c-bcc6-f805efc5f583\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"588\" y=\"636\" font-size=\"17\"><tspan font-size=\"17.00\">100 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_94e1a8e8-5b6a-4712-9f13-21c8fdf01c3b\"><g transform=\"translate(540 720) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_036233f9-8eb0-4715-ba8b-49f6c1eb9adb\"><g class=\"drawing-label\" data-label=\"c_036233f9-8eb0-4715-ba8b-49f6c1eb9adb\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"560\" y=\"500\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">+</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Differential gain A_d",
+          "points": 2
+        },
+        {
+          "label": "Output voltage v_o",
+          "points": 2
+        },
+        {
+          "label": "Show the derivation",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw1-p9-mismatch",
+      "title": "9) Difference amplifier: resistor mismatch",
+      "promptHtml": "<p>Same as Problem 8 except R<sub>4</sub> is 1% high: R<sub>4</sub> = 101 kΩ, with R<sub>3</sub> = 10 kΩ, R<sub>2</sub> = 100 kΩ, R<sub>1</sub> = 10 kΩ. Apply a common-mode input v<sub>1</sub> = v<sub>2</sub> = 1.0 V. Estimate v<sub>o</sub>.</p>",
+      "hints": [
+        "Use the exact four-resistor result, not the matched-ratio shortcut.",
+        "v_o = (1 + R₂/R₁)·v₂·R₄/(R₃+R₄) − (R₂/R₁)·v₁."
+      ],
+      "checklist": [
+        "Compute v₊ exactly.",
+        "Compute v_o.",
+        "Express the result as a common-mode gain."
+      ],
+      "responseFields": [
+        {
+          "id": "vo",
+          "type": "numeric",
+          "label": "Output voltage v_o",
+          "unit": "mV",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "acm",
+          "type": "numeric",
+          "label": "Common-mode gain A_cm = v_o/v_cm",
+          "unit": "V/V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "leak",
+          "type": "text",
+          "label": "Explain the common-mode leakage",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "independent",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Difference amplifier · 1% mismatch",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_c6f39ad7-f2ba-41a7-a0d0-22986ce94312",
+              "type": "opamp",
+              "x": 640,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "U_1",
+              "value": "Ideal op amp",
+              "label": {
+                "dx": 5,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_3e84dad1-da17-4154-bcdb-828d81543e20",
+              "type": "text",
+              "x": 1060,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "v_o",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_51774db9-2756-461b-9c28-350cbf3cdad6",
+              "type": "voltage",
+              "x": 100,
+              "y": 340,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_1",
+              "value": "1.0 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_f8a77a3c-5659-4d11-a29b-ca41d8450ff2",
+              "type": "ground",
+              "x": 100,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_df3dfefa-7503-4815-9793-d5542fe1ee7f",
+              "type": "voltage",
+              "x": 280,
+              "y": 560,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_2",
+              "value": "1.0 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_efc105ab-87d2-430f-814a-f0d12688f369",
+              "type": "ground",
+              "x": 280,
+              "y": 660,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_6b536e18-00bf-4331-8dcf-ca4409aa0390",
+              "type": "resistor",
+              "x": 300,
+              "y": 220,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_1",
+              "value": "10 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_b2d24078-fc9c-488b-abfb-01bd07e327a8",
+              "type": "resistor",
+              "x": 640,
+              "y": 100,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_2",
+              "value": "100 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_922cf95b-d072-46ec-bb24-e97c172a78b6",
+              "type": "resistor",
+              "x": 420,
+              "y": 480,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_3",
+              "value": "10 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_2d09c013-f764-465e-84b9-c319bb186fc4",
+              "type": "resistor",
+              "x": 540,
+              "y": 620,
+              "rotation": 90,
+              "mirror": false,
+              "ref": "R_4",
+              "value": "101 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_30fd4c2f-f962-416b-9c5c-ff8d54c7e896",
+              "type": "ground",
+              "x": 540,
+              "y": 720,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G3",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_b4f966cf-a71c-480d-b65d-f97f1e0dcd87",
+              "type": "text",
+              "x": 560,
+              "y": 500,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T1",
+              "value": "v_{+}",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_aa0055d5-1c7b-4080-98ba-370cb9cf60f7",
+              "x": 880,
+              "y": 320
+            },
+            {
+              "id": "j_99c7bcf4-2e20-4dbe-8000-3155997693a0",
+              "x": 1040,
+              "y": 320
+            },
+            {
+              "id": "j_fa0022a9-525a-4ef9-ac83-03675f1ea88a",
+              "x": 480,
+              "y": 220
+            },
+            {
+              "id": "j_7fd43bfd-8734-473f-b5b5-80c63ba39a56",
+              "x": 540,
+              "y": 480
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_30e1f64f-a318-4325-a92b-1f7639841e52",
+              "a": {
+                "c": "c_c6f39ad7-f2ba-41a7-a0d0-22986ce94312",
+                "p": 2
+              },
+              "b": {
+                "j": "j_aa0055d5-1c7b-4080-98ba-370cb9cf60f7"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_a76a7984-251e-4e94-aeac-a3c15ee3092a",
+              "a": {
+                "j": "j_aa0055d5-1c7b-4080-98ba-370cb9cf60f7"
+              },
+              "b": {
+                "j": "j_99c7bcf4-2e20-4dbe-8000-3155997693a0"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_705e0eac-2149-42a6-9d67-a570851a0001",
+              "a": {
+                "c": "c_51774db9-2756-461b-9c28-350cbf3cdad6",
+                "p": 1
+              },
+              "b": {
+                "c": "c_f8a77a3c-5659-4d11-a29b-ca41d8450ff2",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_f8317e2a-0300-40fb-8736-3711e44e2afc",
+              "a": {
+                "c": "c_df3dfefa-7503-4815-9793-d5542fe1ee7f",
+                "p": 1
+              },
+              "b": {
+                "c": "c_efc105ab-87d2-430f-814a-f0d12688f369",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_a07dc8bd-d93b-48e6-bd03-d53378dc6002",
+              "a": {
+                "c": "c_51774db9-2756-461b-9c28-350cbf3cdad6",
+                "p": 0
+              },
+              "b": {
+                "c": "c_6b536e18-00bf-4331-8dcf-ca4409aa0390",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 100,
+                  "y": 220
+                }
+              ]
+            },
+            {
+              "id": "w_6b94d961-7e17-4614-a6dc-c3e903a10085",
+              "a": {
+                "c": "c_6b536e18-00bf-4331-8dcf-ca4409aa0390",
+                "p": 1
+              },
+              "b": {
+                "j": "j_fa0022a9-525a-4ef9-ac83-03675f1ea88a"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_78c5d65c-4809-469e-b115-bdf7575d5692",
+              "a": {
+                "j": "j_fa0022a9-525a-4ef9-ac83-03675f1ea88a"
+              },
+              "b": {
+                "c": "c_c6f39ad7-f2ba-41a7-a0d0-22986ce94312",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 480,
+                  "y": 300
+                }
+              ]
+            },
+            {
+              "id": "w_02413b3e-e0c2-4dec-8109-c6c89a9d6000",
+              "a": {
+                "j": "j_fa0022a9-525a-4ef9-ac83-03675f1ea88a"
+              },
+              "b": {
+                "c": "c_b2d24078-fc9c-488b-abfb-01bd07e327a8",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 480,
+                  "y": 100
+                }
+              ]
+            },
+            {
+              "id": "w_75465e72-044c-44a9-8fe1-656e6fdd9a37",
+              "a": {
+                "c": "c_b2d24078-fc9c-488b-abfb-01bd07e327a8",
+                "p": 1
+              },
+              "b": {
+                "j": "j_aa0055d5-1c7b-4080-98ba-370cb9cf60f7"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 880,
+                  "y": 100
+                }
+              ]
+            },
+            {
+              "id": "w_a3aca5a3-df97-4729-b8b5-9fdfe038785c",
+              "a": {
+                "c": "c_df3dfefa-7503-4815-9793-d5542fe1ee7f",
+                "p": 0
+              },
+              "b": {
+                "c": "c_922cf95b-d072-46ec-bb24-e97c172a78b6",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 280,
+                  "y": 480
+                }
+              ]
+            },
+            {
+              "id": "w_e29abd69-f6b0-46bb-9aae-c2ee5ee93405",
+              "a": {
+                "c": "c_922cf95b-d072-46ec-bb24-e97c172a78b6",
+                "p": 1
+              },
+              "b": {
+                "j": "j_7fd43bfd-8734-473f-b5b5-80c63ba39a56"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_6e32206c-d791-4d05-8808-c577bdc61a21",
+              "a": {
+                "j": "j_7fd43bfd-8734-473f-b5b5-80c63ba39a56"
+              },
+              "b": {
+                "c": "c_c6f39ad7-f2ba-41a7-a0d0-22986ce94312",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 540,
+                  "y": 340
+                }
+              ]
+            },
+            {
+              "id": "w_56aaaecf-9557-43f9-9f4d-c2bbacdae7e2",
+              "a": {
+                "j": "j_7fd43bfd-8734-473f-b5b5-80c63ba39a56"
+              },
+              "b": {
+                "c": "c_2d09c013-f764-465e-84b9-c319bb186fc4",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_79782ede-bfd2-42a2-8ee7-26dc4f66ada0",
+              "a": {
+                "c": "c_2d09c013-f764-465e-84b9-c319bb186fc4",
+                "p": 1
+              },
+              "b": {
+                "c": "c_30fd4c2f-f962-416b-9c5c-ff8d54c7e896",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            }
+          ],
+          "lesson": {
+            "key": "difference",
+            "roles": {
+              "U": "c_c6f39ad7-f2ba-41a7-a0d0-22986ce94312",
+              "V1": "c_51774db9-2756-461b-9c28-350cbf3cdad6",
+              "V2": "c_df3dfefa-7503-4815-9793-d5542fe1ee7f",
+              "R1": "c_6b536e18-00bf-4331-8dcf-ca4409aa0390",
+              "R2": "c_b2d24078-fc9c-488b-abfb-01bd07e327a8",
+              "R3": "c_922cf95b-d072-46ec-bb24-e97c172a78b6",
+              "R4": "c_2d09c013-f764-465e-84b9-c319bb186fc4"
+            },
+            "params": {
+              "low": -12,
+              "high": 12,
+              "aol": 200000,
+              "tms": 2,
+              "initial": 0
+            }
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1115\" height=\"817\" viewBox=\"10 -8.632022857666016 1114.009521484375 816.6320190429688\"><title>Difference amplifier · 1% mismatch</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"10\" y=\"-8.632022857666016\" width=\"1114.009521484375\" height=\"816.6320190429688\" fill=\"white\"/><path d=\"M700 320L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M880 320L1040 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M100 380L100 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M280 600L280 640\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M100 300L100 220L260 220\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M340 220L480 220\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 220L480 300L580 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 220L480 100L600 100\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M680 100L880 100L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M280 520L280 480L380 480\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M460 480L540 480\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M540 480L540 340L580 340\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M540 480L540 580\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M540 660L540 700\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"880\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"1040\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"480\" cy=\"220\" r=\"4\" fill=\"#365a72\"/><circle cx=\"540\" cy=\"480\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_c6f39ad7-f2ba-41a7-a0d0-22986ce94312\"><g transform=\"translate(640 320) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-60 -20H-35M-60 20H-35M-35 -42V42L40 0ZM40 0H60M-28 -20H-16M-28 20H-16M-22 14V26\"/></g></g><g class=\"drawing-label\" data-label=\"c_c6f39ad7-f2ba-41a7-a0d0-22986ce94312\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"241\" font-size=\"19\"><tspan font-size=\"19.00\">U</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_c6f39ad7-f2ba-41a7-a0d0-22986ce94312\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"264\" font-size=\"17\"><tspan font-size=\"17.00\">Ideal op amp</tspan></text></g></g><g class=\"component\" data-c=\"c_3e84dad1-da17-4154-bcdb-828d81543e20\"><g class=\"drawing-label\" data-label=\"c_3e84dad1-da17-4154-bcdb-828d81543e20\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1060\" y=\"320\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">o</tspan></text></g></g><g class=\"component\" data-c=\"c_51774db9-2756-461b-9c28-350cbf3cdad6\"><g transform=\"translate(100 340) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_51774db9-2756-461b-9c28-350cbf3cdad6\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"148\" y=\"333\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_51774db9-2756-461b-9c28-350cbf3cdad6\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"148\" y=\"356\" font-size=\"17\"><tspan font-size=\"17.00\">1.0 V</tspan></text></g></g><g class=\"component\" data-c=\"c_f8a77a3c-5659-4d11-a29b-ca41d8450ff2\"><g transform=\"translate(100 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_df3dfefa-7503-4815-9793-d5542fe1ee7f\"><g transform=\"translate(280 560) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_df3dfefa-7503-4815-9793-d5542fe1ee7f\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"328\" y=\"553\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">2</tspan></text></g><g class=\"drawing-label\" data-label=\"c_df3dfefa-7503-4815-9793-d5542fe1ee7f\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"328\" y=\"576\" font-size=\"17\"><tspan font-size=\"17.00\">1.0 V</tspan></text></g></g><g class=\"component\" data-c=\"c_efc105ab-87d2-430f-814a-f0d12688f369\"><g transform=\"translate(280 660) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_6b536e18-00bf-4331-8dcf-ca4409aa0390\"><g transform=\"translate(300 220) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_6b536e18-00bf-4331-8dcf-ca4409aa0390\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"272\" y=\"174\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_6b536e18-00bf-4331-8dcf-ca4409aa0390\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"272\" y=\"197\" font-size=\"17\"><tspan font-size=\"17.00\">10 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_b2d24078-fc9c-488b-abfb-01bd07e327a8\"><g transform=\"translate(640 100) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_b2d24078-fc9c-488b-abfb-01bd07e327a8\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"54\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">2</tspan></text></g><g class=\"drawing-label\" data-label=\"c_b2d24078-fc9c-488b-abfb-01bd07e327a8\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"77\" font-size=\"17\"><tspan font-size=\"17.00\">100 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_922cf95b-d072-46ec-bb24-e97c172a78b6\"><g transform=\"translate(420 480) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_922cf95b-d072-46ec-bb24-e97c172a78b6\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"392\" y=\"434\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">3</tspan></text></g><g class=\"drawing-label\" data-label=\"c_922cf95b-d072-46ec-bb24-e97c172a78b6\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"392\" y=\"457\" font-size=\"17\"><tspan font-size=\"17.00\">10 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_2d09c013-f764-465e-84b9-c319bb186fc4\"><g transform=\"translate(540 620) rotate(90) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_2d09c013-f764-465e-84b9-c319bb186fc4\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"588\" y=\"613\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">4</tspan></text></g><g class=\"drawing-label\" data-label=\"c_2d09c013-f764-465e-84b9-c319bb186fc4\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"588\" y=\"636\" font-size=\"17\"><tspan font-size=\"17.00\">101 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_30fd4c2f-f962-416b-9c5c-ff8d54c7e896\"><g transform=\"translate(540 720) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_b4f966cf-a71c-480d-b65d-f97f1e0dcd87\"><g class=\"drawing-label\" data-label=\"c_b4f966cf-a71c-480d-b65d-f97f1e0dcd87\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"560\" y=\"500\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">+</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Output voltage v_o",
+          "points": 2
+        },
+        {
+          "label": "Common-mode gain A_cm = v_o/v_cm",
+          "points": 2
+        },
+        {
+          "label": "Explain the common-mode leakage",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw1-p10-rails",
+      "title": "10) Output saturation limit",
+      "promptHtml": "<p>Inverting amplifier with R<sub>1</sub> = 5 kΩ, R<sub>f</sub> = 50 kΩ, and rails ±5 V.</p><ol><li>If v<sub>i</sub> = 0.7 V, what happens to v<sub>o</sub>?</li><li>What is the maximum |v<sub>i</sub>| for linear operation?</li></ol>",
+      "hints": [
+        "The linear gain is −R_f/R₁.",
+        "Set |gain|·|v_i| equal to the rail magnitude."
+      ],
+      "checklist": [
+        "Compute the linear prediction.",
+        "Compare with the rails.",
+        "Solve for the input limit."
+      ],
+      "responseFields": [
+        {
+          "id": "vlin",
+          "type": "numeric",
+          "label": "Linear-model output",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vo",
+          "type": "numeric",
+          "label": "Actual output v_o",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vimax",
+          "type": "numeric",
+          "label": "Maximum |v_i| for linear operation",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "explain",
+          "type": "text",
+          "label": "Explain what happens at v_i = 0.7 V",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "independent",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Inverting amplifier · ±5 V rails",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -5,
+            "dcHigh": 5,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_27f4d626-96e8-4977-9e9d-c36b0fed8685",
+              "type": "opamp",
+              "x": 640,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "U_1",
+              "value": "Ideal op amp",
+              "label": {
+                "dx": 5,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_03e6703c-3428-4e07-a483-5096728236e2",
+              "type": "text",
+              "x": 1060,
+              "y": 320,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "v_o",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_f1ebf1f1-0a0b-4e15-8b52-a10e8d54d290",
+              "type": "voltage",
+              "x": 120,
+              "y": 400,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "v_i",
+              "value": "0.7 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_3555bb5b-b4b7-4bd3-8f4f-818069861339",
+              "type": "ground",
+              "x": 120,
+              "y": 500,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_69c4e392-72fa-43e6-abbd-3eecb69f541f",
+              "type": "resistor",
+              "x": 320,
+              "y": 300,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_1",
+              "value": "5 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_4728946b-7390-4e1b-bffb-d08b78b444b7",
+              "type": "resistor",
+              "x": 640,
+              "y": 140,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "R_f",
+              "value": "50 kΩ",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_902be52d-46a4-4534-a3cb-fa4cd30fa948",
+              "type": "ground",
+              "x": 540,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_7f8aef53-17ce-41b2-8761-257778453317",
+              "type": "text",
+              "x": 430,
+              "y": 280,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T1",
+              "value": "v_{-}",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_ba915a4c-8471-4e42-9609-7e79ec3d4fc8",
+              "type": "text",
+              "x": 640,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T9",
+              "value": "±5 V rails",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_aa82b2d6-3466-4ca6-900b-fe2e1de89275",
+              "x": 880,
+              "y": 320
+            },
+            {
+              "id": "j_ee70f1c9-b5ed-430b-8ee1-cfe155e43d57",
+              "x": 1040,
+              "y": 320
+            },
+            {
+              "id": "j_0067b96d-6c22-42aa-b8f2-19d1052c3243",
+              "x": 480,
+              "y": 300
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_e7f21ba0-15fd-4947-a60a-4872e4439a0d",
+              "a": {
+                "c": "c_27f4d626-96e8-4977-9e9d-c36b0fed8685",
+                "p": 2
+              },
+              "b": {
+                "j": "j_aa82b2d6-3466-4ca6-900b-fe2e1de89275"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_623b8146-ebf1-4f5b-8d9e-fff072de2066",
+              "a": {
+                "j": "j_aa82b2d6-3466-4ca6-900b-fe2e1de89275"
+              },
+              "b": {
+                "j": "j_ee70f1c9-b5ed-430b-8ee1-cfe155e43d57"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_9d809906-27e2-49e7-82b4-1b8940510117",
+              "a": {
+                "c": "c_f1ebf1f1-0a0b-4e15-8b52-a10e8d54d290",
+                "p": 1
+              },
+              "b": {
+                "c": "c_3555bb5b-b4b7-4bd3-8f4f-818069861339",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_d27bba3b-df6a-44f9-9b3a-a85ba16f728a",
+              "a": {
+                "c": "c_f1ebf1f1-0a0b-4e15-8b52-a10e8d54d290",
+                "p": 0
+              },
+              "b": {
+                "c": "c_69c4e392-72fa-43e6-abbd-3eecb69f541f",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 120,
+                  "y": 300
+                }
+              ]
+            },
+            {
+              "id": "w_b3ed77ec-35a8-4e60-b01c-77b999080570",
+              "a": {
+                "c": "c_69c4e392-72fa-43e6-abbd-3eecb69f541f",
+                "p": 1
+              },
+              "b": {
+                "j": "j_0067b96d-6c22-42aa-b8f2-19d1052c3243"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_4e6fa33e-65db-4089-87bc-559ef8f5ded1",
+              "a": {
+                "j": "j_0067b96d-6c22-42aa-b8f2-19d1052c3243"
+              },
+              "b": {
+                "c": "c_27f4d626-96e8-4977-9e9d-c36b0fed8685",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_81173c6a-5e88-4912-8948-e95d778cf641",
+              "a": {
+                "j": "j_0067b96d-6c22-42aa-b8f2-19d1052c3243"
+              },
+              "b": {
+                "c": "c_4728946b-7390-4e1b-bffb-d08b78b444b7",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 480,
+                  "y": 140
+                }
+              ]
+            },
+            {
+              "id": "w_e83e696f-e0e5-4389-be79-1c671e8e407e",
+              "a": {
+                "c": "c_4728946b-7390-4e1b-bffb-d08b78b444b7",
+                "p": 1
+              },
+              "b": {
+                "j": "j_aa82b2d6-3466-4ca6-900b-fe2e1de89275"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 880,
+                  "y": 140
+                }
+              ]
+            },
+            {
+              "id": "w_d43a346d-ad10-4f61-96ab-7f6b85532372",
+              "a": {
+                "c": "c_27f4d626-96e8-4977-9e9d-c36b0fed8685",
+                "p": 1
+              },
+              "b": {
+                "c": "c_902be52d-46a4-4534-a3cb-fa4cd30fa948",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 540,
+                  "y": 340
+                }
+              ]
+            }
+          ],
+          "lesson": {
+            "key": "inverting",
+            "roles": {
+              "U": "c_27f4d626-96e8-4977-9e9d-c36b0fed8685",
+              "Vi": "c_f1ebf1f1-0a0b-4e15-8b52-a10e8d54d290",
+              "R1": "c_69c4e392-72fa-43e6-abbd-3eecb69f541f",
+              "Rf": "c_4728946b-7390-4e1b-bffb-d08b78b444b7"
+            },
+            "params": {
+              "low": -5,
+              "high": 5,
+              "aol": 200000,
+              "tms": 2,
+              "initial": 0
+            }
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1094\" height=\"557\" viewBox=\"30 31.684738159179688 1093.86474609375 556.3152465820312\"><title>Inverting amplifier · ±5 V rails</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"30\" y=\"31.684738159179688\" width=\"1093.86474609375\" height=\"556.3152465820312\" fill=\"white\"/><path d=\"M700 320L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M880 320L1040 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M120 440L120 480\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M120 360L120 300L280 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M360 300L480 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 300L580 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M480 300L480 140L600 140\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M680 140L880 140L880 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M580 340L540 340L540 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"880\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"1040\" cy=\"320\" r=\"4\" fill=\"#365a72\"/><circle cx=\"480\" cy=\"300\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_27f4d626-96e8-4977-9e9d-c36b0fed8685\"><g transform=\"translate(640 320) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-60 -20H-35M-60 20H-35M-35 -42V42L40 0ZM40 0H60M-28 -20H-16M-28 20H-16M-22 14V26\"/></g></g><g class=\"drawing-label\" data-label=\"c_27f4d626-96e8-4977-9e9d-c36b0fed8685\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"241\" font-size=\"19\"><tspan font-size=\"19.00\">U</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_27f4d626-96e8-4977-9e9d-c36b0fed8685\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"617\" y=\"264\" font-size=\"17\"><tspan font-size=\"17.00\">Ideal op amp</tspan></text></g></g><g class=\"component\" data-c=\"c_03e6703c-3428-4e07-a483-5096728236e2\"><g class=\"drawing-label\" data-label=\"c_03e6703c-3428-4e07-a483-5096728236e2\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1060\" y=\"320\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">o</tspan></text></g></g><g class=\"component\" data-c=\"c_f1ebf1f1-0a0b-4e15-8b52-a10e8d54d290\"><g transform=\"translate(120 400) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_f1ebf1f1-0a0b-4e15-8b52-a10e8d54d290\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"168\" y=\"393\" font-size=\"19\"><tspan font-size=\"19.00\">v</tspan><tspan dy=\"5.70\" font-size=\"13.30\">i</tspan></text></g><g class=\"drawing-label\" data-label=\"c_f1ebf1f1-0a0b-4e15-8b52-a10e8d54d290\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"168\" y=\"416\" font-size=\"17\"><tspan font-size=\"17.00\">0.7 V</tspan></text></g></g><g class=\"component\" data-c=\"c_3555bb5b-b4b7-4bd3-8f4f-818069861339\"><g transform=\"translate(120 500) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_69c4e392-72fa-43e6-abbd-3eecb69f541f\"><g transform=\"translate(320 300) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_69c4e392-72fa-43e6-abbd-3eecb69f541f\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"292\" y=\"254\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_69c4e392-72fa-43e6-abbd-3eecb69f541f\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"292\" y=\"277\" font-size=\"17\"><tspan font-size=\"17.00\">5 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_4728946b-7390-4e1b-bffb-d08b78b444b7\"><g transform=\"translate(640 140) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-26l5 -9 8 18 8 -18 8 18 8 -18 8 18 5 -9H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_4728946b-7390-4e1b-bffb-d08b78b444b7\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"94\" font-size=\"19\"><tspan font-size=\"19.00\">R</tspan><tspan dy=\"5.70\" font-size=\"13.30\">f</tspan></text></g><g class=\"drawing-label\" data-label=\"c_4728946b-7390-4e1b-bffb-d08b78b444b7\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"612\" y=\"117\" font-size=\"17\"><tspan font-size=\"17.00\">50 kΩ</tspan></text></g></g><g class=\"component\" data-c=\"c_902be52d-46a4-4534-a3cb-fa4cd30fa948\"><g transform=\"translate(540 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_7f8aef53-17ce-41b2-8761-257778453317\"><g class=\"drawing-label\" data-label=\"c_7f8aef53-17ce-41b2-8761-257778453317\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"430\" y=\"280\" font-size=\"22\"><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">-</tspan></text></g></g><g class=\"component\" data-c=\"c_ba915a4c-8471-4e42-9609-7e79ec3d4fc8\"><g class=\"drawing-label\" data-label=\"c_ba915a4c-8471-4e42-9609-7e79ec3d4fc8\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"640\" y=\"440\" font-size=\"22\"><tspan font-size=\"22.00\">±5 V rails</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Linear-model output",
+          "points": 2
+        },
+        {
+          "label": "Actual output v_o",
+          "points": 2
+        },
+        {
+          "label": "Maximum |v_i| for linear operation",
+          "points": 2
+        },
+        {
+          "label": "Explain what happens at v_i = 0.7 V",
+          "points": 2
+        }
+      ]
+    }
+  ]
+}
