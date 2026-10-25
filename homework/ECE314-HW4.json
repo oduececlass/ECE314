@@ -1,0 +1,3187 @@
+{
+  "schema": "edu.odu.circuit-assessment",
+  "schemaVersion": "1.0",
+  "assessment": {
+    "id": "ECE314-HW4",
+    "title": "Homework #4 · MOSFET device operation",
+    "course": "ECE 314",
+    "topic": "Module 4 · MOSFET · Triode resistance · Saturation · Device sizing",
+    "version": "2.2-CS2.13-unwired",
+    "instructions": "Show key steps, assumptions, and final answers with units. Use the square-law model: triode with small v_DS, r_DS = 1/[k_n′(W/L)V_OV]; saturation, I_D = ½k_n′(W/L)V_OV² for V_DS ≥ V_OV, with k_n′ = μ_nC_ox and V_OV = V_GS − V_t. State and check the operating region. Enter numbers in the units shown. Practical task: predict first, build the schematic and breadboard yourself, check connections, test, and explain. Use Save progress in the homework toolbar, then reopen the downloaded JSON with Open saved homework. There is no homework file byte-size cap; available device memory and browser storage still apply. Keep a downloaded backup.",
+    "maximumScore": 99
+  },
+  "questions": [
+    {
+      "id": "hw4-p1-rds-scaling",
+      "title": "1) Triode resistance r_DS: scaling factors",
+      "promptHtml": "<p>An NMOS transistor operated with a small v<sub>DS</sub> exhibits a resistance r<sub>DS</sub>. By what factor will r<sub>DS</sub> change in each situation?</p><ol><li>V<sub>OV</sub> is doubled.</li><li>The device is replaced by one in the same technology with double the width.</li><li>The device is replaced by one in the same technology with both width and length doubled.</li><li>The device is replaced by one in a more advanced technology with the oxide thickness halved, and W and L scaled similarly (halved).</li></ol><p>Enter each answer as the ratio r<sub>DS,new</sub>/r<sub>DS,old</sub>.</p>",
+      "hints": [
+        "For small v_DS: r_DS = 1/[k_n′(W/L)V_OV] with k_n′ = μ_nC_ox.",
+        "C_ox = ε_ox/t_ox, so halving t_ox doubles k_n′."
+      ],
+      "checklist": [
+        "Write r_DS in terms of k_n′, W/L and V_OV.",
+        "Identify which factor changes in each case.",
+        "Report each ratio."
+      ],
+      "responseFields": [
+        {
+          "id": "fa",
+          "type": "numeric",
+          "label": "(a) Factor for V_OV doubled",
+          "unit": "×",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "fb",
+          "type": "numeric",
+          "label": "(b) Factor for W doubled",
+          "unit": "×",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "fc",
+          "type": "numeric",
+          "label": "(c) Factor for W and L doubled",
+          "unit": "×",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "fd",
+          "type": "numeric",
+          "label": "(d) Factor for t_ox, W, L halved",
+          "unit": "×",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "why",
+          "type": "text",
+          "label": "Explain each result from the r_DS expression",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "NMOS · P1",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_9308834c-1773-415b-a788-173eef93f3e1",
+              "type": "nmos",
+              "x": 680,
+              "y": 360,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "M_1",
+              "value": "NMOS",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_7bfd1f58-74d6-4e10-aa61-08e4e3285ed6",
+              "type": "voltage",
+              "x": 180,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_G",
+              "value": "V_GS",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_60971cd6-fbdd-45c8-8b81-407cb8cd9363",
+              "type": "ground",
+              "x": 180,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_ccaa8bab-5d86-4e3b-98bc-0d7d6cde6d99",
+              "type": "voltage",
+              "x": 1040,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_{DS}",
+              "value": "50 mV",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_e6f6ca60-9990-45b2-b27e-ab6c57f4013a",
+              "type": "ground",
+              "x": 1040,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_8886b1f3-2e00-44e1-96db-c7c042177320",
+              "type": "ground",
+              "x": 700,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G3",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_c34ea4ce-410a-4292-8f1c-07e5083a010d",
+              "type": "text",
+              "x": 735,
+              "y": 260,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T6",
+              "value": "V_D",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_aa27ec2d-b156-4a3b-9aec-5f1031c9f854",
+              "type": "text",
+              "x": 568,
+              "y": 335,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T7",
+              "value": "V_G",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_1aa3009f-a434-4115-b6f5-458ac7ca852b",
+              "type": "text",
+              "x": 610,
+              "y": 150,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T8",
+              "value": "small v_DS: r_DS = v_DS / i_D",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_18d5c99d-7c1c-45c4-b10c-becd5df97c5d",
+              "x": 700,
+              "y": 280
+            },
+            {
+              "id": "j_40539021-cc63-449b-9614-64ee7f144dee",
+              "x": 560,
+              "y": 360
+            },
+            {
+              "id": "j_96538655-94c2-45a5-b3a3-d755bd8b7d65",
+              "x": 700,
+              "y": 420
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_fddc9d91-4cf4-4332-a1b3-f2650fabd0c9",
+              "a": {
+                "j": "j_18d5c99d-7c1c-45c4-b10c-becd5df97c5d"
+              },
+              "b": {
+                "c": "c_9308834c-1773-415b-a788-173eef93f3e1",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_8e91dbd4-2494-4bed-901b-eaa84908abb2",
+              "a": {
+                "j": "j_40539021-cc63-449b-9614-64ee7f144dee"
+              },
+              "b": {
+                "c": "c_9308834c-1773-415b-a788-173eef93f3e1",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_97222413-155a-486c-a4bf-760f0ecf069c",
+              "a": {
+                "c": "c_9308834c-1773-415b-a788-173eef93f3e1",
+                "p": 2
+              },
+              "b": {
+                "j": "j_96538655-94c2-45a5-b3a3-d755bd8b7d65"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_7d706e90-b042-405f-a340-eab89f7d4143",
+              "a": {
+                "c": "c_7bfd1f58-74d6-4e10-aa61-08e4e3285ed6",
+                "p": 1
+              },
+              "b": {
+                "c": "c_60971cd6-fbdd-45c8-8b81-407cb8cd9363",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_4ecfbd54-d7a7-4284-94e4-95046ec1f28e",
+              "a": {
+                "c": "c_ccaa8bab-5d86-4e3b-98bc-0d7d6cde6d99",
+                "p": 1
+              },
+              "b": {
+                "c": "c_e6f6ca60-9990-45b2-b27e-ab6c57f4013a",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_b9f0ae42-0f95-4be8-97fd-9e7fb08e4f48",
+              "a": {
+                "c": "c_7bfd1f58-74d6-4e10-aa61-08e4e3285ed6",
+                "p": 0
+              },
+              "b": {
+                "j": "j_40539021-cc63-449b-9614-64ee7f144dee"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 180,
+                  "y": 360
+                }
+              ]
+            },
+            {
+              "id": "w_28ffefa8-55a8-4ac1-bd6e-d05582b57575",
+              "a": {
+                "c": "c_ccaa8bab-5d86-4e3b-98bc-0d7d6cde6d99",
+                "p": 0
+              },
+              "b": {
+                "j": "j_18d5c99d-7c1c-45c4-b10c-becd5df97c5d"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 1040,
+                  "y": 280
+                }
+              ]
+            },
+            {
+              "id": "w_2f4f76af-b4ad-4b86-a509-57d7a442a20c",
+              "a": {
+                "j": "j_96538655-94c2-45a5-b3a3-d755bd8b7d65"
+              },
+              "b": {
+                "c": "c_8886b1f3-2e00-44e1-96db-c7c042177320",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            }
+          ],
+          "lesson": {
+            "family": "mosfet",
+            "key": "regions",
+            "roles": {
+              "M": "c_9308834c-1773-415b-a788-173eef93f3e1",
+              "Vg": "c_7bfd1f58-74d6-4e10-aa61-08e4e3285ed6",
+              "Vds": "c_ccaa8bab-5d86-4e3b-98bc-0d7d6cde6d99"
+            },
+            "params": {
+              "vth": 1,
+              "kn": 2,
+              "lambda": 0,
+              "freq": 1000
+            },
+            "signalRepresentation": "pi"
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1090\" height=\"542\" viewBox=\"90 86.18009948730469 1089.9832763671875 541.8198852539062\"><title>NMOS · P1</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"90\" y=\"86.18009948730469\" width=\"1089.9832763671875\" height=\"541.8198852539062\" fill=\"white\"/><path d=\"M700 280L700 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M560 360L640 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 400L700 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 480L180 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 480L1040 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 400L180 360L560 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 400L1040 280L700 280\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 420L700 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"700\" cy=\"280\" r=\"4\" fill=\"#365a72\"/><circle cx=\"560\" cy=\"360\" r=\"4\" fill=\"#365a72\"/><circle cx=\"700\" cy=\"420\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_9308834c-1773-415b-a788-173eef93f3e1\"><g transform=\"translate(680 360) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-8M-8 -22V22M0 -22V-8M0 -5V5M0 8V22M0 -18H20V-40M0 18H20V40M20 18V0H4\"/><path d=\"M14 -4 L6 0 L14 4\" fill=\"currentColor\" stroke=\"none\"/></g></g><g class=\"drawing-label\" data-label=\"c_9308834c-1773-415b-a788-173eef93f3e1\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"353\" font-size=\"19\"><tspan font-size=\"19.00\">M</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_9308834c-1773-415b-a788-173eef93f3e1\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"376\" font-size=\"17\"><tspan font-size=\"17.00\">NMOS</tspan></text></g></g><g class=\"component\" data-c=\"c_7bfd1f58-74d6-4e10-aa61-08e4e3285ed6\"><g transform=\"translate(180 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_7bfd1f58-74d6-4e10-aa61-08e4e3285ed6\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">G</tspan></text></g><g class=\"drawing-label\" data-label=\"c_7bfd1f58-74d6-4e10-aa61-08e4e3285ed6\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">V</tspan><tspan dy=\"5.10\" font-size=\"11.90\">GS</tspan></text></g></g><g class=\"component\" data-c=\"c_60971cd6-fbdd-45c8-8b81-407cb8cd9363\"><g transform=\"translate(180 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_ccaa8bab-5d86-4e3b-98bc-0d7d6cde6d99\"><g transform=\"translate(1040 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_ccaa8bab-5d86-4e3b-98bc-0d7d6cde6d99\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">DS</tspan></text></g><g class=\"drawing-label\" data-label=\"c_ccaa8bab-5d86-4e3b-98bc-0d7d6cde6d99\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">50 mV</tspan></text></g></g><g class=\"component\" data-c=\"c_e6f6ca60-9990-45b2-b27e-ab6c57f4013a\"><g transform=\"translate(1040 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_8886b1f3-2e00-44e1-96db-c7c042177320\"><g transform=\"translate(700 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_c34ea4ce-410a-4292-8f1c-07e5083a010d\"><g class=\"drawing-label\" data-label=\"c_c34ea4ce-410a-4292-8f1c-07e5083a010d\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"735\" y=\"260\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">D</tspan></text></g></g><g class=\"component\" data-c=\"c_aa27ec2d-b156-4a3b-9aec-5f1031c9f854\"><g class=\"drawing-label\" data-label=\"c_aa27ec2d-b156-4a3b-9aec-5f1031c9f854\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"568\" y=\"335\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">G</tspan></text></g></g><g class=\"component\" data-c=\"c_1aa3009f-a434-4115-b6f5-458ac7ca852b\"><g class=\"drawing-label\" data-label=\"c_1aa3009f-a434-4115-b6f5-458ac7ca852b\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"610\" y=\"150\" font-size=\"22\"><tspan font-size=\"22.00\">small </tspan><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">DS</tspan><tspan dy=\"-6.60\" font-size=\"22.00\">: </tspan><tspan font-size=\"22.00\">r</tspan><tspan dy=\"6.60\" font-size=\"15.40\">DS</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = </tspan><tspan font-size=\"22.00\">v</tspan><tspan dy=\"6.60\" font-size=\"15.40\">DS</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> / </tspan><tspan font-size=\"22.00\">i</tspan><tspan dy=\"6.60\" font-size=\"15.40\">D</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "(a) Factor for V_OV doubled",
+          "points": 2
+        },
+        {
+          "label": "(b) Factor for W doubled",
+          "points": 2
+        },
+        {
+          "label": "(c) Factor for W and L doubled",
+          "points": 2
+        },
+        {
+          "label": "(d) Factor for t_ox, W, L halved",
+          "points": 2
+        },
+        {
+          "label": "Explain each result from the r_DS expression",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw4-p2-variable-resistor",
+      "title": "2) NMOS as a variable resistor (200 Ω to 1 kΩ)",
+      "promptHtml": "<p>An NMOS transistor in a technology with k<sub>n</sub>′ = 400 μA/V<sup>2</sup> and V<sub>t</sub> = 0.4 V operates with small v<sub>DS</sub> as a variable resistor ranging from 200 Ω to 1 kΩ. Specify the range required for the control voltage V<sub>GS</sub> and the required transistor width W. Use the smallest possible device, as limited by the minimum channel length L<sub>min</sub> = 0.18 μm and the maximum allowed voltage of 1.8 V.</p>",
+      "hints": [
+        "The smallest resistance needs the largest V_OV: V_GS = 1.8 V → V_OV = 1.4 V.",
+        "r_DS ∝ 1/V_OV, so 1 kΩ needs one-fifth of that overdrive."
+      ],
+      "checklist": [
+        "Use L = L_min.",
+        "Size W/L for 200 Ω at V_GS = 1.8 V.",
+        "Find V_GS for 1 kΩ."
+      ],
+      "responseFields": [
+        {
+          "id": "wl",
+          "type": "numeric",
+          "label": "Required W/L",
+          "unit": "",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "w",
+          "type": "numeric",
+          "label": "Required width W",
+          "unit": "μm",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vgsmin",
+          "type": "numeric",
+          "label": "V_GS for 1 kΩ (lower end of range)",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vgsmax",
+          "type": "numeric",
+          "label": "V_GS for 200 Ω (upper end of range)",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "why",
+          "type": "text",
+          "label": "Explain the design choices",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "NMOS · P2",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_80296906-ac69-4049-8bd7-7c9e7b98de9f",
+              "type": "nmos",
+              "x": 680,
+              "y": 360,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "M_1",
+              "value": "L = 0.18 μm, W = ?",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_04e72cfd-8628-490f-a24c-ade15b0ea49c",
+              "type": "voltage",
+              "x": 180,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_G",
+              "value": "0.4–1.8 V ?",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_1332a309-c262-4a83-a247-b5c4ad596204",
+              "type": "ground",
+              "x": 180,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_c16c76fd-979c-46dc-976d-2c392a20e02b",
+              "type": "voltage",
+              "x": 1040,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_{DS}",
+              "value": "50 mV",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_10360fc4-7c14-438c-aa70-4ade9bc4d282",
+              "type": "ground",
+              "x": 1040,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_134bb73a-b50a-4b40-aa02-2b12a66630db",
+              "type": "ground",
+              "x": 700,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G3",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_72028aa8-3bad-43d6-b5f1-26568701f492",
+              "type": "text",
+              "x": 735,
+              "y": 260,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T6",
+              "value": "V_D",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_a6e1e0eb-ebcd-49ad-a059-35045486258c",
+              "type": "text",
+              "x": 568,
+              "y": 335,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T7",
+              "value": "V_G",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_57449576-1bac-4fe3-adb7-638a11c2c3ec",
+              "type": "text",
+              "x": 610,
+              "y": 150,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T8",
+              "value": "k_n′ = 400 μA/V², V_t = 0.4 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_3ebba3c8-1f10-40c4-ba45-1e163da78c07",
+              "x": 700,
+              "y": 280
+            },
+            {
+              "id": "j_72e58d0d-3ecd-4171-a708-2b3a79f1a963",
+              "x": 560,
+              "y": 360
+            },
+            {
+              "id": "j_da953e9f-7cbf-47f7-bf6a-2bd75ca2ff8a",
+              "x": 700,
+              "y": 420
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_0c496118-b182-464e-814d-466af5ea71f3",
+              "a": {
+                "j": "j_3ebba3c8-1f10-40c4-ba45-1e163da78c07"
+              },
+              "b": {
+                "c": "c_80296906-ac69-4049-8bd7-7c9e7b98de9f",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_7f494742-b5a3-49b2-be09-d89f1d72000c",
+              "a": {
+                "j": "j_72e58d0d-3ecd-4171-a708-2b3a79f1a963"
+              },
+              "b": {
+                "c": "c_80296906-ac69-4049-8bd7-7c9e7b98de9f",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_7ed1387e-5244-491a-9d88-a25e2638dbe0",
+              "a": {
+                "c": "c_80296906-ac69-4049-8bd7-7c9e7b98de9f",
+                "p": 2
+              },
+              "b": {
+                "j": "j_da953e9f-7cbf-47f7-bf6a-2bd75ca2ff8a"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_636be5fa-2d24-4bf7-a7b3-3be886f33841",
+              "a": {
+                "c": "c_04e72cfd-8628-490f-a24c-ade15b0ea49c",
+                "p": 1
+              },
+              "b": {
+                "c": "c_1332a309-c262-4a83-a247-b5c4ad596204",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_50451daa-291a-46f6-b5bb-c99231967e7d",
+              "a": {
+                "c": "c_c16c76fd-979c-46dc-976d-2c392a20e02b",
+                "p": 1
+              },
+              "b": {
+                "c": "c_10360fc4-7c14-438c-aa70-4ade9bc4d282",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_7ce4827d-dc77-4aec-bdeb-9d325c30f1b8",
+              "a": {
+                "c": "c_04e72cfd-8628-490f-a24c-ade15b0ea49c",
+                "p": 0
+              },
+              "b": {
+                "j": "j_72e58d0d-3ecd-4171-a708-2b3a79f1a963"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 180,
+                  "y": 360
+                }
+              ]
+            },
+            {
+              "id": "w_48cfe354-56b0-4932-9461-8929687535c1",
+              "a": {
+                "c": "c_c16c76fd-979c-46dc-976d-2c392a20e02b",
+                "p": 0
+              },
+              "b": {
+                "j": "j_3ebba3c8-1f10-40c4-ba45-1e163da78c07"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 1040,
+                  "y": 280
+                }
+              ]
+            },
+            {
+              "id": "w_b3642697-f863-4e0f-9203-7ea335cb3e41",
+              "a": {
+                "j": "j_da953e9f-7cbf-47f7-bf6a-2bd75ca2ff8a"
+              },
+              "b": {
+                "c": "c_134bb73a-b50a-4b40-aa02-2b12a66630db",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            }
+          ],
+          "lesson": {
+            "family": "mosfet",
+            "key": "regions",
+            "roles": {
+              "M": "c_80296906-ac69-4049-8bd7-7c9e7b98de9f",
+              "Vg": "c_04e72cfd-8628-490f-a24c-ade15b0ea49c",
+              "Vds": "c_c16c76fd-979c-46dc-976d-2c392a20e02b"
+            },
+            "params": {
+              "vth": 0.4,
+              "kn": 2,
+              "lambda": 0,
+              "freq": 1000
+            },
+            "signalRepresentation": "pi"
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1090\" height=\"542\" viewBox=\"90 86.18014526367188 1089.983154296875 541.8198547363281\"><title>NMOS · P2</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"90\" y=\"86.18014526367188\" width=\"1089.983154296875\" height=\"541.8198547363281\" fill=\"white\"/><path d=\"M700 280L700 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M560 360L640 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 400L700 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 480L180 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 480L1040 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 400L180 360L560 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 400L1040 280L700 280\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 420L700 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"700\" cy=\"280\" r=\"4\" fill=\"#365a72\"/><circle cx=\"560\" cy=\"360\" r=\"4\" fill=\"#365a72\"/><circle cx=\"700\" cy=\"420\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_80296906-ac69-4049-8bd7-7c9e7b98de9f\"><g transform=\"translate(680 360) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-8M-8 -22V22M0 -22V-8M0 -5V5M0 8V22M0 -18H20V-40M0 18H20V40M20 18V0H4\"/><path d=\"M14 -4 L6 0 L14 4\" fill=\"currentColor\" stroke=\"none\"/></g></g><g class=\"drawing-label\" data-label=\"c_80296906-ac69-4049-8bd7-7c9e7b98de9f\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"353\" font-size=\"19\"><tspan font-size=\"19.00\">M</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_80296906-ac69-4049-8bd7-7c9e7b98de9f\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"376\" font-size=\"17\"><tspan font-size=\"17.00\">L = 0.18 μm, W = ?</tspan></text></g></g><g class=\"component\" data-c=\"c_04e72cfd-8628-490f-a24c-ade15b0ea49c\"><g transform=\"translate(180 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_04e72cfd-8628-490f-a24c-ade15b0ea49c\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">G</tspan></text></g><g class=\"drawing-label\" data-label=\"c_04e72cfd-8628-490f-a24c-ade15b0ea49c\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">0.4–1.8 V ?</tspan></text></g></g><g class=\"component\" data-c=\"c_1332a309-c262-4a83-a247-b5c4ad596204\"><g transform=\"translate(180 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_c16c76fd-979c-46dc-976d-2c392a20e02b\"><g transform=\"translate(1040 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_c16c76fd-979c-46dc-976d-2c392a20e02b\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">DS</tspan></text></g><g class=\"drawing-label\" data-label=\"c_c16c76fd-979c-46dc-976d-2c392a20e02b\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">50 mV</tspan></text></g></g><g class=\"component\" data-c=\"c_10360fc4-7c14-438c-aa70-4ade9bc4d282\"><g transform=\"translate(1040 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_134bb73a-b50a-4b40-aa02-2b12a66630db\"><g transform=\"translate(700 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_72028aa8-3bad-43d6-b5f1-26568701f492\"><g class=\"drawing-label\" data-label=\"c_72028aa8-3bad-43d6-b5f1-26568701f492\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"735\" y=\"260\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">D</tspan></text></g></g><g class=\"component\" data-c=\"c_a6e1e0eb-ebcd-49ad-a059-35045486258c\"><g class=\"drawing-label\" data-label=\"c_a6e1e0eb-ebcd-49ad-a059-35045486258c\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"568\" y=\"335\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">G</tspan></text></g></g><g class=\"component\" data-c=\"c_57449576-1bac-4fe3-adb7-638a11c2c3ec\"><g class=\"drawing-label\" data-label=\"c_57449576-1bac-4fe3-adb7-638a11c2c3ec\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"610\" y=\"150\" font-size=\"22\"><tspan font-size=\"22.00\">k</tspan><tspan dy=\"6.60\" font-size=\"15.40\">n</tspan><tspan dy=\"-6.60\" font-size=\"22.00\">′ = 400 μA/V², </tspan><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">t</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = 0.4 V</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Required W/L",
+          "points": 2
+        },
+        {
+          "label": "Required width W",
+          "points": 2
+        },
+        {
+          "label": "V_GS for 1 kΩ (lower end of range)",
+          "points": 2
+        },
+        {
+          "label": "V_GS for 200 Ω (upper end of range)",
+          "points": 2
+        },
+        {
+          "label": "Explain the design choices",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw4-p3-min-resistance",
+      "title": "3) Width for a 1 kΩ minimum resistance",
+      "promptHtml": "<p>An n-channel MOS device in a technology with oxide thickness 20 nm, minimum channel length 1 μm, k<sub>n</sub>′ = 100 μA/V<sup>2</sup>, and V<sub>t</sub> = 0.8 V operates in the triode region with small v<sub>DS</sub> and with V<sub>GS</sub> in the range 0 V to +5 V. What device width is needed to ensure that the minimum available resistance is 1 kΩ?</p>",
+      "hints": [
+        "The minimum resistance occurs at the maximum V_GS = 5 V.",
+        "Use L = L_min = 1 μm; t_ox is not needed because k_n′ is given."
+      ],
+      "checklist": [
+        "Find the maximum V_OV.",
+        "Solve r_DS,min = 1 kΩ for W/L.",
+        "Convert to W."
+      ],
+      "responseFields": [
+        {
+          "id": "wl",
+          "type": "numeric",
+          "label": "Required W/L",
+          "unit": "",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "w",
+          "type": "numeric",
+          "label": "Required width W",
+          "unit": "μm",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "why",
+          "type": "text",
+          "label": "Show the derivation",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "NMOS · P3",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_e7fe82ed-faa4-415f-b485-7d07b9a72834",
+              "type": "nmos",
+              "x": 680,
+              "y": 360,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "M_1",
+              "value": "L = 1 μm, W = ?",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_b39e8905-c3d4-4cf3-bd04-a5d693393561",
+              "type": "voltage",
+              "x": 180,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_G",
+              "value": "0–5 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_d5b19520-1310-4ebb-9117-44994cac6c3d",
+              "type": "ground",
+              "x": 180,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_561a7a4b-5cf4-47f1-b82f-944c950e520b",
+              "type": "voltage",
+              "x": 1040,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_{DS}",
+              "value": "50 mV",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_e8b64180-f1f3-4139-b363-5229441a6901",
+              "type": "ground",
+              "x": 1040,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_a43215e6-52cb-4326-8d4a-7f5a5b57d5e5",
+              "type": "ground",
+              "x": 700,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G3",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_74738494-2bcc-4f3a-a29e-3b634d908a70",
+              "type": "text",
+              "x": 735,
+              "y": 260,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T6",
+              "value": "V_D",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_49757b9f-e5ba-4254-bf93-52a2dd86e0ec",
+              "type": "text",
+              "x": 568,
+              "y": 335,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T7",
+              "value": "V_G",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_2f56e61f-6593-4b66-a0b5-c51b1eebdd9d",
+              "type": "text",
+              "x": 610,
+              "y": 150,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T8",
+              "value": "k_n′ = 100 μA/V², V_t = 0.8 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_ecb0714d-8f42-4fa1-b710-b3828d1c774b",
+              "x": 700,
+              "y": 280
+            },
+            {
+              "id": "j_f0584058-068b-4a77-bbd0-8739734259e6",
+              "x": 560,
+              "y": 360
+            },
+            {
+              "id": "j_9c20ffd2-b659-40ba-991b-9e2057c34d69",
+              "x": 700,
+              "y": 420
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_c3026332-747f-43da-90c6-58886a44fdc1",
+              "a": {
+                "j": "j_ecb0714d-8f42-4fa1-b710-b3828d1c774b"
+              },
+              "b": {
+                "c": "c_e7fe82ed-faa4-415f-b485-7d07b9a72834",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_70755293-23fb-4941-8a4e-17aae29a80f2",
+              "a": {
+                "j": "j_f0584058-068b-4a77-bbd0-8739734259e6"
+              },
+              "b": {
+                "c": "c_e7fe82ed-faa4-415f-b485-7d07b9a72834",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_6dbcc560-911b-464e-945e-49d30205ed8c",
+              "a": {
+                "c": "c_e7fe82ed-faa4-415f-b485-7d07b9a72834",
+                "p": 2
+              },
+              "b": {
+                "j": "j_9c20ffd2-b659-40ba-991b-9e2057c34d69"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_4ae71f74-580a-4f48-9953-2aef0b498193",
+              "a": {
+                "c": "c_b39e8905-c3d4-4cf3-bd04-a5d693393561",
+                "p": 1
+              },
+              "b": {
+                "c": "c_d5b19520-1310-4ebb-9117-44994cac6c3d",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_3bf7de37-975b-461a-b480-19240918601c",
+              "a": {
+                "c": "c_561a7a4b-5cf4-47f1-b82f-944c950e520b",
+                "p": 1
+              },
+              "b": {
+                "c": "c_e8b64180-f1f3-4139-b363-5229441a6901",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_4a32b609-c579-46fc-b88f-3e02aebd2077",
+              "a": {
+                "c": "c_b39e8905-c3d4-4cf3-bd04-a5d693393561",
+                "p": 0
+              },
+              "b": {
+                "j": "j_f0584058-068b-4a77-bbd0-8739734259e6"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 180,
+                  "y": 360
+                }
+              ]
+            },
+            {
+              "id": "w_d87a6180-ea76-455f-a278-6898cf8cf75f",
+              "a": {
+                "c": "c_561a7a4b-5cf4-47f1-b82f-944c950e520b",
+                "p": 0
+              },
+              "b": {
+                "j": "j_ecb0714d-8f42-4fa1-b710-b3828d1c774b"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 1040,
+                  "y": 280
+                }
+              ]
+            },
+            {
+              "id": "w_3b01df92-9e77-4c29-9927-b9cad48733dc",
+              "a": {
+                "j": "j_9c20ffd2-b659-40ba-991b-9e2057c34d69"
+              },
+              "b": {
+                "c": "c_a43215e6-52cb-4326-8d4a-7f5a5b57d5e5",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            }
+          ],
+          "lesson": {
+            "family": "mosfet",
+            "key": "regions",
+            "roles": {
+              "M": "c_e7fe82ed-faa4-415f-b485-7d07b9a72834",
+              "Vg": "c_b39e8905-c3d4-4cf3-bd04-a5d693393561",
+              "Vds": "c_561a7a4b-5cf4-47f1-b82f-944c950e520b"
+            },
+            "params": {
+              "vth": 0.8,
+              "kn": 2,
+              "lambda": 0,
+              "freq": 1000
+            },
+            "signalRepresentation": "pi"
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1090\" height=\"542\" viewBox=\"90 86.18014526367188 1089.983154296875 541.8198547363281\"><title>NMOS · P3</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"90\" y=\"86.18014526367188\" width=\"1089.983154296875\" height=\"541.8198547363281\" fill=\"white\"/><path d=\"M700 280L700 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M560 360L640 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 400L700 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 480L180 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 480L1040 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 400L180 360L560 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 400L1040 280L700 280\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 420L700 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"700\" cy=\"280\" r=\"4\" fill=\"#365a72\"/><circle cx=\"560\" cy=\"360\" r=\"4\" fill=\"#365a72\"/><circle cx=\"700\" cy=\"420\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_e7fe82ed-faa4-415f-b485-7d07b9a72834\"><g transform=\"translate(680 360) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-8M-8 -22V22M0 -22V-8M0 -5V5M0 8V22M0 -18H20V-40M0 18H20V40M20 18V0H4\"/><path d=\"M14 -4 L6 0 L14 4\" fill=\"currentColor\" stroke=\"none\"/></g></g><g class=\"drawing-label\" data-label=\"c_e7fe82ed-faa4-415f-b485-7d07b9a72834\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"353\" font-size=\"19\"><tspan font-size=\"19.00\">M</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_e7fe82ed-faa4-415f-b485-7d07b9a72834\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"376\" font-size=\"17\"><tspan font-size=\"17.00\">L = 1 μm, W = ?</tspan></text></g></g><g class=\"component\" data-c=\"c_b39e8905-c3d4-4cf3-bd04-a5d693393561\"><g transform=\"translate(180 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_b39e8905-c3d4-4cf3-bd04-a5d693393561\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">G</tspan></text></g><g class=\"drawing-label\" data-label=\"c_b39e8905-c3d4-4cf3-bd04-a5d693393561\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">0–5 V</tspan></text></g></g><g class=\"component\" data-c=\"c_d5b19520-1310-4ebb-9117-44994cac6c3d\"><g transform=\"translate(180 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_561a7a4b-5cf4-47f1-b82f-944c950e520b\"><g transform=\"translate(1040 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_561a7a4b-5cf4-47f1-b82f-944c950e520b\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">DS</tspan></text></g><g class=\"drawing-label\" data-label=\"c_561a7a4b-5cf4-47f1-b82f-944c950e520b\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">50 mV</tspan></text></g></g><g class=\"component\" data-c=\"c_e8b64180-f1f3-4139-b363-5229441a6901\"><g transform=\"translate(1040 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_a43215e6-52cb-4326-8d4a-7f5a5b57d5e5\"><g transform=\"translate(700 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_74738494-2bcc-4f3a-a29e-3b634d908a70\"><g class=\"drawing-label\" data-label=\"c_74738494-2bcc-4f3a-a29e-3b634d908a70\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"735\" y=\"260\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">D</tspan></text></g></g><g class=\"component\" data-c=\"c_49757b9f-e5ba-4254-bf93-52a2dd86e0ec\"><g class=\"drawing-label\" data-label=\"c_49757b9f-e5ba-4254-bf93-52a2dd86e0ec\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"568\" y=\"335\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">G</tspan></text></g></g><g class=\"component\" data-c=\"c_2f56e61f-6593-4b66-a0b5-c51b1eebdd9d\"><g class=\"drawing-label\" data-label=\"c_2f56e61f-6593-4b66-a0b5-c51b1eebdd9d\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"610\" y=\"150\" font-size=\"22\"><tspan font-size=\"22.00\">k</tspan><tspan dy=\"6.60\" font-size=\"15.40\">n</tspan><tspan dy=\"-6.60\" font-size=\"22.00\">′ = 100 μA/V², </tspan><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">t</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = 0.8 V</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Required W/L",
+          "points": 2
+        },
+        {
+          "label": "Required width W",
+          "points": 2
+        },
+        {
+          "label": "Show the derivation",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw4-p4-cmos-process",
+      "title": "4) CMOS process parameters, saturation bias, and triode resistor",
+      "promptHtml": "<p>A CMOS process has L<sub>min</sub> = 0.25 μm, t<sub>ox</sub> = 6 nm, μ<sub>n</sub> = 460 cm<sup>2</sup>/V·s, and V<sub>t</sub> = 0.5 V.</p><ol><li>Find C<sub>ox</sub> and k<sub>n</sub>′.</li><li>For an NMOS transistor with W/L = 15 μm/0.25 μm, calculate V<sub>OV</sub>, V<sub>GS</sub>, and V<sub>DS,min</sub> needed to operate in saturation with a dc current I<sub>D</sub> = 0.8 mA.</li><li>For the same device, find V<sub>OV</sub> and V<sub>GS</sub> required to operate it as a 500 Ω resistor for very small v<sub>DS</sub>.</li></ol><p>Use ε<sub>ox</sub> = 3.9ε<sub>0</sub> = 3.45×10<sup>−11</sup> F/m.</p>",
+      "hints": [
+        "C_ox = ε_ox/t_ox; 1 F/m² = 1 fF/μm²·10³.",
+        "Saturation: I_D = ½k_n′(W/L)V_OV². Triode (small v_DS): r_DS = 1/[k_n′(W/L)V_OV]."
+      ],
+      "checklist": [
+        "Compute C_ox and k_n′ with consistent units.",
+        "Solve the saturation equation for V_OV.",
+        "State V_DS,min = V_OV.",
+        "Solve the triode resistance for V_OV."
+      ],
+      "responseFields": [
+        {
+          "id": "cox",
+          "type": "numeric",
+          "label": "C_ox",
+          "unit": "fF/μm²",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "kn",
+          "type": "numeric",
+          "label": "k_n′",
+          "unit": "μA/V²",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vov",
+          "type": "numeric",
+          "label": "(b) V_OV",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vgs",
+          "type": "numeric",
+          "label": "(b) V_GS",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vdsmin",
+          "type": "numeric",
+          "label": "(b) V_DS,min",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vovr",
+          "type": "numeric",
+          "label": "(c) V_OV for 500 Ω",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "vgsr",
+          "type": "numeric",
+          "label": "(c) V_GS for 500 Ω",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "why",
+          "type": "text",
+          "label": "Explain V_DS,min and compare (b) with (c)",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "NMOS · P4",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_41b303b5-a921-482f-9220-793f26a9c6ed",
+              "type": "nmos",
+              "x": 680,
+              "y": 360,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "M_1",
+              "value": "W/L = 15 μm / 0.25 μm",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_7db1c541-c506-4737-a9db-f037632264da",
+              "type": "voltage",
+              "x": 180,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_G",
+              "value": "V_GS = ?",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_9a592953-c181-468e-a2ce-36df01d0e497",
+              "type": "ground",
+              "x": 180,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_1b69ae8e-641f-44bd-a32d-52506780624a",
+              "type": "voltage",
+              "x": 1040,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_{DS}",
+              "value": "V_DS ≥ ?",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_b8ad5ea4-093d-4d24-bef7-c3ded85663e7",
+              "type": "ground",
+              "x": 1040,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_e76227c6-3c3e-4603-8f60-76e631288a80",
+              "type": "ground",
+              "x": 700,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G3",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_ca7694c5-0d5d-43d3-8405-b6f7bdbf20d5",
+              "type": "text",
+              "x": 735,
+              "y": 260,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T6",
+              "value": "V_D",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_524c41df-4ef2-42d3-be03-1d004ca687d1",
+              "type": "text",
+              "x": 568,
+              "y": 335,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T7",
+              "value": "V_G",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_4a53a21d-f78f-41eb-9dd2-e5e17e83e24d",
+              "type": "text",
+              "x": 610,
+              "y": 150,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T8",
+              "value": "t_ox = 6 nm, μ_n = 460 cm²/V·s, V_t = 0.5 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_bfd9d41e-34ca-487e-bece-40d27cdebd86",
+              "x": 700,
+              "y": 280
+            },
+            {
+              "id": "j_9a477ff8-d4b2-4441-9860-089dd7cbc484",
+              "x": 560,
+              "y": 360
+            },
+            {
+              "id": "j_48509503-725e-4242-8ee9-5c8dc0b60a3e",
+              "x": 700,
+              "y": 420
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_b508e879-fb18-44a6-a14c-10c7d9c13d8f",
+              "a": {
+                "j": "j_bfd9d41e-34ca-487e-bece-40d27cdebd86"
+              },
+              "b": {
+                "c": "c_41b303b5-a921-482f-9220-793f26a9c6ed",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_c891571e-4ac4-415c-b9f1-8b352c811eb9",
+              "a": {
+                "j": "j_9a477ff8-d4b2-4441-9860-089dd7cbc484"
+              },
+              "b": {
+                "c": "c_41b303b5-a921-482f-9220-793f26a9c6ed",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_0b6bcec8-faae-4298-a99f-6383ae5cc8f2",
+              "a": {
+                "c": "c_41b303b5-a921-482f-9220-793f26a9c6ed",
+                "p": 2
+              },
+              "b": {
+                "j": "j_48509503-725e-4242-8ee9-5c8dc0b60a3e"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_79fc2552-b3ea-4d4c-87dd-09994c952a70",
+              "a": {
+                "c": "c_7db1c541-c506-4737-a9db-f037632264da",
+                "p": 1
+              },
+              "b": {
+                "c": "c_9a592953-c181-468e-a2ce-36df01d0e497",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_ce7c905b-46a2-494d-8ecf-fa03d71d722e",
+              "a": {
+                "c": "c_1b69ae8e-641f-44bd-a32d-52506780624a",
+                "p": 1
+              },
+              "b": {
+                "c": "c_b8ad5ea4-093d-4d24-bef7-c3ded85663e7",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_f36c1b40-0acb-4966-aaeb-a8119b61b193",
+              "a": {
+                "c": "c_7db1c541-c506-4737-a9db-f037632264da",
+                "p": 0
+              },
+              "b": {
+                "j": "j_9a477ff8-d4b2-4441-9860-089dd7cbc484"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 180,
+                  "y": 360
+                }
+              ]
+            },
+            {
+              "id": "w_46fcff95-f3c7-4cdb-a833-4f947b400107",
+              "a": {
+                "c": "c_1b69ae8e-641f-44bd-a32d-52506780624a",
+                "p": 0
+              },
+              "b": {
+                "j": "j_bfd9d41e-34ca-487e-bece-40d27cdebd86"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 1040,
+                  "y": 280
+                }
+              ]
+            },
+            {
+              "id": "w_7685acf1-9c57-440c-b3c0-6287172d7666",
+              "a": {
+                "j": "j_48509503-725e-4242-8ee9-5c8dc0b60a3e"
+              },
+              "b": {
+                "c": "c_e76227c6-3c3e-4603-8f60-76e631288a80",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            }
+          ],
+          "lesson": {
+            "family": "mosfet",
+            "key": "regions",
+            "roles": {
+              "M": "c_41b303b5-a921-482f-9220-793f26a9c6ed",
+              "Vg": "c_7db1c541-c506-4737-a9db-f037632264da",
+              "Vds": "c_1b69ae8e-641f-44bd-a32d-52506780624a"
+            },
+            "params": {
+              "vth": 0.5,
+              "kn": 2,
+              "lambda": 0,
+              "freq": 1000
+            },
+            "signalRepresentation": "pi"
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1097\" height=\"542\" viewBox=\"90 86.07414245605469 1096.1708984375 541.9258422851562\"><title>NMOS · P4</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"90\" y=\"86.07414245605469\" width=\"1096.1708984375\" height=\"541.9258422851562\" fill=\"white\"/><path d=\"M700 280L700 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M560 360L640 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 400L700 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 480L180 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 480L1040 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 400L180 360L560 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 400L1040 280L700 280\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 420L700 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"700\" cy=\"280\" r=\"4\" fill=\"#365a72\"/><circle cx=\"560\" cy=\"360\" r=\"4\" fill=\"#365a72\"/><circle cx=\"700\" cy=\"420\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_41b303b5-a921-482f-9220-793f26a9c6ed\"><g transform=\"translate(680 360) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-8M-8 -22V22M0 -22V-8M0 -5V5M0 8V22M0 -18H20V-40M0 18H20V40M20 18V0H4\"/><path d=\"M14 -4 L6 0 L14 4\" fill=\"currentColor\" stroke=\"none\"/></g></g><g class=\"drawing-label\" data-label=\"c_41b303b5-a921-482f-9220-793f26a9c6ed\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"353\" font-size=\"19\"><tspan font-size=\"19.00\">M</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_41b303b5-a921-482f-9220-793f26a9c6ed\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"376\" font-size=\"17\"><tspan font-size=\"17.00\">W/L = 15 μm / 0.25 μm</tspan></text></g></g><g class=\"component\" data-c=\"c_7db1c541-c506-4737-a9db-f037632264da\"><g transform=\"translate(180 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_7db1c541-c506-4737-a9db-f037632264da\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">G</tspan></text></g><g class=\"drawing-label\" data-label=\"c_7db1c541-c506-4737-a9db-f037632264da\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">V</tspan><tspan dy=\"5.10\" font-size=\"11.90\">GS</tspan><tspan dy=\"-5.10\" font-size=\"17.00\"> = ?</tspan></text></g></g><g class=\"component\" data-c=\"c_9a592953-c181-468e-a2ce-36df01d0e497\"><g transform=\"translate(180 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_1b69ae8e-641f-44bd-a32d-52506780624a\"><g transform=\"translate(1040 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_1b69ae8e-641f-44bd-a32d-52506780624a\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">DS</tspan></text></g><g class=\"drawing-label\" data-label=\"c_1b69ae8e-641f-44bd-a32d-52506780624a\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">V</tspan><tspan dy=\"5.10\" font-size=\"11.90\">DS</tspan><tspan dy=\"-5.10\" font-size=\"17.00\"> ≥ ?</tspan></text></g></g><g class=\"component\" data-c=\"c_b8ad5ea4-093d-4d24-bef7-c3ded85663e7\"><g transform=\"translate(1040 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_e76227c6-3c3e-4603-8f60-76e631288a80\"><g transform=\"translate(700 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_ca7694c5-0d5d-43d3-8405-b6f7bdbf20d5\"><g class=\"drawing-label\" data-label=\"c_ca7694c5-0d5d-43d3-8405-b6f7bdbf20d5\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"735\" y=\"260\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">D</tspan></text></g></g><g class=\"component\" data-c=\"c_524c41df-4ef2-42d3-be03-1d004ca687d1\"><g class=\"drawing-label\" data-label=\"c_524c41df-4ef2-42d3-be03-1d004ca687d1\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"568\" y=\"335\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">G</tspan></text></g></g><g class=\"component\" data-c=\"c_4a53a21d-f78f-41eb-9dd2-e5e17e83e24d\"><g class=\"drawing-label\" data-label=\"c_4a53a21d-f78f-41eb-9dd2-e5e17e83e24d\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"610\" y=\"150\" font-size=\"22\"><tspan font-size=\"22.00\">t</tspan><tspan dy=\"6.60\" font-size=\"15.40\">ox</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = 6 nm, </tspan><tspan font-size=\"22.00\">μ</tspan><tspan dy=\"6.60\" font-size=\"15.40\">n</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = 460 cm²/V·s, </tspan><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">t</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = 0.5 V</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "C_ox",
+          "points": 2
+        },
+        {
+          "label": "k_n′",
+          "points": 2
+        },
+        {
+          "label": "(b) V_OV",
+          "points": 2
+        },
+        {
+          "label": "(b) V_GS",
+          "points": 2
+        },
+        {
+          "label": "(b) V_DS,min",
+          "points": 2
+        },
+        {
+          "label": "(c) V_OV for 500 Ω",
+          "points": 2
+        },
+        {
+          "label": "(c) V_GS for 500 Ω",
+          "points": 2
+        },
+        {
+          "label": "Explain V_DS,min and compare (b) with (c)",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw4-p5-extract-kn-vt",
+      "title": "5) Extract k_n and V_t from two measurements",
+      "promptHtml": "<p>A particular n-channel enhancement MOSFET is measured to have a drain current of 0.4 mA at V<sub>GS</sub> = V<sub>DS</sub> = 2 V and of 0.1 mA at V<sub>GS</sub> = V<sub>DS</sub> = 1.5 V. What are the values of k<sub>n</sub> and V<sub>t</sub> for this device?</p><p>Use I<sub>D</sub> = ½k<sub>n</sub>(V<sub>GS</sub> − V<sub>t</sub>)<sup>2</sup> with k<sub>n</sub> = k<sub>n</sub>′(W/L).</p>",
+      "hints": [
+        "With V_DS = V_GS > V_GS − V_t the device is always in saturation.",
+        "Take the ratio of the two currents so k_n cancels."
+      ],
+      "checklist": [
+        "Justify the saturation assumption.",
+        "Use the current ratio to find V_t.",
+        "Back-substitute for k_n."
+      ],
+      "responseFields": [
+        {
+          "id": "vt",
+          "type": "numeric",
+          "label": "Threshold voltage V_t",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "kn",
+          "type": "numeric",
+          "label": "k_n",
+          "unit": "mA/V²",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "why",
+          "type": "text",
+          "label": "Show the ratio method and the saturation check",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "NMOS · P5",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_eccc9954-d50e-44c9-94fe-e9f6bb433bd1",
+              "type": "nmos",
+              "x": 680,
+              "y": 360,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "M_1",
+              "value": "NMOS",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_b0ae543e-2723-4aba-8576-3dd532e3dd3b",
+              "type": "voltage",
+              "x": 180,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_G",
+              "value": "2 V / 1.5 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_aa82526c-8e6f-4651-8eb8-e31fccb3fd1c",
+              "type": "ground",
+              "x": 180,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_7b835b21-6c5f-4aa5-8093-2d4a3634a3d4",
+              "type": "voltage",
+              "x": 1040,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_{DS}",
+              "value": "2 V / 1.5 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_71e064b5-3444-4a9b-96b2-d362912038f9",
+              "type": "ground",
+              "x": 1040,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_366adb5c-ffb0-44c3-ab2d-d5fc5d171897",
+              "type": "ground",
+              "x": 700,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G3",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_e046995b-5d82-43d0-904a-6ff092f1b102",
+              "type": "text",
+              "x": 735,
+              "y": 260,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T6",
+              "value": "V_D",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_b5c9072d-df37-4350-a498-f8608118c48e",
+              "type": "text",
+              "x": 568,
+              "y": 335,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T7",
+              "value": "V_G",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_3db76788-712c-4e8a-85d5-4489c1d862c5",
+              "type": "text",
+              "x": 610,
+              "y": 150,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T8",
+              "value": "I_D = 0.4 mA at 2 V; 0.1 mA at 1.5 V (V_GS = V_DS)",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_679451cc-7574-49e5-8469-7fd44a407a6b",
+              "x": 700,
+              "y": 280
+            },
+            {
+              "id": "j_5ae2b746-eedc-4f90-950d-f219c5b5ecb5",
+              "x": 560,
+              "y": 360
+            },
+            {
+              "id": "j_64884643-e8c5-421d-b1ec-fbfa56135efb",
+              "x": 700,
+              "y": 420
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_ae08e024-3c8e-4076-86a3-e465a6edb98f",
+              "a": {
+                "j": "j_679451cc-7574-49e5-8469-7fd44a407a6b"
+              },
+              "b": {
+                "c": "c_eccc9954-d50e-44c9-94fe-e9f6bb433bd1",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_bf74788d-e182-478d-85a9-ebabb8dfa347",
+              "a": {
+                "j": "j_5ae2b746-eedc-4f90-950d-f219c5b5ecb5"
+              },
+              "b": {
+                "c": "c_eccc9954-d50e-44c9-94fe-e9f6bb433bd1",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_39776a86-eb61-44a9-8db3-c363728d4238",
+              "a": {
+                "c": "c_eccc9954-d50e-44c9-94fe-e9f6bb433bd1",
+                "p": 2
+              },
+              "b": {
+                "j": "j_64884643-e8c5-421d-b1ec-fbfa56135efb"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_2e8322bf-4949-435b-88a8-d3f0c91735db",
+              "a": {
+                "c": "c_b0ae543e-2723-4aba-8576-3dd532e3dd3b",
+                "p": 1
+              },
+              "b": {
+                "c": "c_aa82526c-8e6f-4651-8eb8-e31fccb3fd1c",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_2f5cef11-0adb-435c-8985-9d3395a07eaf",
+              "a": {
+                "c": "c_7b835b21-6c5f-4aa5-8093-2d4a3634a3d4",
+                "p": 1
+              },
+              "b": {
+                "c": "c_71e064b5-3444-4a9b-96b2-d362912038f9",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_cd32aeb1-9462-4164-8aac-c573f9f1d337",
+              "a": {
+                "c": "c_b0ae543e-2723-4aba-8576-3dd532e3dd3b",
+                "p": 0
+              },
+              "b": {
+                "j": "j_5ae2b746-eedc-4f90-950d-f219c5b5ecb5"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 180,
+                  "y": 360
+                }
+              ]
+            },
+            {
+              "id": "w_8cfd3869-fcc5-4201-b9c4-f34ab73a130e",
+              "a": {
+                "c": "c_7b835b21-6c5f-4aa5-8093-2d4a3634a3d4",
+                "p": 0
+              },
+              "b": {
+                "j": "j_679451cc-7574-49e5-8469-7fd44a407a6b"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 1040,
+                  "y": 280
+                }
+              ]
+            },
+            {
+              "id": "w_052360c5-5801-43ec-99bb-b0f49f3656c3",
+              "a": {
+                "j": "j_64884643-e8c5-421d-b1ec-fbfa56135efb"
+              },
+              "b": {
+                "c": "c_366adb5c-ffb0-44c3-ab2d-d5fc5d171897",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            }
+          ],
+          "lesson": {
+            "family": "mosfet",
+            "key": "regions",
+            "roles": {
+              "M": "c_eccc9954-d50e-44c9-94fe-e9f6bb433bd1",
+              "Vg": "c_b0ae543e-2723-4aba-8576-3dd532e3dd3b",
+              "Vds": "c_7b835b21-6c5f-4aa5-8093-2d4a3634a3d4"
+            },
+            "params": {
+              "vth": 1,
+              "kn": 2,
+              "lambda": 0,
+              "freq": 1000
+            },
+            "signalRepresentation": "pi"
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1119\" height=\"543\" viewBox=\"90 85.69004821777344 1118.595947265625 542.3099365234375\"><title>NMOS · P5</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"90\" y=\"85.69004821777344\" width=\"1118.595947265625\" height=\"542.3099365234375\" fill=\"white\"/><path d=\"M700 280L700 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M560 360L640 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 400L700 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 480L180 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 480L1040 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 400L180 360L560 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 400L1040 280L700 280\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 420L700 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"700\" cy=\"280\" r=\"4\" fill=\"#365a72\"/><circle cx=\"560\" cy=\"360\" r=\"4\" fill=\"#365a72\"/><circle cx=\"700\" cy=\"420\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_eccc9954-d50e-44c9-94fe-e9f6bb433bd1\"><g transform=\"translate(680 360) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-8M-8 -22V22M0 -22V-8M0 -5V5M0 8V22M0 -18H20V-40M0 18H20V40M20 18V0H4\"/><path d=\"M14 -4 L6 0 L14 4\" fill=\"currentColor\" stroke=\"none\"/></g></g><g class=\"drawing-label\" data-label=\"c_eccc9954-d50e-44c9-94fe-e9f6bb433bd1\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"353\" font-size=\"19\"><tspan font-size=\"19.00\">M</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_eccc9954-d50e-44c9-94fe-e9f6bb433bd1\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"376\" font-size=\"17\"><tspan font-size=\"17.00\">NMOS</tspan></text></g></g><g class=\"component\" data-c=\"c_b0ae543e-2723-4aba-8576-3dd532e3dd3b\"><g transform=\"translate(180 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_b0ae543e-2723-4aba-8576-3dd532e3dd3b\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">G</tspan></text></g><g class=\"drawing-label\" data-label=\"c_b0ae543e-2723-4aba-8576-3dd532e3dd3b\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">2 V / 1.5 V</tspan></text></g></g><g class=\"component\" data-c=\"c_aa82526c-8e6f-4651-8eb8-e31fccb3fd1c\"><g transform=\"translate(180 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_7b835b21-6c5f-4aa5-8093-2d4a3634a3d4\"><g transform=\"translate(1040 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_7b835b21-6c5f-4aa5-8093-2d4a3634a3d4\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">DS</tspan></text></g><g class=\"drawing-label\" data-label=\"c_7b835b21-6c5f-4aa5-8093-2d4a3634a3d4\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">2 V / 1.5 V</tspan></text></g></g><g class=\"component\" data-c=\"c_71e064b5-3444-4a9b-96b2-d362912038f9\"><g transform=\"translate(1040 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_366adb5c-ffb0-44c3-ab2d-d5fc5d171897\"><g transform=\"translate(700 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_e046995b-5d82-43d0-904a-6ff092f1b102\"><g class=\"drawing-label\" data-label=\"c_e046995b-5d82-43d0-904a-6ff092f1b102\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"735\" y=\"260\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">D</tspan></text></g></g><g class=\"component\" data-c=\"c_b5c9072d-df37-4350-a498-f8608118c48e\"><g class=\"drawing-label\" data-label=\"c_b5c9072d-df37-4350-a498-f8608118c48e\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"568\" y=\"335\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">G</tspan></text></g></g><g class=\"component\" data-c=\"c_3db76788-712c-4e8a-85d5-4489c1d862c5\"><g class=\"drawing-label\" data-label=\"c_3db76788-712c-4e8a-85d5-4489c1d862c5\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"610\" y=\"150\" font-size=\"22\"><tspan font-size=\"22.00\">I</tspan><tspan dy=\"6.60\" font-size=\"15.40\">D</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = 0.4 mA at 2 V; 0.1 mA at 1.5 V (</tspan><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">GS</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = </tspan><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">DS</tspan><tspan dy=\"-6.60\" font-size=\"22.00\">)</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Threshold voltage V_t",
+          "points": 2
+        },
+        {
+          "label": "k_n",
+          "points": 2
+        },
+        {
+          "label": "Show the ratio method and the saturation check",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw4-p6-width-design",
+      "title": "6) Channel width for 2 mA at V_GS = V_DS = 1.8 V",
+      "promptHtml": "<p>For an IC process with k<sub>n</sub>′ = 400 μA/V<sup>2</sup> and V<sub>t</sub> = 0.4 V, an application uses v<sub>GS</sub> = v<sub>DS</sub> = V<sub>supply</sub> = 1.8 V. A drain current of 2 mA is required of a device with the minimum length 0.18 μm. What channel width must the design use?</p>",
+      "hints": [
+        "V_DS = V_GS guarantees saturation.",
+        "Solve I_D = ½k_n′(W/L)V_OV² for W/L."
+      ],
+      "checklist": [
+        "State the region.",
+        "Solve for W/L.",
+        "Convert to W with L = 0.18 μm."
+      ],
+      "responseFields": [
+        {
+          "id": "wl",
+          "type": "numeric",
+          "label": "Required W/L",
+          "unit": "",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "w",
+          "type": "numeric",
+          "label": "Required width W",
+          "unit": "μm",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "why",
+          "type": "text",
+          "label": "Show the region check and the sizing",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "NMOS · P6",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_cb00745f-4333-40a2-94a0-81400944b51a",
+              "type": "nmos",
+              "x": 680,
+              "y": 360,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "M_1",
+              "value": "L = 0.18 μm, W = ?",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_8a7ca35e-e082-472f-a137-a91f04def56a",
+              "type": "voltage",
+              "x": 180,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_G",
+              "value": "1.8 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_f32d508e-0925-4e8c-9323-7bda4e281eb7",
+              "type": "ground",
+              "x": 180,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_fffc6bd1-f7ef-4b62-8ac0-6075fae2dd24",
+              "type": "voltage",
+              "x": 1040,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_{DS}",
+              "value": "1.8 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_d3720916-b2f3-4c4b-8064-dc2cfd54633e",
+              "type": "ground",
+              "x": 1040,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_35c6f1b9-41af-4816-acbc-18c1b7c76d29",
+              "type": "ground",
+              "x": 700,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G3",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_1c0839f0-124c-46fc-bb9f-c083b13f576d",
+              "type": "text",
+              "x": 735,
+              "y": 260,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T6",
+              "value": "V_D",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_b5d24566-3ea1-47de-a00d-a425835ba048",
+              "type": "text",
+              "x": 568,
+              "y": 335,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T7",
+              "value": "V_G",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_364f0907-2db2-44b2-be84-dd6a2915ff47",
+              "type": "text",
+              "x": 610,
+              "y": 150,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T8",
+              "value": "k_n′ = 400 μA/V², V_t = 0.4 V, I_D = 2 mA",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_ff5b0d61-35c9-472e-83ff-62672ab6fc5d",
+              "x": 700,
+              "y": 280
+            },
+            {
+              "id": "j_25395449-16b3-430b-92fe-8c528991114a",
+              "x": 560,
+              "y": 360
+            },
+            {
+              "id": "j_30874e7e-63a3-4d38-8a60-5833be646ce2",
+              "x": 700,
+              "y": 420
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_fb03ef31-6232-4ca0-ace9-399f0b5ee23e",
+              "a": {
+                "j": "j_ff5b0d61-35c9-472e-83ff-62672ab6fc5d"
+              },
+              "b": {
+                "c": "c_cb00745f-4333-40a2-94a0-81400944b51a",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_55c41e9c-75e1-4715-bbe4-73b968744bfa",
+              "a": {
+                "j": "j_25395449-16b3-430b-92fe-8c528991114a"
+              },
+              "b": {
+                "c": "c_cb00745f-4333-40a2-94a0-81400944b51a",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_b615d9a0-d1a6-47b1-8f87-7d0244e182f5",
+              "a": {
+                "c": "c_cb00745f-4333-40a2-94a0-81400944b51a",
+                "p": 2
+              },
+              "b": {
+                "j": "j_30874e7e-63a3-4d38-8a60-5833be646ce2"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_f551dcd5-dd78-43fa-a51d-76c4c901ea35",
+              "a": {
+                "c": "c_8a7ca35e-e082-472f-a137-a91f04def56a",
+                "p": 1
+              },
+              "b": {
+                "c": "c_f32d508e-0925-4e8c-9323-7bda4e281eb7",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_281a914d-a64c-4317-b3fc-8d9157dde470",
+              "a": {
+                "c": "c_fffc6bd1-f7ef-4b62-8ac0-6075fae2dd24",
+                "p": 1
+              },
+              "b": {
+                "c": "c_d3720916-b2f3-4c4b-8064-dc2cfd54633e",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_451da92b-7b97-4b06-9ed3-237a39e8f868",
+              "a": {
+                "c": "c_8a7ca35e-e082-472f-a137-a91f04def56a",
+                "p": 0
+              },
+              "b": {
+                "j": "j_25395449-16b3-430b-92fe-8c528991114a"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 180,
+                  "y": 360
+                }
+              ]
+            },
+            {
+              "id": "w_a062a9f6-cfce-4882-b480-314ef24bc88c",
+              "a": {
+                "c": "c_fffc6bd1-f7ef-4b62-8ac0-6075fae2dd24",
+                "p": 0
+              },
+              "b": {
+                "j": "j_ff5b0d61-35c9-472e-83ff-62672ab6fc5d"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 1040,
+                  "y": 280
+                }
+              ]
+            },
+            {
+              "id": "w_4adcd30e-cef2-4dd8-b281-0ba7930e8781",
+              "a": {
+                "j": "j_30874e7e-63a3-4d38-8a60-5833be646ce2"
+              },
+              "b": {
+                "c": "c_35c6f1b9-41af-4816-acbc-18c1b7c76d29",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            }
+          ],
+          "lesson": {
+            "family": "mosfet",
+            "key": "regions",
+            "roles": {
+              "M": "c_cb00745f-4333-40a2-94a0-81400944b51a",
+              "Vg": "c_8a7ca35e-e082-472f-a137-a91f04def56a",
+              "Vds": "c_fffc6bd1-f7ef-4b62-8ac0-6075fae2dd24"
+            },
+            "params": {
+              "vth": 0.4,
+              "kn": 2,
+              "lambda": 0,
+              "freq": 1000
+            },
+            "signalRepresentation": "pi"
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1081\" height=\"544\" viewBox=\"90 84.77940368652344 1080.58251953125 543.2205810546875\"><title>NMOS · P6</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"90\" y=\"84.77940368652344\" width=\"1080.58251953125\" height=\"543.2205810546875\" fill=\"white\"/><path d=\"M700 280L700 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M560 360L640 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 400L700 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 480L180 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 480L1040 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 400L180 360L560 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 400L1040 280L700 280\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 420L700 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"700\" cy=\"280\" r=\"4\" fill=\"#365a72\"/><circle cx=\"560\" cy=\"360\" r=\"4\" fill=\"#365a72\"/><circle cx=\"700\" cy=\"420\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_cb00745f-4333-40a2-94a0-81400944b51a\"><g transform=\"translate(680 360) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-8M-8 -22V22M0 -22V-8M0 -5V5M0 8V22M0 -18H20V-40M0 18H20V40M20 18V0H4\"/><path d=\"M14 -4 L6 0 L14 4\" fill=\"currentColor\" stroke=\"none\"/></g></g><g class=\"drawing-label\" data-label=\"c_cb00745f-4333-40a2-94a0-81400944b51a\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"353\" font-size=\"19\"><tspan font-size=\"19.00\">M</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_cb00745f-4333-40a2-94a0-81400944b51a\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"376\" font-size=\"17\"><tspan font-size=\"17.00\">L = 0.18 μm, W = ?</tspan></text></g></g><g class=\"component\" data-c=\"c_8a7ca35e-e082-472f-a137-a91f04def56a\"><g transform=\"translate(180 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_8a7ca35e-e082-472f-a137-a91f04def56a\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">G</tspan></text></g><g class=\"drawing-label\" data-label=\"c_8a7ca35e-e082-472f-a137-a91f04def56a\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">1.8 V</tspan></text></g></g><g class=\"component\" data-c=\"c_f32d508e-0925-4e8c-9323-7bda4e281eb7\"><g transform=\"translate(180 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_fffc6bd1-f7ef-4b62-8ac0-6075fae2dd24\"><g transform=\"translate(1040 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_fffc6bd1-f7ef-4b62-8ac0-6075fae2dd24\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">DS</tspan></text></g><g class=\"drawing-label\" data-label=\"c_fffc6bd1-f7ef-4b62-8ac0-6075fae2dd24\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">1.8 V</tspan></text></g></g><g class=\"component\" data-c=\"c_d3720916-b2f3-4c4b-8064-dc2cfd54633e\"><g transform=\"translate(1040 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_35c6f1b9-41af-4816-acbc-18c1b7c76d29\"><g transform=\"translate(700 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_1c0839f0-124c-46fc-bb9f-c083b13f576d\"><g class=\"drawing-label\" data-label=\"c_1c0839f0-124c-46fc-bb9f-c083b13f576d\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"735\" y=\"260\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">D</tspan></text></g></g><g class=\"component\" data-c=\"c_b5d24566-3ea1-47de-a00d-a425835ba048\"><g class=\"drawing-label\" data-label=\"c_b5d24566-3ea1-47de-a00d-a425835ba048\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"568\" y=\"335\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">G</tspan></text></g></g><g class=\"component\" data-c=\"c_364f0907-2db2-44b2-be84-dd6a2915ff47\"><g class=\"drawing-label\" data-label=\"c_364f0907-2db2-44b2-be84-dd6a2915ff47\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"610\" y=\"150\" font-size=\"22\"><tspan font-size=\"22.00\">k</tspan><tspan dy=\"6.60\" font-size=\"15.40\">n</tspan><tspan dy=\"-6.60\" font-size=\"22.00\">′ = 400 μA/V², </tspan><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">t</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = 0.4 V, </tspan><tspan font-size=\"22.00\">I</tspan><tspan dy=\"6.60\" font-size=\"15.40\">D</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = 2 mA</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Required W/L",
+          "points": 2
+        },
+        {
+          "label": "Required width W",
+          "points": 2
+        },
+        {
+          "label": "Show the region check and the sizing",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw4-p7-three-vds",
+      "title": "7) NMOS region and current at three V_DS values",
+      "promptHtml": "<p>An NMOS with V<sub>t</sub> = 0.5 V and k<sub>n</sub>′(W/L) = 2 mA/V<sup>2</sup> (λ = 0) has V<sub>GS</sub> = 1.2 V. Find the operating region and I<sub>D</sub> for (a) V<sub>DS</sub> = 0.2 V, (b) V<sub>DS</sub> = 0.7 V, (c) V<sub>DS</sub> = 1.5 V.</p>",
+      "hints": [
+        "V_OV = V_GS − V_t; compare V_DS with V_OV.",
+        "Triode: I_D = k_n′(W/L)[V_OV V_DS − V_DS²/2]."
+      ],
+      "checklist": [
+        "Compute V_OV.",
+        "Classify each case.",
+        "Compute I_D."
+      ],
+      "responseFields": [
+        {
+          "id": "ra",
+          "type": "choice",
+          "label": "(a) region",
+          "unit": "",
+          "options": [
+            "cutoff",
+            "triode",
+            "saturation"
+          ],
+          "points": 1
+        },
+        {
+          "id": "ia",
+          "type": "numeric",
+          "label": "(a) I_D",
+          "unit": "mA",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "rb",
+          "type": "choice",
+          "label": "(b) region",
+          "unit": "",
+          "options": [
+            "cutoff",
+            "triode",
+            "saturation"
+          ],
+          "points": 1
+        },
+        {
+          "id": "ib",
+          "type": "numeric",
+          "label": "(b) I_D",
+          "unit": "mA",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "rc",
+          "type": "choice",
+          "label": "(c) region",
+          "unit": "",
+          "options": [
+            "cutoff",
+            "triode",
+            "saturation"
+          ],
+          "points": 1
+        },
+        {
+          "id": "ic",
+          "type": "numeric",
+          "label": "(c) I_D",
+          "unit": "mA",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "why",
+          "type": "text",
+          "label": "Explain the boundary case (b)",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "NMOS · three V_DS values",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_060d5e0e-c4ff-4891-bf31-b3bd8bbed5df",
+              "type": "nmos",
+              "x": 680,
+              "y": 360,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "M_1",
+              "value": "k′W/L = 2 mA/V²",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_a5ea9ac0-6059-4506-b9f5-727037e15f04",
+              "type": "voltage",
+              "x": 180,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_G",
+              "value": "1.2 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_6594cf44-4985-4383-a0ec-3b43994adb34",
+              "type": "ground",
+              "x": 180,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_de0f8065-f0a1-45cc-be0c-0c78b53980b5",
+              "type": "voltage",
+              "x": 1040,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_{DS}",
+              "value": "0.2 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_4c02a888-3a42-4c76-9fbf-c3b255bcc02e",
+              "type": "ground",
+              "x": 1040,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_ba9865ba-28dc-414c-b128-d457c2b8471f",
+              "type": "ground",
+              "x": 700,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G3",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_92e30c11-ae0f-4d03-9cdb-df22e083e42b",
+              "type": "text",
+              "x": 735,
+              "y": 260,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T6",
+              "value": "V_D",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_fcb5a3db-ddbc-4e19-b406-62d81d53c439",
+              "type": "text",
+              "x": 568,
+              "y": 335,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T7",
+              "value": "V_G",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_d62a21ff-b9bc-4212-ab9e-8f75d15ff9d6",
+              "type": "text",
+              "x": 610,
+              "y": 150,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T9",
+              "value": "V_DS = 0.2 V, 0.7 V, 1.5 V · V_t = 0.5 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [
+            {
+              "id": "j_c85f36ae-309e-4844-b305-243be86b4f76",
+              "x": 700,
+              "y": 280
+            },
+            {
+              "id": "j_254daa43-4c0c-43aa-b651-836bc2107020",
+              "x": 560,
+              "y": 360
+            },
+            {
+              "id": "j_42ac078b-b53e-43ec-a9a0-0f01b57f76e3",
+              "x": 700,
+              "y": 420
+            }
+          ],
+          "wires": [
+            {
+              "id": "w_a71b8a8b-8c37-4195-ac5a-5d011372fb20",
+              "a": {
+                "j": "j_c85f36ae-309e-4844-b305-243be86b4f76"
+              },
+              "b": {
+                "c": "c_060d5e0e-c4ff-4891-bf31-b3bd8bbed5df",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_a51d6476-ac40-4923-bc77-9cb8f78e291c",
+              "a": {
+                "j": "j_254daa43-4c0c-43aa-b651-836bc2107020"
+              },
+              "b": {
+                "c": "c_060d5e0e-c4ff-4891-bf31-b3bd8bbed5df",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_e89f5e35-c57f-4f38-8504-35bc8c5dc29c",
+              "a": {
+                "c": "c_060d5e0e-c4ff-4891-bf31-b3bd8bbed5df",
+                "p": 2
+              },
+              "b": {
+                "j": "j_42ac078b-b53e-43ec-a9a0-0f01b57f76e3"
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_1a3f1075-1b1d-40cd-9900-9489fd656e75",
+              "a": {
+                "c": "c_a5ea9ac0-6059-4506-b9f5-727037e15f04",
+                "p": 1
+              },
+              "b": {
+                "c": "c_6594cf44-4985-4383-a0ec-3b43994adb34",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_b031f01e-8f7a-48d6-8b5b-9a3eee99f5ba",
+              "a": {
+                "c": "c_de0f8065-f0a1-45cc-be0c-0c78b53980b5",
+                "p": 1
+              },
+              "b": {
+                "c": "c_4c02a888-3a42-4c76-9fbf-c3b255bcc02e",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_ac083336-65b4-4f13-854d-3807f27a8217",
+              "a": {
+                "c": "c_a5ea9ac0-6059-4506-b9f5-727037e15f04",
+                "p": 0
+              },
+              "b": {
+                "j": "j_254daa43-4c0c-43aa-b651-836bc2107020"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 180,
+                  "y": 360
+                }
+              ]
+            },
+            {
+              "id": "w_70d23c50-9813-46bd-9de9-7e7935f8ff42",
+              "a": {
+                "c": "c_de0f8065-f0a1-45cc-be0c-0c78b53980b5",
+                "p": 0
+              },
+              "b": {
+                "j": "j_c85f36ae-309e-4844-b305-243be86b4f76"
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 1040,
+                  "y": 280
+                }
+              ]
+            },
+            {
+              "id": "w_860bfb2f-1366-4087-8a0a-9d7c1cd21e2b",
+              "a": {
+                "j": "j_42ac078b-b53e-43ec-a9a0-0f01b57f76e3"
+              },
+              "b": {
+                "c": "c_ba9865ba-28dc-414c-b128-d457c2b8471f",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            }
+          ],
+          "lesson": {
+            "family": "mosfet",
+            "key": "regions",
+            "roles": {
+              "M": "c_060d5e0e-c4ff-4891-bf31-b3bd8bbed5df",
+              "Vg": "c_a5ea9ac0-6059-4506-b9f5-727037e15f04",
+              "Vds": "c_de0f8065-f0a1-45cc-be0c-0c78b53980b5"
+            },
+            "params": {
+              "vth": 0.5,
+              "kn": 2,
+              "lambda": 0,
+              "freq": 1000
+            },
+            "signalRepresentation": "pi"
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1081\" height=\"544\" viewBox=\"90 84.78765869140625 1080.603271484375 543.2123413085938\"><title>NMOS · three V_DS values</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"90\" y=\"84.78765869140625\" width=\"1080.603271484375\" height=\"543.2123413085938\" fill=\"white\"/><path d=\"M700 280L700 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M560 360L640 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 400L700 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 480L180 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 480L1040 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M180 400L180 360L560 360\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M1040 400L1040 280L700 280\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 420L700 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><circle cx=\"700\" cy=\"280\" r=\"4\" fill=\"#365a72\"/><circle cx=\"560\" cy=\"360\" r=\"4\" fill=\"#365a72\"/><circle cx=\"700\" cy=\"420\" r=\"4\" fill=\"#365a72\"/><g class=\"component\" data-c=\"c_060d5e0e-c4ff-4891-bf31-b3bd8bbed5df\"><g transform=\"translate(680 360) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-8M-8 -22V22M0 -22V-8M0 -5V5M0 8V22M0 -18H20V-40M0 18H20V40M20 18V0H4\"/><path d=\"M14 -4 L6 0 L14 4\" fill=\"currentColor\" stroke=\"none\"/></g></g><g class=\"drawing-label\" data-label=\"c_060d5e0e-c4ff-4891-bf31-b3bd8bbed5df\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"353\" font-size=\"19\"><tspan font-size=\"19.00\">M</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_060d5e0e-c4ff-4891-bf31-b3bd8bbed5df\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"728\" y=\"376\" font-size=\"17\"><tspan font-size=\"17.00\">k′W/L = 2 mA/V²</tspan></text></g></g><g class=\"component\" data-c=\"c_a5ea9ac0-6059-4506-b9f5-727037e15f04\"><g transform=\"translate(180 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_a5ea9ac0-6059-4506-b9f5-727037e15f04\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">G</tspan></text></g><g class=\"drawing-label\" data-label=\"c_a5ea9ac0-6059-4506-b9f5-727037e15f04\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"228\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">1.2 V</tspan></text></g></g><g class=\"component\" data-c=\"c_6594cf44-4985-4383-a0ec-3b43994adb34\"><g transform=\"translate(180 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_de0f8065-f0a1-45cc-be0c-0c78b53980b5\"><g transform=\"translate(1040 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_de0f8065-f0a1-45cc-be0c-0c78b53980b5\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">DS</tspan></text></g><g class=\"drawing-label\" data-label=\"c_de0f8065-f0a1-45cc-be0c-0c78b53980b5\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"1088\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">0.2 V</tspan></text></g></g><g class=\"component\" data-c=\"c_4c02a888-3a42-4c76-9fbf-c3b255bcc02e\"><g transform=\"translate(1040 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_ba9865ba-28dc-414c-b128-d457c2b8471f\"><g transform=\"translate(700 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_92e30c11-ae0f-4d03-9cdb-df22e083e42b\"><g class=\"drawing-label\" data-label=\"c_92e30c11-ae0f-4d03-9cdb-df22e083e42b\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"735\" y=\"260\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">D</tspan></text></g></g><g class=\"component\" data-c=\"c_fcb5a3db-ddbc-4e19-b406-62d81d53c439\"><g class=\"drawing-label\" data-label=\"c_fcb5a3db-ddbc-4e19-b406-62d81d53c439\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"568\" y=\"335\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">G</tspan></text></g></g><g class=\"component\" data-c=\"c_d62a21ff-b9bc-4212-ab9e-8f75d15ff9d6\"><g class=\"drawing-label\" data-label=\"c_d62a21ff-b9bc-4212-ab9e-8f75d15ff9d6\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"610\" y=\"150\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">DS</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = 0.2 V, 0.7 V, 1.5 V · </tspan><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">t</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = 0.5 V</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "(a) region",
+          "points": 1
+        },
+        {
+          "label": "(a) I_D",
+          "points": 2
+        },
+        {
+          "label": "(b) region",
+          "points": 1
+        },
+        {
+          "label": "(b) I_D",
+          "points": 2
+        },
+        {
+          "label": "(c) region",
+          "points": 1
+        },
+        {
+          "label": "(c) I_D",
+          "points": 2
+        },
+        {
+          "label": "Explain the boundary case (b)",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw4-p8-pmos",
+      "title": "8) PMOS region and current",
+      "promptHtml": "<p>A PMOS has V<sub>tp</sub> = −0.5 V and k<sub>p</sub>′(W/L) = 1 mA/V<sup>2</sup> (λ = 0). Its source is at 1.8 V and its gate at 0.8 V. Find the region and I<sub>D</sub> when the drain is at (a) 0.5 V and (b) 1.5 V.</p>",
+      "hints": [
+        "Work with V_SG, V_SD and |V_tp| so the square law looks like the NMOS one.",
+        "Saturation requires V_SD ≥ V_SG − |V_tp|."
+      ],
+      "checklist": [
+        "Compute V_SG and V_OV.",
+        "Compute V_SD for each drain voltage.",
+        "Classify and compute I_D."
+      ],
+      "responseFields": [
+        {
+          "id": "vov",
+          "type": "numeric",
+          "label": "V_OV = V_SG − |V_tp|",
+          "unit": "V",
+          "options": [],
+          "points": 1
+        },
+        {
+          "id": "ra",
+          "type": "choice",
+          "label": "(a) region",
+          "unit": "",
+          "options": [
+            "cutoff",
+            "triode",
+            "saturation"
+          ],
+          "points": 1
+        },
+        {
+          "id": "ia",
+          "type": "numeric",
+          "label": "(a) I_D",
+          "unit": "mA",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "rb",
+          "type": "choice",
+          "label": "(b) region",
+          "unit": "",
+          "options": [
+            "cutoff",
+            "triode",
+            "saturation"
+          ],
+          "points": 1
+        },
+        {
+          "id": "ib",
+          "type": "numeric",
+          "label": "(b) I_D",
+          "unit": "mA",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "why",
+          "type": "text",
+          "label": "Show the region tests",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "PMOS with fixed terminal voltages",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": 0,
+            "dcHigh": 1.8,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_8d563b0a-00d0-4c6b-afb2-56e68753507c",
+              "type": "pmos",
+              "x": 500,
+              "y": 320,
+              "rotation": 180,
+              "mirror": true,
+              "ref": "Q_1",
+              "value": "k_p′W/L = 1 mA/V²",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_a88d42e6-d85a-43bc-ac29-30ce4c31b440",
+              "type": "netlabel",
+              "x": 520,
+              "y": 200,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "N1",
+              "value": "+1.8 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_e4577489-e23c-49f3-bd72-9f5de555978e",
+              "type": "voltage",
+              "x": 300,
+              "y": 420,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_G",
+              "value": "0.8 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_6f6f946d-18a9-4eda-a920-0c806ede3a4a",
+              "type": "ground",
+              "x": 300,
+              "y": 500,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_384d475e-097a-4e5f-be5b-c60e3bc1f845",
+              "type": "voltage",
+              "x": 700,
+              "y": 460,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_D",
+              "value": "0.5 V / 1.5 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_638fe4b0-de35-42cc-b50c-65a49a69fada",
+              "type": "ground",
+              "x": 700,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_cb624a3e-895c-4f68-8bde-fbe0e9898b00",
+              "type": "text",
+              "x": 520,
+              "y": 600,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "V_tp = −0.5 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [],
+          "wires": [
+            {
+              "id": "w_2c51f068-ec26-45e9-a615-19a985c6a59c",
+              "a": {
+                "c": "c_a88d42e6-d85a-43bc-ac29-30ce4c31b440",
+                "p": 0
+              },
+              "b": {
+                "c": "c_8d563b0a-00d0-4c6b-afb2-56e68753507c",
+                "p": 2
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_7f784251-db0d-4ece-834c-eedf058bdf8d",
+              "a": {
+                "c": "c_e4577489-e23c-49f3-bd72-9f5de555978e",
+                "p": 0
+              },
+              "b": {
+                "c": "c_8d563b0a-00d0-4c6b-afb2-56e68753507c",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 300,
+                  "y": 320
+                }
+              ]
+            },
+            {
+              "id": "w_c97846a5-6467-438d-aa56-f7db346c77b7",
+              "a": {
+                "c": "c_e4577489-e23c-49f3-bd72-9f5de555978e",
+                "p": 1
+              },
+              "b": {
+                "c": "c_6f6f946d-18a9-4eda-a920-0c806ede3a4a",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_2dd7e993-a4f5-4394-96e8-9df1ebaf6ea9",
+              "a": {
+                "c": "c_8d563b0a-00d0-4c6b-afb2-56e68753507c",
+                "p": 1
+              },
+              "b": {
+                "c": "c_384d475e-097a-4e5f-be5b-c60e3bc1f845",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 520,
+                  "y": 400
+                },
+                {
+                  "x": 700,
+                  "y": 400
+                }
+              ]
+            },
+            {
+              "id": "w_7a47ae6d-33da-4015-a038-415a454caec1",
+              "a": {
+                "c": "c_384d475e-097a-4e5f-be5b-c60e3bc1f845",
+                "p": 1
+              },
+              "b": {
+                "c": "c_638fe4b0-de35-42cc-b50c-65a49a69fada",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            }
+          ]
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"672\" height=\"544\" viewBox=\"210 112 671.0592041015625 543.4614868164062\"><title>PMOS with fixed terminal voltages</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"210\" y=\"112\" width=\"671.0592041015625\" height=\"543.4614868164062\" fill=\"white\"/><path d=\"M520 200L520 280\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M300 380L300 320L460 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M300 460L300 480\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M520 360L520 400L700 400L700 420\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M700 500L700 520\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><g class=\"component\" data-c=\"c_8d563b0a-00d0-4c6b-afb2-56e68753507c\"><g transform=\"translate(500 320) rotate(180) scale(-1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-8M-8 -22V22M0 -22V-8M0 -5V5M0 8V22M0 -18H20V-40M0 18H20V40M20 18V0H4\"/><path d=\"M4 -4 L12 0 L4 4\" fill=\"currentColor\" stroke=\"none\"/></g></g><g class=\"drawing-label\" data-label=\"c_8d563b0a-00d0-4c6b-afb2-56e68753507c\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"548\" y=\"313\" font-size=\"19\"><tspan font-size=\"19.00\">Q</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_8d563b0a-00d0-4c6b-afb2-56e68753507c\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"548\" y=\"336\" font-size=\"17\"><tspan font-size=\"17.00\">k</tspan><tspan dy=\"5.10\" font-size=\"11.90\">p</tspan><tspan dy=\"-5.10\" font-size=\"17.00\">′W/L = 1 mA/V²</tspan></text></g></g><g class=\"component\" data-c=\"c_a88d42e6-d85a-43bc-ac29-30ce4c31b440\"><g transform=\"translate(520 200) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 0V-14M-34 -14H34V-42H-34Z\"/></g></g><g class=\"drawing-label\" data-label=\"c_a88d42e6-d85a-43bc-ac29-30ce4c31b440\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\" text-anchor=\"middle\" letter-spacing=\".04em\" x=\"520\" y=\"179\" font-size=\"19\"><tspan font-size=\"19.00\">+1.8 V</tspan></text></g></g><g class=\"component\" data-c=\"c_e4577489-e23c-49f3-bd72-9f5de555978e\"><g transform=\"translate(300 420) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_e4577489-e23c-49f3-bd72-9f5de555978e\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"348\" y=\"413\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">G</tspan></text></g><g class=\"drawing-label\" data-label=\"c_e4577489-e23c-49f3-bd72-9f5de555978e\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"348\" y=\"436\" font-size=\"17\"><tspan font-size=\"17.00\">0.8 V</tspan></text></g></g><g class=\"component\" data-c=\"c_6f6f946d-18a9-4eda-a920-0c806ede3a4a\"><g transform=\"translate(300 500) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_384d475e-097a-4e5f-be5b-c60e3bc1f845\"><g transform=\"translate(700 460) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_384d475e-097a-4e5f-be5b-c60e3bc1f845\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"748\" y=\"453\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">D</tspan></text></g><g class=\"drawing-label\" data-label=\"c_384d475e-097a-4e5f-be5b-c60e3bc1f845\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"748\" y=\"476\" font-size=\"17\"><tspan font-size=\"17.00\">0.5 V / 1.5 V</tspan></text></g></g><g class=\"component\" data-c=\"c_638fe4b0-de35-42cc-b50c-65a49a69fada\"><g transform=\"translate(700 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_cb624a3e-895c-4f68-8bde-fbe0e9898b00\"><g class=\"drawing-label\" data-label=\"c_cb624a3e-895c-4f68-8bde-fbe0e9898b00\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"520\" y=\"600\" font-size=\"22\"><tspan font-size=\"22.00\">V</tspan><tspan dy=\"6.60\" font-size=\"15.40\">tp</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = −0.5 V</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "V_OV = V_SG − |V_tp|",
+          "points": 1
+        },
+        {
+          "label": "(a) region",
+          "points": 1
+        },
+        {
+          "label": "(a) I_D",
+          "points": 2
+        },
+        {
+          "label": "(b) region",
+          "points": 1
+        },
+        {
+          "label": "(b) I_D",
+          "points": 2
+        },
+        {
+          "label": "Show the region tests",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw4-p9-cs-extract",
+      "title": "9) Circuit Studio · Extract k_n and V_t, then look inside the channel (the Lab 7 method)",
+      "promptHtml": "<p><strong>Start by connecting the components.</strong> The canvas contains the required components with their values, but no wires. Open <em>Edit circuit</em>, keep these components, and add the connections for the circuit described below. Check device pin names, source polarity and ground. Complete the schematic before using the solver or lenses. Test it on the canvas, then assemble the same circuit on the breadboard, check its wiring and compare measurements. Capture both your completed schematic and breadboard.</p><p><strong>Circuit Studio problem · DC values, Simulate I–V curves and Inside the device lens.</strong> Simulation tools are switched on for this question. Record each prediction before you use the tool that checks it.</p><p>The NMOS is driven by a gate source V<sub>G</sub> and a drain source V<sub>DS</sub>. Its parameters are not printed on the drawing: treat Circuit Studio as your bench, as you will the real transistor in Lab 7.</p><ol><li>With V<sub>DS</sub> = 3 V, set V<sub>G</sub> = 1.0 V and click <strong>Show values</strong>; record I<sub>D</sub>. Repeat with V<sub>G</sub> = 1.5 V.</li><li>Extract V<sub>t</sub> and k<sub>n</sub> from the two points using I<sub>D</sub> = ½k<sub>n</sub>(V<sub>GS</sub> − V<sub>t</sub>)². Check them against the <em>Modelling notes</em> in the values panel.</li><li>Open <strong>Simulate → I–V curves</strong>, click <strong>Run</strong>, and confirm the Q-point lies on the curve for V<sub>GS</sub> = 1.5 V.</li><li>With V<sub>G</sub> = 1.5 V, open <strong>Visual Aids ▾ → Inside the device</strong> and click M<sub>1</sub>. Record what the lens shows for the channel at V<sub>DS</sub> = 3 V, then at V<sub>DS</sub> = 0.3 V. <em>Predict</em> I<sub>D</sub> at 0.3 V from your extracted parameters before you read it.</li><li><em>Explain:</em> why the channel shape changes between the two V<sub>DS</sub> values, and why the V<sub>t</sub> and k<sub>n</sub> you measure on a real part in Lab 7 will differ from part to part.</li></ol><h3>Required build and test · Circuit Studio V2</h3><p>Rebuild the NMOS test circuit and assemble it on the breadboard, checking gate, drain and source pin mapping. Set VDS=3 V and measure ID at VGS=1.0 V and 1.5 V. Extract threshold and transconductance parameter, then predict and measure ID at VGS=1.5 V and VDS=0.3 V. State the region for each point. Record which device model and parameter values were used by each solver.</p><ol><li>Record a prediction before running the solver. Match the stated component and model parameters; document any difference between the hand model and simulator.</li><li>Use Edit circuit, then Build breadboard. Keep the supplied components on the canvas and connect them yourself. On the breadboard, place components and jumpers yourself; Guide me and X-Ray are allowed. Record any assistance used. Do not use Build for me as evidence of an independent build.</li><li>Run the wiring check before power-on. Record the checker result, instrument terminals, source settings, measurements and units.</li><li>Capture schematic, breadboard and test evidence with Capture lab evidence. For time traces, allow settling and state the measurement interval.</li><li>Save progress, switch to another question and back, then reopen the downloaded progress file. Confirm that your answers, circuit, breadboard and instrument settings return.</li></ol><p>The breadboard and measurements are virtual. Use simulated supplies only for this assignment.</p>",
+      "hints": [
+        "With a = √I_D1 and b = √I_D2: V_t = (V_GS2·a − V_GS1·b)/(a − b).",
+        "The channel pinches off at the drain when V_DS ≥ V_GS − V_t."
+      ],
+      "checklist": [
+        "Starter components connected by the student on the canvas before testing",
+        "Two saturation points recorded.",
+        "V_t and k_n extracted and checked.",
+        "I–V curves and Inside-the-device views used.",
+        "Triode current predicted before reading it.",
+        "Schematic built and values checked",
+        "Breadboard assembled and connection check recorded",
+        "Prediction and measurements include units and probe locations",
+        "Evidence captured; changed circuit tested",
+        "Downloaded progress reopened successfully"
+      ],
+      "responseFields": [
+        {
+          "id": "i1",
+          "type": "numeric",
+          "label": "I_D at V_G = 1.0 V",
+          "unit": "mA",
+          "options": [],
+          "points": 1
+        },
+        {
+          "id": "i2",
+          "type": "numeric",
+          "label": "I_D at V_G = 1.5 V",
+          "unit": "mA",
+          "options": [],
+          "points": 1
+        },
+        {
+          "id": "vt",
+          "type": "numeric",
+          "label": "Extracted V_t",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "kn",
+          "type": "numeric",
+          "label": "Extracted k_n",
+          "unit": "mA/V²",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "ch3",
+          "type": "choice",
+          "label": "Channel at V_DS = 3 V (lens)",
+          "unit": "",
+          "options": [
+            "Pinched off near the drain",
+            "Continuous from source to drain"
+          ],
+          "points": 1
+        },
+        {
+          "id": "ch03",
+          "type": "choice",
+          "label": "Channel at V_DS = 0.3 V (lens)",
+          "unit": "",
+          "options": [
+            "Pinched off near the drain",
+            "Continuous from source to drain"
+          ],
+          "points": 1
+        },
+        {
+          "id": "itri",
+          "type": "numeric",
+          "label": "I_D at V_G = 1.5 V, V_DS = 0.3 V",
+          "unit": "mA",
+          "options": [],
+          "points": 1
+        },
+        {
+          "id": "why",
+          "type": "text",
+          "label": "Channel shape and part-to-part variation",
+          "unit": "",
+          "options": [],
+          "points": 1
+        },
+        {
+          "id": "cs2-build",
+          "type": "text",
+          "label": "Build/check result, pin mapping, and assistance used",
+          "unit": "",
+          "options": [],
+          "points": 5
+        },
+        {
+          "id": "cs2-measure",
+          "type": "text",
+          "label": "Measurement table: conditions, prediction, measured value, units and probes",
+          "unit": "",
+          "options": [],
+          "points": 5
+        },
+        {
+          "id": "cs2-explain",
+          "type": "text",
+          "label": "Explain differences and the effect of the required circuit change",
+          "unit": "",
+          "options": [],
+          "points": 5
+        },
+        {
+          "id": "cs2-reopen",
+          "type": "text",
+          "label": "Save/reopen check: filename and which work was restored",
+          "unit": "",
+          "options": [],
+          "points": 0
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "NMOS on the bench · extract k_n and V_t",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_060d5e0e-c4ff-4891-bf31-b3bd8bbed5df",
+              "type": "nmos",
+              "x": 680,
+              "y": 360,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "M_1",
+              "value": "NMOS",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_a5ea9ac0-6059-4506-b9f5-727037e15f04",
+              "type": "voltage",
+              "x": 180,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_G",
+              "value": "1.0 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_6594cf44-4985-4383-a0ec-3b43994adb34",
+              "type": "ground",
+              "x": 180,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_de0f8065-f0a1-45cc-be0c-0c78b53980b5",
+              "type": "voltage",
+              "x": 1040,
+              "y": 440,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_{DS}",
+              "value": "3 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_4c02a888-3a42-4c76-9fbf-c3b255bcc02e",
+              "type": "ground",
+              "x": 1040,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_ba9865ba-28dc-414c-b128-d457c2b8471f",
+              "type": "ground",
+              "x": 700,
+              "y": 540,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G3",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [],
+          "wires": [],
+          "lesson": {
+            "family": "mosfet",
+            "key": "regions",
+            "roles": {
+              "M": "c_060d5e0e-c4ff-4891-bf31-b3bd8bbed5df",
+              "Vg": "c_a5ea9ac0-6059-4506-b9f5-727037e15f04",
+              "Vds": "c_de0f8065-f0a1-45cc-be0c-0c78b53980b5"
+            },
+            "params": {
+              "vth": 0.6,
+              "kn": 4,
+              "lambda": 0,
+              "freq": 1000
+            },
+            "signalRepresentation": "pi"
+          }
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1074\" height=\"543\" viewBox=\"90 85.15841674804688 1073.09814453125 542.8415832519531\"><title>NMOS on the bench · extract k_n and V_t</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"90\" y=\"85.15841674804688\" width=\"1073.09814453125\" height=\"542.8415832519531\" fill=\"white\" /><circle cx=\"700\" cy=\"280\" r=\"4\" fill=\"#365a72\" /><circle cx=\"560\" cy=\"360\" r=\"4\" fill=\"#365a72\" /><circle cx=\"700\" cy=\"420\" r=\"4\" fill=\"#365a72\" /><g class=\"component\" data-c=\"c_060d5e0e-c4ff-4891-bf31-b3bd8bbed5df\"><g transform=\"translate(680 360) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><g data-mos-symbol=\"nmos\" data-mos-style=\"source-arrow\"><path d=\"M-40 0H-10M-10 -20V20M0 -27V27M0 -18H20V-40M0 18H20V40\" /><g data-mos-source-arrow=\"out\"><path d=\"M7 14 L15 18 L7 22\" fill=\"currentColor\" stroke=\"none\" /></g></g></g></g><g class=\"drawing-label\" data-cs-label=\"names\" data-label=\"c_060d5e0e-c4ff-4891-bf31-b3bd8bbed5df\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\" x=\"728\" y=\"353\" font-size=\"19\"><tspan font-size=\"19.00\">M</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-cs-label=\"values\" data-label=\"c_060d5e0e-c4ff-4891-bf31-b3bd8bbed5df\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\" x=\"728\" y=\"376\" font-size=\"17\"><tspan font-size=\"17.00\">NMOS</tspan></text></g></g><g class=\"component\" data-c=\"c_a5ea9ac0-6059-4506-b9f5-727037e15f04\"><g transform=\"translate(180 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\" /><circle cx=\"0\" cy=\"0\" r=\"22\" /><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\" /></g></g><g class=\"drawing-label\" data-cs-label=\"names\" data-label=\"c_a5ea9ac0-6059-4506-b9f5-727037e15f04\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\" x=\"228\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">G</tspan></text></g><g class=\"drawing-label\" data-cs-label=\"values\" data-label=\"c_a5ea9ac0-6059-4506-b9f5-727037e15f04\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\" x=\"228\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">1.0 V</tspan></text></g></g><g class=\"component\" data-c=\"c_6594cf44-4985-4383-a0ec-3b43994adb34\"><g transform=\"translate(180 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\" /></g></g></g><g class=\"component\" data-c=\"c_de0f8065-f0a1-45cc-be0c-0c78b53980b5\"><g transform=\"translate(1040 440) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\" /><circle cx=\"0\" cy=\"0\" r=\"22\" /><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\" /></g></g><g class=\"drawing-label\" data-cs-label=\"names\" data-label=\"c_de0f8065-f0a1-45cc-be0c-0c78b53980b5\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\" x=\"1088\" y=\"433\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">DS</tspan></text></g><g class=\"drawing-label\" data-cs-label=\"values\" data-label=\"c_de0f8065-f0a1-45cc-be0c-0c78b53980b5\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\" x=\"1088\" y=\"456\" font-size=\"17\"><tspan font-size=\"17.00\">3 V</tspan></text></g></g><g class=\"component\" data-c=\"c_4c02a888-3a42-4c76-9fbf-c3b255bcc02e\"><g transform=\"translate(1040 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\" /></g></g></g><g class=\"component\" data-c=\"c_ba9865ba-28dc-414c-b128-d457c2b8471f\"><g transform=\"translate(700 540) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\" /></g></g></g></svg>",
+        "notebookStages": [
+          "Prediction and circuit model",
+          "Schematic and breadboard build",
+          "Measurement table and evidence",
+          "Comparison and explanation",
+          "Save and reopen check"
+        ]
+      },
+      "studentRubric": [
+        {
+          "label": "I_D at V_G = 1.0 V",
+          "points": 1
+        },
+        {
+          "label": "I_D at V_G = 1.5 V",
+          "points": 1
+        },
+        {
+          "label": "Extracted V_t",
+          "points": 2
+        },
+        {
+          "label": "Extracted k_n",
+          "points": 2
+        },
+        {
+          "label": "Channel at V_DS = 3 V (lens)",
+          "points": 1
+        },
+        {
+          "label": "Channel at V_DS = 0.3 V (lens)",
+          "points": 1
+        },
+        {
+          "label": "I_D at V_G = 1.5 V, V_DS = 0.3 V",
+          "points": 1
+        },
+        {
+          "label": "Channel shape and part-to-part variation",
+          "points": 1
+        },
+        {
+          "label": "Build/check result, pin mapping, and assistance used",
+          "points": 5
+        },
+        {
+          "label": "Measurement table: conditions, prediction, measured value, units and probes",
+          "points": 5
+        },
+        {
+          "label": "Explain differences and the effect of the required circuit change",
+          "points": 5
+        },
+        {
+          "label": "Save/reopen check: filename and which work was restored",
+          "points": 0
+        }
+      ]
+    }
+  ]
+}

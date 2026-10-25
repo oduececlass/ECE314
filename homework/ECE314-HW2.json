@@ -1,0 +1,1110 @@
+{
+  "schema": "edu.odu.circuit-assessment",
+  "schemaVersion": "1.0",
+  "assessment": {
+    "id": "ECE314-HW2",
+    "title": "Homework #2 · Semiconductor physics and the pn junction",
+    "course": "ECE 314",
+    "topic": "Module 2 · Semiconductors · Drift/diffusion · pn junction",
+    "version": "2.2-CS2.13-unwired",
+    "instructions": "Assume T = 300 K unless stated: V_T = kT/q = 0.0259 V, n_i = 10¹⁰ cm⁻³, q = 1.602×10⁻¹⁹ C, μ_n = 1350 and μ_p = 480 cm²/V·s, ε_s = 11.7ε₀ ≈ 1.04×10⁻¹² F/cm. Einstein relation: D_n = μ_nV_T ≈ 35.0 cm²/s, D_p = μ_pV_T ≈ 12.4 cm²/s. Enter numbers in the units shown; scientific notation such as 2.93e-6 is accepted. Show each substitution and interpret signs.",
+    "maximumScore": 68
+  },
+  "questions": [
+    {
+      "id": "hw2-p1-intrinsic",
+      "title": "1) Intrinsic silicon: conductivity and resistivity",
+      "promptHtml": "<p><strong>Topic 2.1 · Intrinsic and doped semiconductors</strong></p><p>Intrinsic Si at 300 K has n = p = n<sub>i</sub> = 10<sup>10</sup> cm<sup>−3</sup>. Find σ and ρ, using σ = q(nμ<sub>n</sub> + pμ<sub>p</sub>).</p>",
+      "hints": [
+        "In intrinsic Si, n = p = n_i, so σ = q n_i (μ_n + μ_p).",
+        "ρ = 1/σ."
+      ],
+      "checklist": [
+        "Substitute n = p = n_i.",
+        "Keep units in S/cm and Ω·cm.",
+        "Comment on the magnitude."
+      ],
+      "responseFields": [
+        {
+          "id": "sigma",
+          "type": "numeric",
+          "label": "Conductivity σ",
+          "unit": "S/cm",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "rho",
+          "type": "numeric",
+          "label": "Resistivity ρ",
+          "unit": "Ω·cm",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "comment",
+          "type": "text",
+          "label": "Interpret the result",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Semiconductor problem (no circuit)",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [],
+          "junctions": [],
+          "wires": []
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"520\" viewBox=\"0 0 800 520\"><title>Semiconductor problem (no circuit)</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"0\" y=\"0\" width=\"800\" height=\"520\" fill=\"white\"/></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Conductivity σ",
+          "points": 2
+        },
+        {
+          "label": "Resistivity ρ",
+          "points": 2
+        },
+        {
+          "label": "Interpret the result",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw2-p2-ntype",
+      "title": "2) n-type silicon: majority/minority carriers and ρ",
+      "promptHtml": "<p>Given N<sub>D</sub> = 5×10<sup>15</sup> cm<sup>−3</sup> (no acceptors). Find n, then ρ. Also find the minority hole concentration p.</p>",
+      "hints": [
+        "N_D ≫ n_i, so complete ionization gives n ≈ N_D.",
+        "Mass-action law: np = n_i²."
+      ],
+      "checklist": [
+        "Majority carriers from N_D.",
+        "Minority carriers from n_i²/n.",
+        "Drop the negligible hole term in σ."
+      ],
+      "responseFields": [
+        {
+          "id": "n",
+          "type": "numeric",
+          "label": "Electron concentration n",
+          "unit": "cm⁻³",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "p",
+          "type": "numeric",
+          "label": "Hole concentration p",
+          "unit": "cm⁻³",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "rho",
+          "type": "numeric",
+          "label": "Resistivity ρ",
+          "unit": "Ω·cm",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "work",
+          "type": "text",
+          "label": "Show the approximations",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Semiconductor problem (no circuit)",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [],
+          "junctions": [],
+          "wires": []
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"520\" viewBox=\"0 0 800 520\"><title>Semiconductor problem (no circuit)</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"0\" y=\"0\" width=\"800\" height=\"520\" fill=\"white\"/></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Electron concentration n",
+          "points": 2
+        },
+        {
+          "label": "Hole concentration p",
+          "points": 2
+        },
+        {
+          "label": "Resistivity ρ",
+          "points": 2
+        },
+        {
+          "label": "Show the approximations",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw2-p3-compensated",
+      "title": "3) Compensated doping",
+      "promptHtml": "<p>Given N<sub>D</sub> = 1×10<sup>16</sup> and N<sub>A</sub> = 3×10<sup>15</sup> cm<sup>−3</sup>. Approximate n and p.</p>",
+      "hints": [
+        "Acceptors compensate donors: the net doping is N_D − N_A.",
+        "Then use np = n_i²."
+      ],
+      "checklist": [
+        "Identify the net type.",
+        "Compute n from net doping.",
+        "Compute p from mass action."
+      ],
+      "responseFields": [
+        {
+          "id": "n",
+          "type": "numeric",
+          "label": "Electron concentration n",
+          "unit": "cm⁻³",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "p",
+          "type": "numeric",
+          "label": "Hole concentration p",
+          "unit": "cm⁻³",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "work",
+          "type": "text",
+          "label": "Explain compensation",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Semiconductor problem (no circuit)",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [],
+          "junctions": [],
+          "wires": []
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"520\" viewBox=\"0 0 800 520\"><title>Semiconductor problem (no circuit)</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"0\" y=\"0\" width=\"800\" height=\"520\" fill=\"white\"/></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Electron concentration n",
+          "points": 2
+        },
+        {
+          "label": "Hole concentration p",
+          "points": 2
+        },
+        {
+          "label": "Explain compensation",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw2-p4-drift",
+      "title": "4) Electron drift current density",
+      "promptHtml": "<p><strong>Topic 2.2 · Drift and diffusion currents</strong></p><p>Given n = 1×10<sup>16</sup> cm<sup>−3</sup> and E = 10 V/cm. Find J<sub>n,drift</sub> = qnμ<sub>n</sub>E.</p>",
+      "hints": [
+        "Multiply out with q in coulombs; the result is in A/cm²."
+      ],
+      "checklist": [
+        "Substitute with consistent cm units.",
+        "State the current direction relative to E."
+      ],
+      "responseFields": [
+        {
+          "id": "j",
+          "type": "numeric",
+          "label": "Drift current density J_n,drift",
+          "unit": "A/cm²",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "dir",
+          "type": "text",
+          "label": "Direction of current and electron motion",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Semiconductor problem (no circuit)",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [],
+          "junctions": [],
+          "wires": []
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"520\" viewBox=\"0 0 800 520\"><title>Semiconductor problem (no circuit)</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"0\" y=\"0\" width=\"800\" height=\"520\" fill=\"white\"/></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Drift current density J_n,drift",
+          "points": 2
+        },
+        {
+          "label": "Direction of current and electron motion",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw2-p5-diffusion",
+      "title": "5) Electron diffusion current density from an exponential profile",
+      "promptHtml": "<p>Let n(x) = n<sub>0</sub>e<sup>−x/L</sup> with n<sub>0</sub> = 10<sup>16</sup> cm<sup>−3</sup> and L = 5 μm = 5×10<sup>−4</sup> cm. Find J<sub>n,diff</sub> at x = 0, using J<sub>n,diff</sub> = qD<sub>n</sub>(dn/dx).</p>",
+      "hints": [
+        "dn/dx = −(n_0/L)e^(−x/L); evaluate at x = 0.",
+        "Use D_n ≈ 35.0 cm²/s from the Einstein relation."
+      ],
+      "checklist": [
+        "Differentiate the profile.",
+        "Substitute at x = 0.",
+        "Interpret the sign."
+      ],
+      "responseFields": [
+        {
+          "id": "dndx",
+          "type": "numeric",
+          "label": "Gradient dn/dx at x = 0",
+          "unit": "cm⁻⁴",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "j",
+          "type": "numeric",
+          "label": "Diffusion current density J_n,diff",
+          "unit": "A/cm²",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "sign",
+          "type": "text",
+          "label": "Interpret the sign",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Semiconductor problem (no circuit)",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [],
+          "junctions": [],
+          "wires": []
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"520\" viewBox=\"0 0 800 520\"><title>Semiconductor problem (no circuit)</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"0\" y=\"0\" width=\"800\" height=\"520\" fill=\"white\"/></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Gradient dn/dx at x = 0",
+          "points": 2
+        },
+        {
+          "label": "Diffusion current density J_n,diff",
+          "points": 2
+        },
+        {
+          "label": "Interpret the sign",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw2-p6-cancel",
+      "title": "6) Electric field needed to cancel diffusion (Jn = 0)",
+      "promptHtml": "<p>At a point in silicon, (1/n)(dn/dx) = +150 cm<sup>−1</sup>. Find E such that J<sub>n</sub> = qnμ<sub>n</sub>E + qD<sub>n</sub>(dn/dx) = 0.</p>",
+      "hints": [
+        "Divide the zero-current condition by qnμ_n.",
+        "D_n/μ_n = V_T (Einstein relation)."
+      ],
+      "checklist": [
+        "Set J_n = 0 and solve for E.",
+        "Use the Einstein relation.",
+        "Check the sign."
+      ],
+      "responseFields": [
+        {
+          "id": "e",
+          "type": "numeric",
+          "label": "Electric field E",
+          "unit": "V/cm",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "why",
+          "type": "text",
+          "label": "Explain the result",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Semiconductor problem (no circuit)",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [],
+          "junctions": [],
+          "wires": []
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"520\" viewBox=\"0 0 800 520\"><title>Semiconductor problem (no circuit)</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"0\" y=\"0\" width=\"800\" height=\"520\" fill=\"white\"/></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Electric field E",
+          "points": 2
+        },
+        {
+          "label": "Explain the result",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw2-p7-total",
+      "title": "7) Total electron current with both drift and diffusion",
+      "promptHtml": "<p>Given n = 10<sup>15</sup> cm<sup>−3</sup>, E = 5 V/cm, and dn/dx = −10<sup>18</sup> cm<sup>−4</sup>. Compute J<sub>n</sub> = qnμ<sub>n</sub>E + qD<sub>n</sub>(dn/dx).</p>",
+      "hints": [
+        "Compute each term separately, then add with signs."
+      ],
+      "checklist": [
+        "Drift term.",
+        "Diffusion term.",
+        "Signed sum; identify the dominant mechanism."
+      ],
+      "responseFields": [
+        {
+          "id": "jdrift",
+          "type": "numeric",
+          "label": "Drift component",
+          "unit": "A/cm²",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "jdiff",
+          "type": "numeric",
+          "label": "Diffusion component",
+          "unit": "A/cm²",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "j",
+          "type": "numeric",
+          "label": "Total J_n",
+          "unit": "A/cm²",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "dom",
+          "type": "text",
+          "label": "Which mechanism dominates?",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Semiconductor problem (no circuit)",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [],
+          "junctions": [],
+          "wires": []
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"520\" viewBox=\"0 0 800 520\"><title>Semiconductor problem (no circuit)</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"0\" y=\"0\" width=\"800\" height=\"520\" fill=\"white\"/></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Drift component",
+          "points": 2
+        },
+        {
+          "label": "Diffusion component",
+          "points": 2
+        },
+        {
+          "label": "Total J_n",
+          "points": 2
+        },
+        {
+          "label": "Which mechanism dominates?",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw2-p8-equilibrium",
+      "title": "8) Built-in potential and depletion widths (equilibrium)",
+      "promptHtml": "<p><strong>Topic 2.3 · pn junction</strong></p><p>Abrupt pn junction with N<sub>A</sub> = 10<sup>17</sup> and N<sub>D</sub> = 5×10<sup>15</sup> cm<sup>−3</sup>. Find V<sub>bi</sub>, W, x<sub>n</sub>, and x<sub>p</sub>.</p><p>Use V<sub>bi</sub> = V<sub>T</sub> ln(N<sub>A</sub>N<sub>D</sub>/n<sub>i</sub><sup>2</sup>), W = √[(2ε<sub>s</sub>/q)(1/N<sub>A</sub> + 1/N<sub>D</sub>)V<sub>bi</sub>], and N<sub>A</sub>x<sub>p</sub> = N<sub>D</sub>x<sub>n</sub>.</p>",
+      "hints": [
+        "Report W, x_n and x_p in μm (1 μm = 10⁻⁴ cm).",
+        "x_n = W·N_A/(N_A+N_D) and x_p = W·N_D/(N_A+N_D)."
+      ],
+      "checklist": [
+        "Compute V_bi.",
+        "Compute W in cm, convert to μm.",
+        "Split W by charge neutrality.",
+        "Identify which side the depletion region extends into."
+      ],
+      "responseFields": [
+        {
+          "id": "vbi",
+          "type": "numeric",
+          "label": "Built-in potential V_bi",
+          "unit": "V",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "w",
+          "type": "numeric",
+          "label": "Depletion width W",
+          "unit": "μm",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "xn",
+          "type": "numeric",
+          "label": "n-side width x_n",
+          "unit": "μm",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "xp",
+          "type": "numeric",
+          "label": "p-side width x_p",
+          "unit": "μm",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "side",
+          "type": "text",
+          "label": "Which side holds most of W, and why?",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Abrupt pn junction",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_a340f915-9b6d-44e9-8f6d-1e7cd49a4d90",
+              "type": "diode",
+              "x": 400,
+              "y": 300,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "D_1",
+              "value": "pn junction",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_ed0fa231-e11a-4918-b02b-a8ca5c455e20",
+              "type": "text",
+              "x": 110,
+              "y": 300,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "p side · N_A = 10¹⁷ cm⁻³",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_80c9a819-4a01-4df9-acb8-8720cb97a1ed",
+              "type": "text",
+              "x": 620,
+              "y": 300,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T1",
+              "value": "n side · N_D = 5×10¹⁵ cm⁻³",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_ba823c21-9ffb-4dfa-a78a-27a2cbcf37c1",
+              "type": "text",
+              "x": 400,
+              "y": 380,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T2",
+              "value": "equilibrium (no bias)",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [],
+          "wires": []
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"832\" height=\"247\" viewBox=\"65 184.2576141357422 831.6409912109375 246.72181701660156\"><title>Abrupt pn junction</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"65\" y=\"184.2576141357422\" width=\"831.6409912109375\" height=\"246.72181701660156\" fill=\"white\"/><g class=\"component\" data-c=\"c_a340f915-9b6d-44e9-8f6d-1e7cd49a4d90\"><g transform=\"translate(400 300) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-13M-13 -17 13 0-13 17ZM13 -17V17M13 0H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_a340f915-9b6d-44e9-8f6d-1e7cd49a4d90\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"372\" y=\"246\" font-size=\"19\"><tspan font-size=\"19.00\">D</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_a340f915-9b6d-44e9-8f6d-1e7cd49a4d90\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"372\" y=\"269\" font-size=\"17\"><tspan font-size=\"17.00\">pn junction</tspan></text></g></g><g class=\"component\" data-c=\"c_ed0fa231-e11a-4918-b02b-a8ca5c455e20\"><g class=\"drawing-label\" data-label=\"c_ed0fa231-e11a-4918-b02b-a8ca5c455e20\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"110\" y=\"300\" font-size=\"22\"><tspan font-size=\"22.00\">p side · </tspan><tspan font-size=\"22.00\">N</tspan><tspan dy=\"6.60\" font-size=\"15.40\">A</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = 10¹⁷ cm⁻³</tspan></text></g></g><g class=\"component\" data-c=\"c_80c9a819-4a01-4df9-acb8-8720cb97a1ed\"><g class=\"drawing-label\" data-label=\"c_80c9a819-4a01-4df9-acb8-8720cb97a1ed\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"620\" y=\"300\" font-size=\"22\"><tspan font-size=\"22.00\">n side · </tspan><tspan font-size=\"22.00\">N</tspan><tspan dy=\"6.60\" font-size=\"15.40\">D</tspan><tspan dy=\"-6.60\" font-size=\"22.00\"> = 5×10¹⁵ cm⁻³</tspan></text></g></g><g class=\"component\" data-c=\"c_ba823c21-9ffb-4dfa-a78a-27a2cbcf37c1\"><g class=\"drawing-label\" data-label=\"c_ba823c21-9ffb-4dfa-a78a-27a2cbcf37c1\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"400\" y=\"380\" font-size=\"22\"><tspan font-size=\"22.00\">equilibrium (no bias)</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Built-in potential V_bi",
+          "points": 2
+        },
+        {
+          "label": "Depletion width W",
+          "points": 2
+        },
+        {
+          "label": "n-side width x_n",
+          "points": 2
+        },
+        {
+          "label": "p-side width x_p",
+          "points": 2
+        },
+        {
+          "label": "Which side holds most of W, and why?",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw2-p9-reverse",
+      "title": "9) Reverse bias: depletion width and junction capacitance",
+      "promptHtml": "<p>Using the same junction, apply reverse bias V<sub>R</sub> = 5 V. Compute W<sub>R</sub> and the junction capacitance per unit area C<sub>j,R</sub>, using W<sub>R</sub> = √[(2ε<sub>s</sub>/q)(1/N<sub>A</sub> + 1/N<sub>D</sub>)(V<sub>bi</sub> + V<sub>R</sub>)] and C<sub>j</sub> = ε<sub>s</sub>/W.</p>",
+      "hints": [
+        "W scales as √(V_bi + V_R).",
+        "C_j in F/cm² — report in nF/cm²."
+      ],
+      "checklist": [
+        "Add V_R to V_bi.",
+        "Compute W_R.",
+        "Compute C_j and compare with zero bias."
+      ],
+      "responseFields": [
+        {
+          "id": "wr",
+          "type": "numeric",
+          "label": "Depletion width W_R",
+          "unit": "μm",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "cj",
+          "type": "numeric",
+          "label": "Junction capacitance C_j,R",
+          "unit": "nF/cm²",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "trend",
+          "type": "text",
+          "label": "How do W and C_j change with reverse bias?",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Reverse-biased pn junction",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_8461aeb2-5a1c-4a10-80b4-654b599ddc06",
+              "type": "voltage",
+              "x": 200,
+              "y": 400,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_R",
+              "value": "5 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_039a3feb-dd19-4b17-be02-c101661af54c",
+              "type": "diode",
+              "x": 400,
+              "y": 300,
+              "rotation": 180,
+              "mirror": false,
+              "ref": "D_1",
+              "value": "pn junction",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_4b478c37-e79b-46ff-a5bd-342ad47feb86",
+              "type": "ground",
+              "x": 200,
+              "y": 460,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_b931792d-d6f5-4c25-b66d-54e27421ed82",
+              "type": "ground",
+              "x": 520,
+              "y": 340,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_3c1468b9-e3d7-4bd8-b7fb-2042cde9be54",
+              "type": "text",
+              "x": 380,
+              "y": 200,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "reverse bias: + terminal on the n side",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [],
+          "wires": [
+            {
+              "id": "w_48c09b1b-867f-4ac6-b630-33dd0e2fa709",
+              "a": {
+                "c": "c_8461aeb2-5a1c-4a10-80b4-654b599ddc06",
+                "p": 0
+              },
+              "b": {
+                "c": "c_039a3feb-dd19-4b17-be02-c101661af54c",
+                "p": 1
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 200,
+                  "y": 300
+                }
+              ]
+            },
+            {
+              "id": "w_07d5bd76-4f9e-49ce-9a4a-93b30ab6a9ed",
+              "a": {
+                "c": "c_8461aeb2-5a1c-4a10-80b4-654b599ddc06",
+                "p": 1
+              },
+              "b": {
+                "c": "c_4b478c37-e79b-46ff-a5bd-342ad47feb86",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_581c6683-ebad-4aec-815f-932a64691001",
+              "a": {
+                "c": "c_039a3feb-dd19-4b17-be02-c101661af54c",
+                "p": 0
+              },
+              "b": {
+                "c": "c_b931792d-d6f5-4c25-b66d-54e27421ed82",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 520,
+                  "y": 300
+                }
+              ]
+            }
+          ]
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"640\" height=\"413\" viewBox=\"110 135.68557739257812 639.4076538085938 412.3144226074219\"><title>Reverse-biased pn junction</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"110\" y=\"135.68557739257812\" width=\"639.4076538085938\" height=\"412.3144226074219\" fill=\"white\"/><path d=\"M200 360L200 300L360 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M200 440\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M440 300L520 300L520 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><g class=\"component\" data-c=\"c_8461aeb2-5a1c-4a10-80b4-654b599ddc06\"><g transform=\"translate(200 400) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_8461aeb2-5a1c-4a10-80b4-654b599ddc06\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"248\" y=\"393\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">R</tspan></text></g><g class=\"drawing-label\" data-label=\"c_8461aeb2-5a1c-4a10-80b4-654b599ddc06\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"248\" y=\"416\" font-size=\"17\"><tspan font-size=\"17.00\">5 V</tspan></text></g></g><g class=\"component\" data-c=\"c_039a3feb-dd19-4b17-be02-c101661af54c\"><g transform=\"translate(400 300) rotate(180) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-13M-13 -17 13 0-13 17ZM13 -17V17M13 0H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_039a3feb-dd19-4b17-be02-c101661af54c\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"372\" y=\"246\" font-size=\"19\"><tspan font-size=\"19.00\">D</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_039a3feb-dd19-4b17-be02-c101661af54c\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"372\" y=\"269\" font-size=\"17\"><tspan font-size=\"17.00\">pn junction</tspan></text></g></g><g class=\"component\" data-c=\"c_4b478c37-e79b-46ff-a5bd-342ad47feb86\"><g transform=\"translate(200 460) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_b931792d-d6f5-4c25-b66d-54e27421ed82\"><g transform=\"translate(520 340) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_3c1468b9-e3d7-4bd8-b7fb-2042cde9be54\"><g class=\"drawing-label\" data-label=\"c_3c1468b9-e3d7-4bd8-b7fb-2042cde9be54\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"380\" y=\"200\" font-size=\"22\"><tspan font-size=\"22.00\">reverse bias: + terminal on the n side</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Depletion width W_R",
+          "points": 2
+        },
+        {
+          "label": "Junction capacitance C_j,R",
+          "points": 2
+        },
+        {
+          "label": "How do W and C_j change with reverse bias?",
+          "points": 2
+        }
+      ]
+    },
+    {
+      "id": "hw2-p10-forward",
+      "title": "10) Forward bias: minority-carrier injection at depletion edges",
+      "promptHtml": "<p>Using the same junction, apply forward bias V<sub>D</sub> = 0.30 V. Find the minority concentrations at the depletion edges:</p><p>p<sub>n</sub>(0) = p<sub>n0</sub>e<sup>V<sub>D</sub>/V<sub>T</sub></sup>, with p<sub>n0</sub> = n<sub>i</sub><sup>2</sup>/N<sub>D</sub>; &nbsp; n<sub>p</sub>(0) = n<sub>p0</sub>e<sup>V<sub>D</sub>/V<sub>T</sub></sup>, with n<sub>p0</sub> = n<sub>i</sub><sup>2</sup>/N<sub>A</sub>.</p>",
+      "hints": [
+        "e^(0.30/0.0259) ≈ 1.07×10⁵.",
+        "The equilibrium minority concentrations come from mass action."
+      ],
+      "checklist": [
+        "Compute p_n0 and n_p0.",
+        "Compute the exponential factor once.",
+        "Compare injection into each side."
+      ],
+      "responseFields": [
+        {
+          "id": "pn0",
+          "type": "numeric",
+          "label": "Equilibrium p_n0",
+          "unit": "cm⁻³",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "pn",
+          "type": "numeric",
+          "label": "p_n(0) at the n-side edge",
+          "unit": "cm⁻³",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "np0",
+          "type": "numeric",
+          "label": "Equilibrium n_p0",
+          "unit": "cm⁻³",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "np",
+          "type": "numeric",
+          "label": "n_p(0) at the p-side edge",
+          "unit": "cm⁻³",
+          "options": [],
+          "points": 2
+        },
+        {
+          "id": "comp",
+          "type": "text",
+          "label": "Which side receives more injection, and is low-level injection valid?",
+          "unit": "",
+          "options": [],
+          "points": 2
+        }
+      ],
+      "workspace": {
+        "support": "guided",
+        "circuitProject": {
+          "format": "circuit-studio",
+          "version": 1,
+          "name": "Forward-biased pn junction",
+          "settings": {
+            "wireJumps": true,
+            "resistorStyle": "ansi",
+            "solutionMode": "auto",
+            "dcLow": -12,
+            "dcHigh": 12,
+            "diodeN": 1,
+            "diodeVT": 25.852
+          },
+          "components": [
+            {
+              "id": "c_b22fbebc-7411-4e40-91e8-8fc430cb4bf3",
+              "type": "voltage",
+              "x": 200,
+              "y": 400,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "V_D",
+              "value": "0.30 V",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_9f653203-9847-4339-b629-34345d720914",
+              "type": "diode",
+              "x": 400,
+              "y": 300,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "D_1",
+              "value": "pn junction",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_f6e55b1c-5c44-4f81-86d2-29ab0c061e84",
+              "type": "ground",
+              "x": 200,
+              "y": 460,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G1",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_75a3ddbc-93a8-4b0f-9e8f-4b0df3dce123",
+              "type": "ground",
+              "x": 520,
+              "y": 340,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "G2",
+              "value": "",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "c_d73b1da9-f236-490c-927f-0852e85bb10d",
+              "type": "text",
+              "x": 380,
+              "y": 200,
+              "rotation": 0,
+              "mirror": false,
+              "ref": "T0",
+              "value": "forward bias: + terminal on the p side",
+              "label": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ],
+          "junctions": [],
+          "wires": [
+            {
+              "id": "w_c7156838-2925-4f81-952f-af33f3fea54a",
+              "a": {
+                "c": "c_b22fbebc-7411-4e40-91e8-8fc430cb4bf3",
+                "p": 0
+              },
+              "b": {
+                "c": "c_9f653203-9847-4339-b629-34345d720914",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 200,
+                  "y": 300
+                }
+              ]
+            },
+            {
+              "id": "w_37ffb9ff-742d-4b95-927b-e3c318378ce6",
+              "a": {
+                "c": "c_b22fbebc-7411-4e40-91e8-8fc430cb4bf3",
+                "p": 1
+              },
+              "b": {
+                "c": "c_f6e55b1c-5c44-4f81-86d2-29ab0c061e84",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": []
+            },
+            {
+              "id": "w_87826649-053d-43c3-b80a-65fbf4be397c",
+              "a": {
+                "c": "c_9f653203-9847-4339-b629-34345d720914",
+                "p": 1
+              },
+              "b": {
+                "c": "c_75a3ddbc-93a8-4b0f-9e8f-4b0df3dce123",
+                "p": 0
+              },
+              "color": "#365a72",
+              "vias": [
+                {
+                  "x": 520,
+                  "y": 300
+                }
+              ]
+            }
+          ]
+        },
+        "circuitPreview": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"646\" height=\"413\" viewBox=\"110 135.49478149414062 645.5146484375 412.5052185058594\"><title>Forward-biased pn junction</title><style>.symbol{stroke:#18334a;stroke-width:2.2;fill:none;stroke-linecap:round;stroke-linejoin:round}.label{font-family:Georgia,'Times New Roman',serif;fill:#17344b;paint-order:stroke;stroke:white;stroke-width:4px;stroke-linejoin:round}</style><rect x=\"110\" y=\"135.49478149414062\" width=\"645.5146484375\" height=\"412.5052185058594\" fill=\"white\"/><path d=\"M200 360L200 300L360 300\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M200 440\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><path d=\"M440 300L520 300L520 320\" fill=\"none\" stroke=\"#365a72\" stroke-width=\"2\" stroke-linejoin=\"round\"/><g class=\"component\" data-c=\"c_b22fbebc-7411-4e40-91e8-8fc430cb4bf3\"><g transform=\"translate(200 400) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -40V-22M0 22V40\"/><circle cx=\"0\" cy=\"0\" r=\"22\"/><path d=\"M-5 -9H5M0 -14V-4M-5 10H5\"/></g></g><g class=\"drawing-label\" data-label=\"c_b22fbebc-7411-4e40-91e8-8fc430cb4bf3\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"248\" y=\"393\" font-size=\"19\"><tspan font-size=\"19.00\">V</tspan><tspan dy=\"5.70\" font-size=\"13.30\">D</tspan></text></g><g class=\"drawing-label\" data-label=\"c_b22fbebc-7411-4e40-91e8-8fc430cb4bf3\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"248\" y=\"416\" font-size=\"17\"><tspan font-size=\"17.00\">0.30 V</tspan></text></g></g><g class=\"component\" data-c=\"c_9f653203-9847-4339-b629-34345d720914\"><g transform=\"translate(400 300) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M-40 0H-13M-13 -17 13 0-13 17ZM13 -17V17M13 0H40\"/></g></g><g class=\"drawing-label\" data-label=\"c_9f653203-9847-4339-b629-34345d720914\" data-label-field=\"ref\" data-label-edit=\"ref\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"372\" y=\"246\" font-size=\"19\"><tspan font-size=\"19.00\">D</tspan><tspan dy=\"5.70\" font-size=\"13.30\">1</tspan></text></g><g class=\"drawing-label\" data-label=\"c_9f653203-9847-4339-b629-34345d720914\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"372\" y=\"269\" font-size=\"17\"><tspan font-size=\"17.00\">pn junction</tspan></text></g></g><g class=\"component\" data-c=\"c_f6e55b1c-5c44-4f81-86d2-29ab0c061e84\"><g transform=\"translate(200 460) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_75a3ddbc-93a8-4b0f-9e8f-4b0df3dce123\"><g transform=\"translate(520 340) rotate(0) scale(1 1)\" color=\"#18334a\"><g class=\"symbol\"><path d=\"M0 -20V0M-20 0H20M-13 8H13M-6 16H6\"/></g></g></g><g class=\"component\" data-c=\"c_d73b1da9-f236-490c-927f-0852e85bb10d\"><g class=\"drawing-label\" data-label=\"c_d73b1da9-f236-490c-927f-0852e85bb10d\" data-label-field=\"value\" data-label-edit=\"value\" transform=\"translate(0 0)\"><title>Drag to move; double-click to edit.</title><text class=\"label\"  x=\"380\" y=\"200\" font-size=\"22\"><tspan font-size=\"22.00\">forward bias: + terminal on the p side</tspan></text></g></g></svg>"
+      },
+      "studentRubric": [
+        {
+          "label": "Equilibrium p_n0",
+          "points": 2
+        },
+        {
+          "label": "p_n(0) at the n-side edge",
+          "points": 2
+        },
+        {
+          "label": "Equilibrium n_p0",
+          "points": 2
+        },
+        {
+          "label": "n_p(0) at the p-side edge",
+          "points": 2
+        },
+        {
+          "label": "Which side receives more injection, and is low-level injection valid?",
+          "points": 2
+        }
+      ]
+    }
+  ]
+}
